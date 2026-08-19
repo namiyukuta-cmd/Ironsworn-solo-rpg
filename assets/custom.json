@@ -1,0 +1,1 @@
+[{"id":"last-of-people","name":"最後の民","type":"カスタム","summary":"白金の一族由来の野外技能と異文化性を表すカスタム・パス。","abilities":[{"label":"荒野の子","description":"自然環境で地形・獣道・即席道具・野営技術を使う時に有利。"},{"label":"獣を捌く者","description":"狩りや解体、獣資源の利用をさらに得意にする。"},{"label":"異邦の眼","description":"土地の常識に染まらない視点から人や文化の違和感を見抜く。"}],"chooseStartingAbility":false,"requirement":null,"custom":true}]
