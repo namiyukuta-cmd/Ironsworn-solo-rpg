@@ -3,150 +3,80 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
-<title>白金キャラシ</title>
+<title>Ironsworn Solo RPG</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Yomogi&family=Zen+Maru+Gothic:wght@400;500;700&display=swap');
 :root{--bg:#fffaf8;--paper:#fff;--pink:#f4c3cf;--pink2:#ffe7ed;--pink3:#eaa4b7;--brown:#7d574a;--brown2:#ad887c;--line:#d8bbb1;--text:#5a4038}
-*{box-sizing:border-box}
-html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(--text);font-family:"Zen Maru Gothic",-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif}
-button{font:inherit;color:inherit}
-.app{height:100dvh;padding:calc(5px + env(safe-area-inset-top)) 6px calc(5px + env(safe-area-inset-bottom));display:grid;grid-template-rows:auto auto auto auto 1fr;gap:4px;max-width:760px;margin:0 auto}
-.box{background:var(--paper);border:1.5px solid var(--brown);border-radius:10px}
-header{display:flex;align-items:center;justify-content:space-between;padding:4px 7px;min-height:36px}
-.brand{display:flex;align-items:baseline;gap:7px}
-.brand h1{margin:0;font:700 22px/1 "Yomogi","Zen Maru Gothic",sans-serif;color:var(--brown)}
-.brand span{font-size:8px;color:var(--brown2);letter-spacing:.08em}
-.xp{display:flex;align-items:center;gap:3px;font-size:9px}.xp strong{font-size:15px;min-width:18px;text-align:center}
-.sbtn{width:21px;height:21px;padding:0;border:1px solid var(--brown);border-radius:7px;background:var(--pink2);line-height:1}
-.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:3px}
-.stat{padding:2px 2px 3px;text-align:center;border:1px solid var(--line);border-radius:8px;background:#fffdfd}
-.stat span{display:block;font:500 8px/1 "Yomogi","Zen Maru Gothic",sans-serif;color:var(--brown2)}
-.stat b{display:block;font-size:17px;line-height:1.1}
-.resources{display:grid;grid-template-columns:repeat(3,1fr) 2.15fr;gap:3px}
-.res,.mom{border:1px solid var(--line);border-radius:8px;background:#fffdfd;padding:3px 4px}
-.rhead,.mhead{display:flex;align-items:center;justify-content:space-between;gap:2px}
-.label{font:500 8px/1 "Yomogi","Zen Maru Gothic",sans-serif;color:var(--brown2)}
-.ctrl{display:flex;align-items:center;gap:2px}.ctrl strong{font-size:14px;min-width:15px;text-align:center}
-.tinybtn{width:18px;height:18px;padding:0;border:1px solid var(--brown2);border-radius:6px;background:white;font-size:11px;line-height:1}
-.mtrack{display:grid;grid-template-columns:repeat(17,1fr);gap:1px;margin-top:3px}
-.mc{height:14px;border:1px solid var(--line);border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:5.8px;background:#fff;color:var(--brown2);padding:0}
-.mc.on{background:var(--pink);border-color:var(--brown);color:var(--brown);font-weight:700}
-.vow{padding:4px 6px;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:6px}
-.vow-title small{display:block;font:500 7px/1 "Yomogi","Zen Maru Gothic",sans-serif;color:var(--brown2)}
-.vow-title strong{display:block;font-size:9px;white-space:nowrap}
-.vtrack{display:grid;grid-template-columns:repeat(10,1fr);gap:2px}
-.vcell{height:16px;border:1px solid var(--brown2);border-radius:4px;background:white;padding:0}.vcell.on{background:var(--pink)}
-.vow-num{font-size:8px;white-space:nowrap}
-.lower{min-height:0;display:grid;grid-template-columns:1.15fr 1fr;gap:4px}
-.panel{min-height:0;padding:4px 5px;display:grid;grid-template-rows:auto 1fr}
-.ptitle{display:flex;align-items:center;justify-content:space-between;margin-bottom:3px}
-.ptitle h2{margin:0;font:700 10px/1 "Yomogi","Zen Maru Gothic",sans-serif;color:var(--brown)}
-.ptitle span{font-size:6.5px;color:var(--brown2)}
-.assets{min-height:0;display:grid;grid-template-rows:repeat(3,1fr);gap:3px}
-.asset{min-height:0;border:1px solid var(--line);border-radius:7px;background:#fffdfd;padding:3px 4px;display:grid;grid-template-columns:74px 1fr;align-items:start;gap:4px}
-.aname strong{display:block;font-size:8.5px;line-height:1.05}.aname small{display:block;font-size:5.8px;color:var(--brown2)}
-.abilities{display:flex;flex-wrap:wrap;align-content:start;gap:2px}
-.ability{font-size:6.3px;line-height:1.1;padding:2px 3px;border:1px solid var(--line);border-radius:5px;color:var(--brown2);background:white}
-.ability.on{background:var(--pink2);color:var(--brown);border-color:var(--pink3);font-weight:700}
-.tattoos{min-height:0;display:grid;grid-template-columns:repeat(2,1fr);grid-template-rows:repeat(4,1fr);gap:3px}
-.tat{min-height:0;border:1px solid var(--line);border-radius:7px;background:#fff;padding:2px 4px;text-align:left;display:flex;align-items:center;justify-content:space-between}
-.tat strong{font-size:8px}.tat span{font-size:5.8px;color:var(--brown2)}
-.tat.cool{background:#fff0f4;border-color:#d693a5}.tat.cool span{color:#b46279}
-@media (max-height:720px){
-  .app{gap:3px;padding-top:calc(3px + env(safe-area-inset-top));padding-bottom:calc(3px + env(safe-area-inset-bottom))}
-  header{min-height:31px;padding:2px 6px}.brand h1{font-size:19px}.stat{padding:1px 2px}.stat b{font-size:15px}
-  .res,.mom{padding:2px 3px}.mc{height:12px}.vow{padding:3px 5px}.vcell{height:13px}.panel{padding:3px 4px}.asset{padding:2px 3px}
-}
-@media (max-width:390px){.brand span{display:none}.asset{grid-template-columns:62px 1fr}.ability{font-size:5.9px}.tat strong{font-size:7.5px}}
-.save-open{border:1px solid var(--brown);background:var(--pink2);border-radius:7px;padding:3px 6px;font-size:8px;white-space:nowrap}
-.save-tools{display:flex;align-items:center;gap:4px}
-.modal-backdrop{position:fixed;inset:0;background:rgba(86,57,48,.28);display:none;align-items:center;justify-content:center;padding:14px;z-index:50}
-.modal-backdrop.open{display:flex}
-.save-modal{width:min(440px,94vw);max-height:88dvh;overflow:auto;background:#fffaf8;border:2px solid var(--brown);border-radius:16px;padding:10px;box-shadow:0 10px 30px rgba(90,64,56,.18)}
-.save-modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px}
-.save-modal-head h2{margin:0;font:700 16px/1 "Yomogi","Zen Maru Gothic",sans-serif}
-.close-btn{width:28px;height:28px;border:1px solid var(--brown);border-radius:8px;background:white}
-.save-note{font-size:8px;color:var(--brown2);margin:0 0 7px}
-.slot{border:1px solid var(--line);border-radius:10px;padding:6px;margin-bottom:5px;background:white}
-.slot-top{display:flex;justify-content:space-between;gap:6px;align-items:center}
-.slot-title{font-size:9px;font-weight:700}.slot-meta{font-size:6.5px;color:var(--brown2)}
-.slot-actions{display:flex;gap:4px;margin-top:5px}
-.slot-actions button,.save-action{flex:1;border:1px solid var(--brown2);border-radius:8px;background:#fff7fa;padding:6px 5px;font-size:8px}
-.save-action-row{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:6px}
-.save-action.github{grid-column:1/-1;background:var(--pink2);border-color:var(--brown)}
-.save-status{font-size:7px;color:var(--brown2);min-height:12px;margin-top:5px}.hidden-file{display:none}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(--text);font-family:"Zen Maru Gothic",-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif}button{font:inherit;color:inherit;cursor:pointer}
+.screen{width:100%;height:100dvh}.hidden{display:none!important}.box{background:var(--paper);border:1.5px solid var(--brown);border-radius:10px}
+/* HOME */
+#homeScreen{display:grid;place-items:center;padding:calc(18px + env(safe-area-inset-top)) 18px calc(18px + env(safe-area-inset-bottom));background:radial-gradient(circle at 50% 34%,#fff 0,#fff7fa 45%,#fffaf8 100%)}
+.home-card{width:min(360px,90vw);text-align:center}.home-mark{width:76px;height:76px;margin:0 auto 14px;border:2px solid var(--brown);border-radius:50%;display:grid;place-items:center;background:var(--pink2);font:700 31px/1 "Yomogi",sans-serif}.home-card h1{margin:0;font:700 31px/1.15 "Yomogi","Zen Maru Gothic",sans-serif;color:var(--brown)}.home-card .en{font-size:8px;letter-spacing:.18em;color:var(--brown2);margin:5px 0 24px}.home-actions{display:grid;gap:10px}.home-btn{height:54px;border:2px solid var(--brown);border-radius:16px;background:white;font:700 18px/1 "Yomogi","Zen Maru Gothic",sans-serif}.home-btn.primary{background:var(--pink)}.home-foot{margin-top:18px;font-size:8px;color:var(--brown2)}
+/* GAME */
+.app{height:100dvh;padding:calc(5px + env(safe-area-inset-top)) 6px calc(5px + env(safe-area-inset-bottom));display:grid;grid-template-rows:auto auto auto auto 1fr;gap:4px;max-width:760px;margin:0 auto}.game-header{display:flex;align-items:center;justify-content:space-between;padding:4px 7px;min-height:36px}.brand{display:flex;align-items:baseline;gap:7px}.brand h1{margin:0;font:700 22px/1 "Yomogi","Zen Maru Gothic",sans-serif;color:var(--brown)}.brand span{font-size:8px;color:var(--brown2);letter-spacing:.08em}.top-tools{display:flex;align-items:center;gap:3px}.top-btn{border:1px solid var(--brown);background:var(--pink2);border-radius:7px;padding:3px 6px;font-size:8px;white-space:nowrap}.xp{display:flex;align-items:center;gap:3px;font-size:9px}.xp strong{font-size:15px;min-width:18px;text-align:center}.sbtn{width:21px;height:21px;padding:0;border:1px solid var(--brown);border-radius:7px;background:var(--pink2);line-height:1}
+.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:3px}.stat{padding:2px 2px 3px;text-align:center;border:1px solid var(--line);border-radius:8px;background:#fffdfd}.stat span{display:block;font:500 8px/1 "Yomogi","Zen Maru Gothic",sans-serif;color:var(--brown2)}.stat b{display:block;font-size:17px;line-height:1.1}
+.resources{display:grid;grid-template-columns:repeat(3,1fr) 2.15fr;gap:3px}.res,.mom{border:1px solid var(--line);border-radius:8px;background:#fffdfd;padding:3px 4px}.rhead,.mhead{display:flex;align-items:center;justify-content:space-between;gap:2px}.label{font:500 8px/1 "Yomogi","Zen Maru Gothic",sans-serif;color:var(--brown2)}.ctrl{display:flex;align-items:center;gap:2px}.ctrl strong{font-size:14px;min-width:15px;text-align:center}.tinybtn{width:18px;height:18px;padding:0;border:1px solid var(--brown2);border-radius:6px;background:white;font-size:11px;line-height:1}.mtrack{display:grid;grid-template-columns:repeat(17,1fr);gap:1px;margin-top:3px}.mc{height:14px;border:1px solid var(--line);border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:5.8px;background:#fff;color:var(--brown2);padding:0}.mc.on{background:var(--pink);border-color:var(--brown);color:var(--brown);font-weight:700}
+.vow{padding:4px 6px;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:6px}.vow-title small{display:block;font:500 7px/1 "Yomogi","Zen Maru Gothic",sans-serif;color:var(--brown2)}.vow-title strong{display:block;font-size:9px;white-space:nowrap}.vtrack{display:grid;grid-template-columns:repeat(10,1fr);gap:2px}.vcell{height:16px;border:1px solid var(--brown2);border-radius:4px;background:white;padding:0}.vcell.on{background:var(--pink)}.vow-num{font-size:8px;white-space:nowrap}
+.lower{min-height:0;display:grid;grid-template-columns:1.15fr 1fr;gap:4px}.panel{min-height:0;padding:4px 5px;display:grid;grid-template-rows:auto 1fr}.ptitle{display:flex;align-items:center;justify-content:space-between;margin-bottom:3px}.ptitle h2{margin:0;font:700 10px/1 "Yomogi","Zen Maru Gothic",sans-serif;color:var(--brown)}.ptitle span{font-size:6.5px;color:var(--brown2)}.assets{min-height:0;display:grid;grid-template-rows:repeat(3,1fr);gap:3px}.asset{min-height:0;border:1px solid var(--line);border-radius:7px;background:#fffdfd;padding:3px 4px;display:grid;grid-template-columns:74px 1fr;align-items:start;gap:4px}.aname strong{display:block;font-size:8.5px;line-height:1.05}.aname small{display:block;font-size:5.8px;color:var(--brown2)}.abilities{display:flex;flex-wrap:wrap;align-content:start;gap:2px}.ability{font-size:6.3px;line-height:1.1;padding:2px 3px;border:1px solid var(--line);border-radius:5px;color:var(--brown2);background:white}.ability.on{background:var(--pink2);color:var(--brown);border-color:var(--pink3);font-weight:700}.tattoos{min-height:0;display:grid;grid-template-columns:repeat(2,1fr);grid-template-rows:repeat(4,1fr);gap:3px}.tat{min-height:0;border:1px solid var(--line);border-radius:7px;background:#fff;padding:2px 4px;text-align:left;display:flex;align-items:center;justify-content:space-between}.tat strong{font-size:8px}.tat span{font-size:5.8px;color:var(--brown2)}.tat.cool{background:#fff0f4;border-color:#d693a5}.tat.cool span{color:#b46279}
+/* SAVE / LOAD */
+.modal-backdrop{position:fixed;inset:0;background:rgba(86,57,48,.28);display:none;align-items:center;justify-content:center;padding:14px;z-index:50}.modal-backdrop.open{display:flex}.save-modal{width:min(440px,94vw);max-height:88dvh;overflow:auto;background:#fffaf8;border:2px solid var(--brown);border-radius:16px;padding:10px;box-shadow:0 10px 30px rgba(90,64,56,.18)}.save-modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px}.save-modal-head h2{margin:0;font:700 16px/1 "Yomogi","Zen Maru Gothic",sans-serif}.close-btn{width:28px;height:28px;border:1px solid var(--brown);border-radius:8px;background:white}.save-note{font-size:8px;color:var(--brown2);margin:0 0 7px}.continue-btn{width:100%;border:1.5px solid var(--brown);border-radius:10px;background:var(--pink);padding:9px;font-size:10px;font-weight:700;margin-bottom:7px}.slot{border:1px solid var(--line);border-radius:10px;padding:6px;margin-bottom:5px;background:white}.slot-top{display:flex;justify-content:space-between;gap:6px;align-items:center}.slot-title{font-size:9px;font-weight:700}.slot-meta{font-size:6.5px;color:var(--brown2)}.slot-actions{display:flex;gap:4px;margin-top:5px}.slot-actions button,.save-action{flex:1;border:1px solid var(--brown2);border-radius:8px;background:#fff7fa;padding:6px 5px;font-size:8px}.save-action-row{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:6px}.save-action.github{grid-column:1/-1;background:var(--pink2);border-color:var(--brown)}.save-status{font-size:7px;color:var(--brown2);min-height:12px;margin-top:5px}.hidden-file{display:none}
+@media(max-height:720px){.app{gap:3px;padding-top:calc(3px + env(safe-area-inset-top));padding-bottom:calc(3px + env(safe-area-inset-bottom))}.game-header{min-height:31px;padding:2px 6px}.brand h1{font-size:19px}.stat{padding:1px 2px}.stat b{font-size:15px}.res,.mom{padding:2px 3px}.mc{height:12px}.vow{padding:3px 5px}.vcell{height:13px}.panel{padding:3px 4px}.asset{padding:2px 3px}}@media(max-width:390px){.brand span{display:none}.asset{grid-template-columns:62px 1fr}.ability{font-size:5.9px}.tat strong{font-size:7.5px}.top-btn{padding:3px 4px;font-size:7px}}
 </style>
 </head>
 <body>
+<section id="homeScreen" class="screen">
+  <div class="home-card">
+    <div class="home-mark">鉄</div>
+    <h1>Ironsworn<br>Solo RPG</h1>
+    <div class="en">SOLO ADVENTURE</div>
+    <div class="home-actions">
+      <button id="homeLoad" class="home-btn primary">LOAD</button>
+      <button id="homeNew" class="home-btn">NEW</button>
+    </div>
+    <div class="home-foot">セーブデータは端末内＋GitHubで管理</div>
+  </div>
+</section>
+
+<section id="gameScreen" class="screen hidden">
 <div class="app">
-<header class="box">
+<header class="game-header box">
   <div class="brand"><h1>白金</h1><span>IRONSWORN CHARACTER SHEET</span></div>
-  <div class="save-tools"><button id="openSave" class="save-open">セーブ</button><div class="xp"><span>XP</span><button class="sbtn" data-k="xp" data-d="-1">−</button><strong id="xp">1</strong><button class="sbtn" data-k="xp" data-d="1">＋</button></div></div>
+  <div class="top-tools"><button id="goHome" class="top-btn">ホーム</button><button id="openSave" class="top-btn">セーブ</button><div class="xp"><span>XP</span><button class="sbtn" data-k="xp" data-d="-1">−</button><strong id="xp">1</strong><button class="sbtn" data-k="xp" data-d="1">＋</button></div></div>
 </header>
-<section class="stats">
-  <div class="stat box"><span>EDGE</span><b>3</b></div><div class="stat box"><span>HEART</span><b>1</b></div><div class="stat box"><span>IRON</span><b>2</b></div><div class="stat box"><span>SHADOW</span><b>1</b></div><div class="stat box"><span>WITS</span><b>2</b></div>
-</section>
+<section class="stats"><div class="stat box"><span>EDGE</span><b>3</b></div><div class="stat box"><span>HEART</span><b>1</b></div><div class="stat box"><span>IRON</span><b>2</b></div><div class="stat box"><span>SHADOW</span><b>1</b></div><div class="stat box"><span>WITS</span><b>2</b></div></section>
 <section class="resources">
-  <div class="res box"><div class="rhead"><span class="label">体力</span><div class="ctrl"><button class="tinybtn" data-k="health" data-d="-1">−</button><strong id="health">5</strong><button class="tinybtn" data-k="health" data-d="1">＋</button></div></div></div>
-  <div class="res box"><div class="rhead"><span class="label">気力</span><div class="ctrl"><button class="tinybtn" data-k="spirit" data-d="-1">−</button><strong id="spirit">5</strong><button class="tinybtn" data-k="spirit" data-d="1">＋</button></div></div></div>
-  <div class="res box"><div class="rhead"><span class="label">補給</span><div class="ctrl"><button class="tinybtn" data-k="supply" data-d="-1">−</button><strong id="supply">3</strong><button class="tinybtn" data-k="supply" data-d="1">＋</button></div></div></div>
-  <div class="mom box"><div class="mhead"><span class="label">モメンタム</span><div class="ctrl"><button class="tinybtn" data-k="momentum" data-d="-1">−</button><strong id="momentum">3</strong><button class="tinybtn" data-k="momentum" data-d="1">＋</button></div></div><div id="mtrack" class="mtrack"></div></div>
+<div class="res box"><div class="rhead"><span class="label">体力</span><div class="ctrl"><button class="tinybtn" data-k="health" data-d="-1">−</button><strong id="health">5</strong><button class="tinybtn" data-k="health" data-d="1">＋</button></div></div></div>
+<div class="res box"><div class="rhead"><span class="label">気力</span><div class="ctrl"><button class="tinybtn" data-k="spirit" data-d="-1">−</button><strong id="spirit">5</strong><button class="tinybtn" data-k="spirit" data-d="1">＋</button></div></div></div>
+<div class="res box"><div class="rhead"><span class="label">補給</span><div class="ctrl"><button class="tinybtn" data-k="supply" data-d="-1">−</button><strong id="supply">3</strong><button class="tinybtn" data-k="supply" data-d="1">＋</button></div></div></div>
+<div class="mom box"><div class="mhead"><span class="label">モメンタム</span><div class="ctrl"><button class="tinybtn" data-k="momentum" data-d="-1">−</button><strong id="momentum">3</strong><button class="tinybtn" data-k="momentum" data-d="1">＋</button></div></div><div id="mtrack" class="mtrack"></div></div>
 </section>
-<section class="vow box">
-  <div class="vow-title"><small>現在の誓い</small><strong>アデルを連絡拠点まで守る</strong></div>
-  <div id="vtrack" class="vtrack"></div><div class="vow-num"><span id="vp">0</span>/10</div>
-</section>
+<section class="vow box"><div class="vow-title"><small>現在の誓い</small><strong>アデルを連絡拠点まで守る</strong></div><div id="vtrack" class="vtrack"></div><div class="vow-num"><span id="vp">0</span>/10</div></section>
 <section class="lower">
-  <div class="panel box">
-    <div class="ptitle"><h2>アセット</h2><span>取得済みをピンク表示</span></div>
-    <div class="assets">
-      <div class="asset"><div class="aname"><strong>最後の民</strong><small>PATH</small></div><div class="abilities"><span class="ability on">荒野の子</span><span class="ability">獣を捌く者</span><span class="ability">異邦の眼</span></div></div>
-      <div class="asset"><div class="aname"><strong>薬草師</strong><small>PATH</small></div><div class="abilities"><span class="ability on">薬草治療</span><span class="ability">未取得</span><span class="ability">未取得</span></div></div>
-      <div class="asset"><div class="aname"><strong>肉</strong><small>COMPANION</small></div><div class="abilities"><span class="ability">Sly</span><span class="ability">Knowing</span><span class="ability on">Diligent</span></div></div>
-    </div>
-  </div>
-  <div class="panel box">
-    <div class="ptitle"><h2>刺青</h2><span>タップで状態切替</span></div>
-    <div id="tattoos" class="tattoos"></div>
-  </div>
+<div class="panel box"><div class="ptitle"><h2>アセット</h2><span>取得済みをピンク表示</span></div><div class="assets"><div class="asset"><div class="aname"><strong>最後の民</strong><small>PATH</small></div><div class="abilities"><span class="ability on">荒野の子</span><span class="ability">獣を捌く者</span><span class="ability">異邦の眼</span></div></div><div class="asset"><div class="aname"><strong>薬草師</strong><small>PATH</small></div><div class="abilities"><span class="ability on">薬草治療</span><span class="ability">未取得</span><span class="ability">未取得</span></div></div><div class="asset"><div class="aname"><strong>肉</strong><small>COMPANION</small></div><div class="abilities"><span class="ability">Sly</span><span class="ability">Knowing</span><span class="ability on">Diligent</span></div></div></div></div>
+<div class="panel box"><div class="ptitle"><h2>刺青</h2><span>タップで状態切替</span></div><div id="tattoos" class="tattoos"></div></div>
 </section>
 </div>
-<div id="saveModal" class="modal-backdrop" aria-hidden="true">
-  <div class="save-modal" role="dialog" aria-modal="true" aria-label="セーブ管理">
-    <div class="save-modal-head"><h2>セーブ管理</h2><button id="closeSave" class="close-btn">×</button></div>
-    <p class="save-note">普段の変更は端末に自動保存。手動スロットはこの端末用。GitHub最新セーブはAIが更新する正本です。</p>
-    <div id="slots"></div>
-    <div class="save-action-row">
-      <button id="loadGithub" class="save-action github">GitHubの最新セーブを読み込む</button>
-      <button id="exportSave" class="save-action">JSONを書き出す</button>
-      <button id="importSave" class="save-action">JSONを読み込む</button>
-      <input id="importFile" class="hidden-file" type="file" accept="application/json,.json">
-    </div>
-    <div id="saveStatus" class="save-status"></div>
-  </div>
-</div>
+</section>
+
+<div id="saveModal" class="modal-backdrop" aria-hidden="true"><div class="save-modal"><div class="save-modal-head"><h2 id="managerTitle">ロード</h2><button id="closeSave" class="close-btn">×</button></div><p id="managerNote" class="save-note"></p><button id="continueLocal" class="continue-btn">この端末の続きから</button><div id="slots"></div><div class="save-action-row"><button id="loadGithub" class="save-action github">GitHubの最新セーブを読み込む</button><button id="exportSave" class="save-action">JSONを書き出す</button><button id="importSave" class="save-action">JSONを読み込む</button><input id="importFile" class="hidden-file" type="file" accept="application/json,.json"></div><div id="saveStatus" class="save-status"></div></div></div>
 <script>
-const def={xp:1,health:5,spirit:5,supply:3,momentum:3,vow:0,tattoos:{"道標":"ready","鷹目":"ready","守骨":"ready","影歩":"ready","狩牙":"ready","止血":"cool","熾火":"ready","息潜":"ready"}};
-let s;try{const saved=JSON.parse(localStorage.getItem("shirogane-v3")||"null");s={...def,...(saved||{}),tattoos:{...def.tattoos,...((saved||{}).tattoos||{})}}}catch(e){s=JSON.parse(JSON.stringify(def))}
-const save=()=>localStorage.setItem("shirogane-v3",JSON.stringify(s));const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+const KEY="shirogane-v3";const def={xp:1,health:5,spirit:5,supply:3,momentum:3,vow:0,tattoos:{"道標":"ready","鷹目":"ready","守骨":"ready","影歩":"ready","狩牙":"ready","止血":"cool","熾火":"ready","息潜":"ready"}};
+const clone=o=>JSON.parse(JSON.stringify(o));let s;try{const x=JSON.parse(localStorage.getItem(KEY)||"null");s={...def,...(x||{}),tattoos:{...def.tattoos,...((x||{}).tattoos||{})}}}catch(e){s=clone(def)}
+const save=()=>localStorage.setItem(KEY,JSON.stringify(s));const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));const home=()=>{document.getElementById("homeScreen").classList.remove("hidden");document.getElementById("gameScreen").classList.add("hidden")};const game=()=>{document.getElementById("homeScreen").classList.add("hidden");document.getElementById("gameScreen").classList.remove("hidden");render()};
 function renderMomentum(){const h=document.getElementById("mtrack");h.innerHTML="";for(let v=-6;v<=10;v++){const b=document.createElement("button");b.className="mc"+(v===s.momentum?" on":"");b.textContent=v;b.onclick=()=>{s.momentum=v;save();render()};h.appendChild(b)}}
 function renderVow(){const h=document.getElementById("vtrack");h.innerHTML="";for(let i=1;i<=10;i++){const b=document.createElement("button");b.className="vcell"+(i<=s.vow?" on":"");b.onclick=()=>{s.vow=(s.vow===i?i-1:i);save();render()};h.appendChild(b)}document.getElementById("vp").textContent=s.vow}
 function renderTattoos(){const h=document.getElementById("tattoos");h.innerHTML="";Object.entries(s.tattoos).forEach(([name,status])=>{const b=document.createElement("button");b.className="tat"+(status==="cool"?" cool":"");b.innerHTML="<strong>"+name+"</strong><span>"+(status==="cool"?"回復中":"使用可")+"</span>";b.onclick=()=>{s.tattoos[name]=status==="cool"?"ready":"cool";save();render()};h.appendChild(b)})}
 function render(){["xp","health","spirit","supply","momentum"].forEach(k=>document.getElementById(k).textContent=s[k]);renderMomentum();renderVow();renderTattoos()}
-document.querySelectorAll("[data-k]").forEach(b=>{b.onclick=()=>{const k=b.dataset.k,d=Number(b.dataset.d);if(k==="xp")s[k]=clamp(s[k]+d,0,99);if(["health","spirit","supply"].includes(k))s[k]=clamp(s[k]+d,0,5);if(k==="momentum")s[k]=clamp(s[k]+d,-6,10);save();render()}});
-function payload(){return {format:"shirogane-local-save-v1",campaign:"白金",savedAt:new Date().toISOString(),appState:JSON.parse(JSON.stringify(s))}}
-function applyPayload(data){const src=data&&data.appState?data.appState:data;if(!src)throw new Error("empty");s={...def,...src,tattoos:{...def.tattoos,...(src.tattoos||{})}};save();render()}
-function slotKey(n){return "shirogane-slot-"+n}
-function slotData(n){try{return JSON.parse(localStorage.getItem(slotKey(n))||"null")}catch(e){return null}}
-function renderSlots(){const host=document.getElementById("slots");host.innerHTML="";for(let n=1;n<=3;n++){const data=slotData(n),box=document.createElement("div");box.className="slot";const when=data?.savedAt?new Date(data.savedAt).toLocaleString("ja-JP"):"未保存";box.innerHTML=`<div class="slot-top"><div class="slot-title">スロット ${n}</div><div class="slot-meta">${when}</div></div><div class="slot-actions"><button data-slot-save="${n}">ここに保存</button><button data-slot-load="${n}" ${data?"":"disabled"}>読み込む</button></div>`;host.appendChild(box)}host.querySelectorAll("[data-slot-save]").forEach(b=>b.onclick=()=>{const n=Number(b.dataset.slotSave);localStorage.setItem(slotKey(n),JSON.stringify(payload()));document.getElementById("saveStatus").textContent=`スロット ${n} に保存しました。`;renderSlots()});host.querySelectorAll("[data-slot-load]").forEach(b=>b.onclick=()=>{const n=Number(b.dataset.slotLoad),data=slotData(n);if(!data)return;applyPayload(data);document.getElementById("saveStatus").textContent=`スロット ${n} を読み込みました。`})}
-document.getElementById("openSave").onclick=()=>{document.getElementById("saveModal").classList.add("open");renderSlots();document.getElementById("saveStatus").textContent=""};
-document.getElementById("closeSave").onclick=()=>document.getElementById("saveModal").classList.remove("open");
-document.getElementById("saveModal").addEventListener("click",e=>{if(e.target.id==="saveModal")e.currentTarget.classList.remove("open")});
-document.getElementById("loadGithub").onclick=async()=>{const status=document.getElementById("saveStatus");status.textContent="GitHubセーブを読み込み中…";try{const r=await fetch("saves/current.json?ts="+Date.now(),{cache:"no-store"});if(!r.ok)throw new Error("HTTP "+r.status);const g=await r.json(),tracks=g.character?.tracks||{},v4=(g.vows||[]).find(v=>v.id==="V004");applyPayload({xp:tracks.xp??s.xp,health:tracks.health??s.health,spirit:tracks.spirit??s.spirit,supply:tracks.supply??s.supply,momentum:tracks.momentum??s.momentum,vow:v4?.progress??s.vow,tattoos:g.character?.tattoos??s.tattoos});status.textContent=`GitHub最新セーブを読み込みました${g.updatedAt?"（"+new Date(g.updatedAt).toLocaleString("ja-JP")+"）":""}。`}catch(e){status.textContent="GitHubセーブを読み込めませんでした。Web公開後に使えます。"}};
-document.getElementById("exportSave").onclick=()=>{const blob=new Blob([JSON.stringify(payload(),null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="shirogane-save-"+new Date().toISOString().slice(0,10)+".json";a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);document.getElementById("saveStatus").textContent="JSONを書き出しました。"};
-document.getElementById("importSave").onclick=()=>document.getElementById("importFile").click();
-document.getElementById("importFile").onchange=async(e)=>{const f=e.target.files?.[0];if(!f)return;try{applyPayload(JSON.parse(await f.text()));document.getElementById("saveStatus").textContent="JSONを読み込みました。"}catch(err){document.getElementById("saveStatus").textContent="このJSONは読み込めませんでした。"}e.target.value=""};
-render();
+document.querySelectorAll("[data-k]").forEach(b=>b.onclick=()=>{const k=b.dataset.k,d=Number(b.dataset.d);if(k==="xp")s[k]=clamp(s[k]+d,0,99);if(["health","spirit","supply"].includes(k))s[k]=clamp(s[k]+d,0,5);if(k==="momentum")s[k]=clamp(s[k]+d,-6,10);save();render()});
+function payload(){return{format:"shirogane-local-save-v1",campaign:"白金",savedAt:new Date().toISOString(),appState:clone(s)}}function applyPayload(data){const src=data&&data.appState?data.appState:data;if(!src)throw new Error("empty");s={...def,...src,tattoos:{...def.tattoos,...(src.tattoos||{})}};save();render()}
+const slotKey=n=>"shirogane-slot-"+n;function slotData(n){try{return JSON.parse(localStorage.getItem(slotKey(n))||"null")}catch(e){return null}}
+let managerMode="load";function closeManager(){document.getElementById("saveModal").classList.remove("open")}function afterLoad(){closeManager();game()}
+function renderSlots(){const host=document.getElementById("slots");host.innerHTML="";for(let n=1;n<=3;n++){const data=slotData(n),box=document.createElement("div"),when=data?.savedAt?new Date(data.savedAt).toLocaleString("ja-JP"):"未保存";box.className="slot";box.innerHTML=`<div class="slot-top"><div class="slot-title">スロット ${n}</div><div class="slot-meta">${when}</div></div><div class="slot-actions">${managerMode==="save"?`<button data-slot-save="${n}">ここに保存</button>`:""}<button data-slot-load="${n}" ${data?"":"disabled"}>読み込む</button></div>`;host.appendChild(box)}host.querySelectorAll("[data-slot-save]").forEach(b=>b.onclick=()=>{const n=Number(b.dataset.slotSave);localStorage.setItem(slotKey(n),JSON.stringify(payload()));status(`スロット ${n} に保存しました。`);renderSlots()});host.querySelectorAll("[data-slot-load]").forEach(b=>b.onclick=()=>{const data=slotData(Number(b.dataset.slotLoad));if(data){applyPayload(data);afterLoad()}})}
+function status(t){document.getElementById("saveStatus").textContent=t}function openManager(mode){managerMode=mode;document.getElementById("managerTitle").textContent=mode==="load"?"ロード":"セーブ管理";document.getElementById("managerNote").textContent=mode==="load"?"続きから遊ぶセーブを選んでください。":"普段の変更は端末に自動保存されます。手動スロットにも残せます。";document.getElementById("continueLocal").style.display=localStorage.getItem(KEY)?"block":"none";document.getElementById("saveModal").classList.add("open");status("");renderSlots()}
+document.getElementById("homeLoad").onclick=()=>openManager("load");document.getElementById("homeNew").onclick=()=>{if(confirm("新しいゲームを始めますか？\n現在のオートセーブは初期状態になります。\n手動セーブは残ります。")){s=clone(def);save();game()}};document.getElementById("goHome").onclick=home;document.getElementById("openSave").onclick=()=>openManager("save");document.getElementById("closeSave").onclick=closeManager;document.getElementById("saveModal").onclick=e=>{if(e.target.id==="saveModal")closeManager()};document.getElementById("continueLocal").onclick=()=>{try{const x=JSON.parse(localStorage.getItem(KEY)||"null");if(x)applyPayload(x)}catch(e){}afterLoad()};
+document.getElementById("loadGithub").onclick=async()=>{status("GitHubセーブを読み込み中…");try{const r=await fetch("saves/current.json?ts="+Date.now(),{cache:"no-store"});if(!r.ok)throw new Error();const g=await r.json(),t=g.character?.tracks||{},v=(g.vows||[]).find(x=>x.id==="V004");applyPayload({xp:t.xp??s.xp,health:t.health??s.health,spirit:t.spirit??s.spirit,supply:t.supply??s.supply,momentum:t.momentum??s.momentum,vow:v?.progress??s.vow,tattoos:g.character?.tattoos??s.tattoos});afterLoad()}catch(e){status("GitHubセーブを読み込めませんでした。Web公開後に使えます。")}};
+document.getElementById("exportSave").onclick=()=>{const blob=new Blob([JSON.stringify(payload(),null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="shirogane-save-"+new Date().toISOString().slice(0,10)+".json";a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);status("JSONを書き出しました。")};document.getElementById("importSave").onclick=()=>document.getElementById("importFile").click();document.getElementById("importFile").onchange=async e=>{const f=e.target.files?.[0];if(!f)return;try{applyPayload(JSON.parse(await f.text()));afterLoad()}catch(err){status("このJSONは読み込めませんでした。")}e.target.value=""};
+render();home();
 </script>
 </body>
 </html>
