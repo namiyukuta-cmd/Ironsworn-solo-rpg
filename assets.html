@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>アセット選択</title>
-<link rel="stylesheet" href="asset-picker.css?v=asset5">
+<link rel="stylesheet" href="asset-picker.css?v=asset6">
 </head>
 <body>
 <div class="page">
@@ -23,46 +23,8 @@
   <div id="list" class="asset-grid"></div>
   <div class="license">Ironsworn © Shawn Tomkin. Asset concepts based on the Ironsworn Assets Master Set (CC BY-NC-SA 4.0). 日本語説明はこの個人用アプリ向けの要約です。</div>
 </div>
-
-<div id="modal" class="modal" aria-hidden="true">
-  <div class="modal-card">
-    <h2 id="modalTitle"></h2>
-    <p id="modalText"></p>
-    <div id="startAbilities" class="start-abilities"></div>
-    <div class="modal-actions">
-      <button type="button" id="cancelBtn">やめる</button>
-      <button type="button" id="confirmAssetBtn" class="ok">このアセットにする</button>
-    </div>
-  </div>
-</div>
-
-<div id="customModal" class="modal" aria-hidden="true">
-  <div class="modal-card custom-card">
-    <h2>カスタムアセットを作る</h2>
-    <label class="form-label">名前<input id="customName" class="form-input" maxlength="40" placeholder="例：山育ち"></label>
-    <label class="form-label">種類
-      <select id="customType" class="form-input">
-        <option>カスタム</option><option>パス</option><option>相棒</option><option>戦闘タレント</option><option>儀式</option>
-      </select>
-    </label>
-    <label class="form-label">どんなアセット？<textarea id="customSummary" class="form-input" rows="2" placeholder="短い説明"></textarea></label>
-    <div class="custom-ability-title">能力1</div>
-    <input id="customA1" class="form-input" maxlength="40" placeholder="能力名">
-    <textarea id="customD1" class="form-input" rows="2" placeholder="いつ使えて、何が起きる？"></textarea>
-    <div class="custom-ability-title">能力2</div>
-    <input id="customA2" class="form-input" maxlength="40" placeholder="能力名（任意）">
-    <textarea id="customD2" class="form-input" rows="2" placeholder="説明（任意）"></textarea>
-    <div class="custom-ability-title">能力3</div>
-    <input id="customA3" class="form-input" maxlength="40" placeholder="能力名（任意）">
-    <textarea id="customD3" class="form-input" rows="2" placeholder="説明（任意）"></textarea>
-    <div id="customError" class="custom-error"></div>
-    <div class="modal-actions">
-      <button type="button" id="customCancelBtn">やめる</button>
-      <button type="button" id="customCreateBtn" class="ok">作成して選ぶ</button>
-    </div>
-  </div>
-</div>
-
-<script src="asset-picker.js?v=asset5"></script>
+<div id="modal" class="modal" aria-hidden="true"><div class="modal-card"><h2 id="modalTitle"></h2><p id="modalText"></p><div id="startAbilities" class="start-abilities"></div><div class="modal-actions"><button type="button" id="cancelBtn">やめる</button><button type="button" id="confirmAssetBtn" class="ok">このアセットにする</button></div></div></div>
+<div id="customModal" class="modal" aria-hidden="true"><div class="modal-card custom-card"><h2>カスタムアセットを作る</h2><label class="form-label">名前<input id="customName" class="form-input" maxlength="40" placeholder="例：山育ち"></label><label class="form-label">種類<select id="customType" class="form-input"><option>カスタム</option><option>パス</option><option>相棒</option><option>戦闘タレント</option><option>儀式</option></select></label><label class="form-label">どんなアセット？<textarea id="customSummary" class="form-input" rows="2" placeholder="短い説明"></textarea></label><div class="custom-ability-title">能力1</div><input id="customA1" class="form-input" maxlength="40" placeholder="能力名"><textarea id="customD1" class="form-input" rows="2" placeholder="いつ使えて、何が起きる？"></textarea><div class="custom-ability-title">能力2</div><input id="customA2" class="form-input" maxlength="40" placeholder="能力名（任意）"><textarea id="customD2" class="form-input" rows="2" placeholder="説明（任意）"></textarea><div class="custom-ability-title">能力3</div><input id="customA3" class="form-input" maxlength="40" placeholder="能力名（任意）"><textarea id="customD3" class="form-input" rows="2" placeholder="説明（任意）"></textarea><div id="customError" class="custom-error"></div><div class="modal-actions"><button type="button" id="customCancelBtn">やめる</button><button type="button" id="customCreateBtn" class="ok">作成して選ぶ</button></div></div></div>
+<script src="asset-picker.js?v=asset6"></script>
 </body>
 </html>
