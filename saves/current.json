@@ -1,0 +1,66 @@
+{
+  "format": "ironsworn-solo-save-v1",
+  "campaign": "白金",
+  "updatedAt": "2026-08-19T23:46:00+09:00",
+  "scene": {
+    "number": 1,
+    "turn": 33,
+    "location": "アデルの連絡拠点がある町・門前",
+    "time": "発端事件後・南の小村を出発して数時間後",
+    "pending": "門の商人風の男から『名前は？』と直接聞かれている。白金の返答待ち。",
+    "objective": "アデルを連絡拠点まで安全に護衛する"
+  },
+  "character": {
+    "name": "白金",
+    "stats": {
+      "edge": 3,
+      "heart": 1,
+      "iron": 2,
+      "shadow": 1,
+      "wits": 2
+    },
+    "tracks": {
+      "health": 5,
+      "spirit": 5,
+      "supply": 3,
+      "momentum": 3,
+      "momentumMax": 10,
+      "momentumReset": 2,
+      "xp": 1
+    },
+    "assets": [
+      {"name": "最後の民", "abilities": [{"name": "荒野の子", "owned": true}, {"name": "獣を捌く者", "owned": false}, {"name": "異邦の眼", "owned": false}]},
+      {"name": "薬草師", "abilities": [{"name": "薬草治療", "owned": true}]},
+      {"name": "肉", "type": "companion", "abilities": [{"name": "Sly", "owned": false}, {"name": "Knowing", "owned": false}, {"name": "Diligent", "owned": true}]}
+    ],
+    "tattoos": {
+      "道標": "ready",
+      "鷹目": "ready",
+      "守骨": "ready",
+      "影歩": "ready",
+      "狩牙": "ready",
+      "止血": "cool",
+      "熾火": "ready",
+      "息潜": "ready"
+    }
+  },
+  "vows": [
+    {"id": "V001", "title": "子を産む（一族の再興）", "rank": "Epic", "progress": 0, "status": "active"},
+    {"id": "V002", "title": "お前の子を産む", "rank": "Formidable", "progress": 0, "status": "active", "npc": "アデル"},
+    {"id": "V003", "title": "アデルと護衛を安全な場所まで守る", "rank": "Troublesome", "progress": 10, "status": "fulfilled", "xpAwarded": 1},
+    {"id": "V004", "title": "アデルを連絡拠点まで守る", "rank": "Troublesome", "progress": 0, "status": "active", "npc": "アデル"}
+  ],
+  "party": {
+    "adel": "present",
+    "woundedGuard": "recovering_in_south_village"
+  },
+  "openThreads": [
+    "town_gate_observer",
+    "adel_decoy_mission",
+    "princess_assassination_plot",
+    "wagon_attackers",
+    "pursuer_identity_and_survival",
+    "guard_testimony",
+    "city_faction_politics"
+  ]
+}
