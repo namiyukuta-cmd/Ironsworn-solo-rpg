@@ -58,13 +58,30 @@ header{display:flex;align-items:center;justify-content:space-between;padding:4px
   .res,.mom{padding:2px 3px}.mc{height:12px}.vow{padding:3px 5px}.vcell{height:13px}.panel{padding:3px 4px}.asset{padding:2px 3px}
 }
 @media (max-width:390px){.brand span{display:none}.asset{grid-template-columns:62px 1fr}.ability{font-size:5.9px}.tat strong{font-size:7.5px}}
+.save-open{border:1px solid var(--brown);background:var(--pink2);border-radius:7px;padding:3px 6px;font-size:8px;white-space:nowrap}
+.save-tools{display:flex;align-items:center;gap:4px}
+.modal-backdrop{position:fixed;inset:0;background:rgba(86,57,48,.28);display:none;align-items:center;justify-content:center;padding:14px;z-index:50}
+.modal-backdrop.open{display:flex}
+.save-modal{width:min(440px,94vw);max-height:88dvh;overflow:auto;background:#fffaf8;border:2px solid var(--brown);border-radius:16px;padding:10px;box-shadow:0 10px 30px rgba(90,64,56,.18)}
+.save-modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px}
+.save-modal-head h2{margin:0;font:700 16px/1 "Yomogi","Zen Maru Gothic",sans-serif}
+.close-btn{width:28px;height:28px;border:1px solid var(--brown);border-radius:8px;background:white}
+.save-note{font-size:8px;color:var(--brown2);margin:0 0 7px}
+.slot{border:1px solid var(--line);border-radius:10px;padding:6px;margin-bottom:5px;background:white}
+.slot-top{display:flex;justify-content:space-between;gap:6px;align-items:center}
+.slot-title{font-size:9px;font-weight:700}.slot-meta{font-size:6.5px;color:var(--brown2)}
+.slot-actions{display:flex;gap:4px;margin-top:5px}
+.slot-actions button,.save-action{flex:1;border:1px solid var(--brown2);border-radius:8px;background:#fff7fa;padding:6px 5px;font-size:8px}
+.save-action-row{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:6px}
+.save-action.github{grid-column:1/-1;background:var(--pink2);border-color:var(--brown)}
+.save-status{font-size:7px;color:var(--brown2);min-height:12px;margin-top:5px}.hidden-file{display:none}
 </style>
 </head>
 <body>
 <div class="app">
 <header class="box">
   <div class="brand"><h1>白金</h1><span>IRONSWORN CHARACTER SHEET</span></div>
-  <div class="xp"><span>XP</span><button class="sbtn" data-k="xp" data-d="-1">−</button><strong id="xp">1</strong><button class="sbtn" data-k="xp" data-d="1">＋</button></div>
+  <div class="save-tools"><button id="openSave" class="save-open">セーブ</button><div class="xp"><span>XP</span><button class="sbtn" data-k="xp" data-d="-1">−</button><strong id="xp">1</strong><button class="sbtn" data-k="xp" data-d="1">＋</button></div></div>
 </header>
 <section class="stats">
   <div class="stat box"><span>EDGE</span><b>3</b></div><div class="stat box"><span>HEART</span><b>1</b></div><div class="stat box"><span>IRON</span><b>2</b></div><div class="stat box"><span>SHADOW</span><b>1</b></div><div class="stat box"><span>WITS</span><b>2</b></div>
@@ -94,6 +111,20 @@ header{display:flex;align-items:center;justify-content:space-between;padding:4px
   </div>
 </section>
 </div>
+<div id="saveModal" class="modal-backdrop" aria-hidden="true">
+  <div class="save-modal" role="dialog" aria-modal="true" aria-label="セーブ管理">
+    <div class="save-modal-head"><h2>セーブ管理</h2><button id="closeSave" class="close-btn">×</button></div>
+    <p class="save-note">普段の変更は端末に自動保存。手動スロットはこの端末用。GitHub最新セーブはAIが更新する正本です。</p>
+    <div id="slots"></div>
+    <div class="save-action-row">
+      <button id="loadGithub" class="save-action github">GitHubの最新セーブを読み込む</button>
+      <button id="exportSave" class="save-action">JSONを書き出す</button>
+      <button id="importSave" class="save-action">JSONを読み込む</button>
+      <input id="importFile" class="hidden-file" type="file" accept="application/json,.json">
+    </div>
+    <div id="saveStatus" class="save-status"></div>
+  </div>
+</div>
 <script>
 const def={xp:1,health:5,spirit:5,supply:3,momentum:3,vow:0,tattoos:{"道標":"ready","鷹目":"ready","守骨":"ready","影歩":"ready","狩牙":"ready","止血":"cool","熾火":"ready","息潜":"ready"}};
 let s;try{const saved=JSON.parse(localStorage.getItem("shirogane-v3")||"null");s={...def,...(saved||{}),tattoos:{...def.tattoos,...((saved||{}).tattoos||{})}}}catch(e){s=JSON.parse(JSON.stringify(def))}
@@ -103,6 +134,18 @@ function renderVow(){const h=document.getElementById("vtrack");h.innerHTML="";fo
 function renderTattoos(){const h=document.getElementById("tattoos");h.innerHTML="";Object.entries(s.tattoos).forEach(([name,status])=>{const b=document.createElement("button");b.className="tat"+(status==="cool"?" cool":"");b.innerHTML="<strong>"+name+"</strong><span>"+(status==="cool"?"回復中":"使用可")+"</span>";b.onclick=()=>{s.tattoos[name]=status==="cool"?"ready":"cool";save();render()};h.appendChild(b)})}
 function render(){["xp","health","spirit","supply","momentum"].forEach(k=>document.getElementById(k).textContent=s[k]);renderMomentum();renderVow();renderTattoos()}
 document.querySelectorAll("[data-k]").forEach(b=>{b.onclick=()=>{const k=b.dataset.k,d=Number(b.dataset.d);if(k==="xp")s[k]=clamp(s[k]+d,0,99);if(["health","spirit","supply"].includes(k))s[k]=clamp(s[k]+d,0,5);if(k==="momentum")s[k]=clamp(s[k]+d,-6,10);save();render()}});
+function payload(){return {format:"shirogane-local-save-v1",campaign:"白金",savedAt:new Date().toISOString(),appState:JSON.parse(JSON.stringify(s))}}
+function applyPayload(data){const src=data&&data.appState?data.appState:data;if(!src)throw new Error("empty");s={...def,...src,tattoos:{...def.tattoos,...(src.tattoos||{})}};save();render()}
+function slotKey(n){return "shirogane-slot-"+n}
+function slotData(n){try{return JSON.parse(localStorage.getItem(slotKey(n))||"null")}catch(e){return null}}
+function renderSlots(){const host=document.getElementById("slots");host.innerHTML="";for(let n=1;n<=3;n++){const data=slotData(n),box=document.createElement("div");box.className="slot";const when=data?.savedAt?new Date(data.savedAt).toLocaleString("ja-JP"):"未保存";box.innerHTML=`<div class="slot-top"><div class="slot-title">スロット ${n}</div><div class="slot-meta">${when}</div></div><div class="slot-actions"><button data-slot-save="${n}">ここに保存</button><button data-slot-load="${n}" ${data?"":"disabled"}>読み込む</button></div>`;host.appendChild(box)}host.querySelectorAll("[data-slot-save]").forEach(b=>b.onclick=()=>{const n=Number(b.dataset.slotSave);localStorage.setItem(slotKey(n),JSON.stringify(payload()));document.getElementById("saveStatus").textContent=`スロット ${n} に保存しました。`;renderSlots()});host.querySelectorAll("[data-slot-load]").forEach(b=>b.onclick=()=>{const n=Number(b.dataset.slotLoad),data=slotData(n);if(!data)return;applyPayload(data);document.getElementById("saveStatus").textContent=`スロット ${n} を読み込みました。`})}
+document.getElementById("openSave").onclick=()=>{document.getElementById("saveModal").classList.add("open");renderSlots();document.getElementById("saveStatus").textContent=""};
+document.getElementById("closeSave").onclick=()=>document.getElementById("saveModal").classList.remove("open");
+document.getElementById("saveModal").addEventListener("click",e=>{if(e.target.id==="saveModal")e.currentTarget.classList.remove("open")});
+document.getElementById("loadGithub").onclick=async()=>{const status=document.getElementById("saveStatus");status.textContent="GitHubセーブを読み込み中…";try{const r=await fetch("saves/current.json?ts="+Date.now(),{cache:"no-store"});if(!r.ok)throw new Error("HTTP "+r.status);const g=await r.json(),tracks=g.character?.tracks||{},v4=(g.vows||[]).find(v=>v.id==="V004");applyPayload({xp:tracks.xp??s.xp,health:tracks.health??s.health,spirit:tracks.spirit??s.spirit,supply:tracks.supply??s.supply,momentum:tracks.momentum??s.momentum,vow:v4?.progress??s.vow,tattoos:g.character?.tattoos??s.tattoos});status.textContent=`GitHub最新セーブを読み込みました${g.updatedAt?"（"+new Date(g.updatedAt).toLocaleString("ja-JP")+"）":""}。`}catch(e){status.textContent="GitHubセーブを読み込めませんでした。Web公開後に使えます。"}};
+document.getElementById("exportSave").onclick=()=>{const blob=new Blob([JSON.stringify(payload(),null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="shirogane-save-"+new Date().toISOString().slice(0,10)+".json";a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);document.getElementById("saveStatus").textContent="JSONを書き出しました。"};
+document.getElementById("importSave").onclick=()=>document.getElementById("importFile").click();
+document.getElementById("importFile").onchange=async(e)=>{const f=e.target.files?.[0];if(!f)return;try{applyPayload(JSON.parse(await f.text()));document.getElementById("saveStatus").textContent="JSONを読み込みました。"}catch(err){document.getElementById("saveStatus").textContent="このJSONは読み込めませんでした。"}e.target.value=""};
 render();
 </script>
 </body>
