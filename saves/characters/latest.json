@@ -1,0 +1,63 @@
+{
+  "format": "ironsworn-character-save-v1",
+  "id": "char-1787151491684",
+  "name": "ヒマリ",
+  "updatedAt": "2026-08-20T08:42:00+09:00",
+  "character": {
+    "stats": {
+      "edge": 1,
+      "heart": 2,
+      "iron": 1,
+      "shadow": 3,
+      "wits": 2
+    },
+    "tracks": {
+      "health": 5,
+      "spirit": 5,
+      "supply": 5,
+      "momentum": 2,
+      "xp": 0
+    },
+    "vow": {
+      "title": "未設定",
+      "progress": 0
+    },
+    "assets": [
+      {
+        "assetId": "trickster",
+        "name": "詐欺師",
+        "type": "パス",
+        "summary": "嘘・盗み・詐術で局面を動かす。",
+        "abilities": [
+          ["騙し", true, "嘘や盗みを使う危機対応・有利・説得を強化。"],
+          ["裏読み", false, "陰謀調査をShadowで行える。"],
+          ["嘘の絆", false, "嘘から始まる絆をShadowか正直なHeartで結ぶ。"]
+        ]
+      },
+      {
+        "assetId": "storyweaver",
+        "name": "語り部",
+        "type": "パス",
+        "summary": "歌や物語で人を動かし、休息や共同体を支える。",
+        "abilities": [
+          ["物語の力", true, "歌・詩・物語で有利・説得・絆を強化。"],
+          ["野営の語り", false, "休息時に自分や仲間の精神・モメンタムを回復。"],
+          ["歓迎される語り手", false, "絆のある共同体でSojournを大きく強化。"]
+        ]
+      },
+      {
+        "assetId": "divination",
+        "name": "占石",
+        "type": "儀式",
+        "summary": "血とルーン石を使い、対象と周囲の秘密を読む。",
+        "abilities": [
+          ["読み解き", true, "対象や関係者について未知の情報まで得る。"],
+          ["未来視", false, "対象の未来も読み取れる。"],
+          ["安定儀式", false, "儀式判定を強化しモメンタムを得る。"]
+        ]
+      }
+    ],
+    "tattoos": {},
+    "createdAt": null
+  }
+}
