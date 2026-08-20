@@ -18,6 +18,7 @@ function buildAIData(){
       stats:{...(draft.stats||{})},
       tracks:{...(draft.tracks||{})},
       vow:{...(draft.vow||{})},
+      notes:draft.notes||'',
       assets:(draft.assets||[]).map(a=>({
         id:a.assetId||a.id||'',
         name:a.name||'',
