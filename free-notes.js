@@ -2,26 +2,11 @@
 const NOTES_LOCAL_KEY='ironsworn-character-notes-v1';
 const TOKEN_SESSION_KEY='ironsworn-github-token-session-v1';
 const TOKEN_LOCAL_KEY='ironsworn-github-token-local-v1';
-const DRAFT_KEY='ironsworn-working-draft-v3';
-const SETUP_KEY='ironsworn-campaign-setup-v1';
-const SETUP_ACTIVE_KEY='ironsworn-setup-active-v1';
 const OWNER='namiyukuta-cmd';
 const REPO='Ironsworn-solo-rpg';
 const BRANCH='main';
 const API='https://api.github.com/repos/'+OWNER+'/'+REPO;
 const $=id=>document.getElementById(id);
-
-const homeNew=$('homeNew');
-if(homeNew)homeNew.onclick=()=>{
-  sessionStorage.removeItem(DRAFT_KEY);
-  sessionStorage.removeItem(SETUP_KEY);
-  sessionStorage.setItem(SETUP_ACTIVE_KEY,'1');
-  location.href='setup.html?new=1';
-};
-if(sessionStorage.getItem(SETUP_ACTIVE_KEY)==='1'&&location.hash==='#game'){
-  location.replace('setup.html');
-  return;
-}
 
 function loadNoteMap(){try{return JSON.parse(localStorage.getItem(NOTES_LOCAL_KEY)||'{}')||{}}catch(e){return {}}}
 function saveNoteMap(map){localStorage.setItem(NOTES_LOCAL_KEY,JSON.stringify(map))}
