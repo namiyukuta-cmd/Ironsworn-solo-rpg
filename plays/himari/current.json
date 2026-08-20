@@ -3,12 +3,13 @@
   "playId": "play-himari",
   "characterId": "char-1787151491684",
   "worldId": "world-002",
-  "status": "not_started",
-  "scene": 0,
-  "turn": 0,
-  "location": null,
-  "objective": null,
-  "pending": null,
+  "status": "in_progress",
+  "scene": 1,
+  "turn": 1,
+  "date": "1435-10-10",
+  "location": "パリ・レ・アル周辺／酒場兼宿屋の酒場",
+  "objective": "占いでその日の稼ぎを得る",
+  "pending": "ヒマリの呼びかけに気づいた最初の客とのやり取り",
   "currentVowId": null,
   "premise": {
     "livelihood": "占いをして細々と生計を立てる",
@@ -16,6 +17,8 @@
     "storyFocus": "日々の暮らし、客との関わり、旅、金銭、宿、噂、地域社会、身近な危機、架空NPCとの人間関係を中心にする。",
     "historyContact": "戦争、条約、王侯の動向など史実はニュースや噂、治安、物価、徴募などを通じて間接的に影響する。"
   },
-  "openThreads": [],
-  "updatedAt": "2026-08-20T11:37:00+09:00"
+  "openThreads": [
+    "最初の占い客"
+  ],
+  "updatedAt": "2026-08-20T17:25:00+09:00"
 }
