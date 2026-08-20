@@ -1,0 +1,10 @@
+{
+  "format": "ironsworn-world-state-v1",
+  "worldId": "world-002",
+  "status": "setup",
+  "currentFacts": [],
+  "worldChanges": [],
+  "openWorldThreads": [],
+  "note": "ヒマリの行動によって世界そのものが変化した場合、その結果だけをここへ記録する。行動履歴は plays/play-himari 側で管理する。",
+  "updatedAt": "2026-08-20T11:16:00+09:00"
+}
