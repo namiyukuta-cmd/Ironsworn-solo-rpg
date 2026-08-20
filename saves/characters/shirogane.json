@@ -1,0 +1,72 @@
+{
+  "format": "ironsworn-character-save-v1",
+  "id": "shirogane",
+  "name": "白金",
+  "updatedAt": "2026-08-20T11:16:00+09:00",
+  "character": {
+    "stats": {
+      "edge": 3,
+      "heart": 1,
+      "iron": 2,
+      "shadow": 1,
+      "wits": 2
+    },
+    "tracks": {
+      "health": 5,
+      "spirit": 5,
+      "supply": 3,
+      "momentum": 3,
+      "xp": 1
+    },
+    "vow": {
+      "title": "アデルを連絡拠点まで守る",
+      "progress": 0
+    },
+    "assets": [
+      {
+        "assetId": "last-of-people",
+        "name": "最後の民",
+        "type": "カスタム",
+        "summary": "一族最後の生き残り。荒野で生きる力を持つ。",
+        "abilities": [
+          ["荒野の子", true, "荒野での行動を助ける。"],
+          ["獣を捌く者", false, "獣の扱いに長ける。"],
+          ["異邦の眼", false, "異文化を観察する。"]
+        ]
+      },
+      {
+        "assetId": "herbalist",
+        "name": "薬草師",
+        "type": "パス",
+        "summary": "薬草を使った治療を得意とする。",
+        "abilities": [
+          ["薬草治療", true, "薬草を使った治療を強化する。"],
+          ["癒やし手", false, "他者を治療した時に恩恵を得る。"],
+          ["滋養食", false, "野営時の食事で回復を助ける。"]
+        ]
+      },
+      {
+        "assetId": "raven",
+        "name": "肉",
+        "type": "相棒",
+        "summary": "鴉の相棒。策略・死の境・伝書に役立つ。",
+        "abilities": [
+          ["ずる賢い", false, "悪戯や盗みで行動を助ける。"],
+          ["知る者", false, "死に直面した時に助ける。"],
+          ["勤勉", true, "離れた相手への伝書や情報収集に使える。"]
+        ]
+      }
+    ],
+    "tattoos": {
+      "道標": "ready",
+      "鷹目": "ready",
+      "守骨": "ready",
+      "影歩": "ready",
+      "狩牙": "ready",
+      "止血": "cool",
+      "熾火": "ready",
+      "息潜": "ready"
+    },
+    "createdAt": "2026-08-19T00:00:00+09:00"
+  }
+}
