@@ -1,5 +1,6 @@
 (()=>{'use strict';
 const FLOW_KEY='ironsworn-new-game-flow-v1';
+const NOTES_KEY='ironsworn-character-notes-v1';
 const TOKEN_SESSION_KEY='ironsworn-github-token-session-v1';
 const TOKEN_LOCAL_KEY='ironsworn-github-token-local-v1';
 const $=id=>document.getElementById(id);
@@ -37,12 +38,13 @@ function bindFields(){
   });
 }
 function progress(){const names=['キャラクター','アセット','世界','背景','発端','開始場面','最初の誓い'];$('setupProgress').innerHTML=names.map((n,i)=>'<span class="'+(i===state.step?'on':i<state.step?'done':'')+'">'+(i+1)+'</span>').join('')}
+function nextWorldId(){let max=0;worlds.forEach(w=>{const m=String(w.id||'').match(/^world-(\d+)$/);if(m)max=Math.max(max,Number(m[1]))});return max?('world-'+String(max+1).padStart(3,'0')):('world-'+Date.now())}
 function render(){
   if(!state)return;ensureModal();progress();$('setupError').textContent='';$('setupBack').style.visibility=state.step===0?'hidden':'visible';$('setupNext').textContent=state.step===6?'ゲーム開始':'次へ';
   const d=fields(),body=$('setupBody');
   if(state.step===0){
     $('setupTitle').textContent='キャラクター作成';
-    body.innerHTML=makeInput('どんな人物？（あとで増やせます）','concept','例：旅の占い師。口数は少ない。','textarea')+makeInput('名前','name','キャラクター名')+'<div class="setup-label">能力値 <small>3 / 2 / 2 / 1 / 1 を1つずつ</small></div><div class="setup-stats">'+['edge','heart','iron','shadow','wits'].map(k=>'<label><span>'+k.toUpperCase()+'</span><select data-stat="'+k+'"><option '+(d.stats[k]===1?'selected':'')+'>1</option><option '+(d.stats[k]===2?'selected':'')+'>2</option><option '+(d.stats[k]===3?'selected':'')+'>3</option></select></label>').join('')+'</div><div class="setup-fixed">開始値：Health 5 / Spirit 5 / Supply 5 / Momentum 2</div>';
+    body.innerHTML=makeInput('どんな人物？（あとで増やせます）','concept','例：旅の占い師。口数は少ない。','textarea')+makeInput('名前','name','キャラクター名')+'<div class="setup-label">能力値 <small>3 / 2 / 2 / 1 / 1 を1つずつ</small></div><div class="setup-stats">'+['edge','heart','iron','shadow','wits'].map(k=>'<label><span>'+k.toUpperCase()+'</span><select data-stat="'+k+'"><option '+(d.stats[k]===1?'selected':'')+'>1</option><option '+(d.stats[k]===2?'selected':'')+'>2</option><option '+(d.stats[k]===3?'selected':'')+'>3</option></select></label>').join('')+'</div><div class="setup-fixed">開始値：Health 5 / Spirit 5 / Supply 5 / Momentum 2 / XP 0</div>';
     body.querySelectorAll('[data-stat]').forEach(el=>el.onchange=()=>{d.stats[el.dataset.stat]=Number(el.value);saveState();syncDraft()});bindFields();
   }else if(state.step===1){
     $('setupTitle').textContent='アセットを3つ選ぶ';
@@ -53,7 +55,7 @@ function render(){
     $('setupTitle').textContent='世界';
     const options=['<option value="new" '+(d.worldMode==='new'?'selected':'')+'>新しい世界を作る</option>'].concat(worlds.map(w=>'<option value="'+escapeAttr(w.id)+'" '+(d.worldMode==='existing'&&d.worldId===w.id?'selected':'')+'>'+escapeHtml(w.name||w.id)+'</option>')).join('');
     body.innerHTML='<label class="setup-label">使う世界<select id="setupWorldSelect">'+options+'</select></label><div id="setupNewWorld">'+makeInput('世界名','worldName','例：ヒマリの世界')+makeInput('世界の基本設定','worldTruths','時代、国、雰囲気、魔法の有無など。あとで追加できます。','textarea')+'</div>'+makeInput('物語を始める場所','startLocation','例：パリ郊外の宿屋');
-    const sel=$('setupWorldSelect');const toggle=()=>{const isNew=sel.value==='new';$('setupNewWorld').style.display=isNew?'block':'none';d.worldMode=isNew?'new':'existing';if(isNew){if(!d.worldId||worlds.some(w=>w.id===d.worldId))d.worldId='world-'+Date.now()}else{d.worldId=sel.value;const w=worlds.find(x=>x.id===sel.value);d.worldName=w?.name||sel.value}saveState();syncDraft()};sel.onchange=toggle;bindFields();toggle();
+    const sel=$('setupWorldSelect');const toggle=()=>{const isNew=sel.value==='new';$('setupNewWorld').style.display=isNew?'block':'none';d.worldMode=isNew?'new':'existing';if(isNew){if(!d.worldId||worlds.some(w=>w.id===d.worldId))d.worldId=nextWorldId()}else{d.worldId=sel.value;const w=worlds.find(x=>x.id===sel.value);d.worldName=w?.name||sel.value}saveState();syncDraft()};sel.onchange=toggle;bindFields();toggle();
   }else if(state.step===3){
     $('setupTitle').textContent='背景';
     body.innerHTML='<div class="setup-label">背景の絆 <small>0〜3個。故郷、家族、友人、忠誠など</small></div>'+d.bonds.map((v,i)=>'<input class="setup-line" data-bond="'+i+'" value="'+escapeAttr(v)+'" placeholder="絆 '+(i+1)+'">').join('')+makeInput('大切な装備・持ち物','equipment','例：ローブ、占い石、小袋','textarea')+makeInput('背景の誓い','backgroundVow','長く抱えている大きな誓い')+'<label class="setup-label">背景の誓いの難易度<select id="backgroundRank"><option '+(d.backgroundVowRank==='Extreme'?'selected':'')+'>Extreme</option><option '+(d.backgroundVowRank==='Epic'?'selected':'')+'>Epic</option></select></label><p class="setup-help">背景の誓いはここでは判定しません。</p>';
@@ -85,13 +87,23 @@ function goNext(){const err=validate();if(err){$('setupError').textContent=err;r
 function goBack(){if(state.step>0){state.step--;saveState();render()}}
 async function finishFlow(){
   const d=fields();if(typeof draft==='undefined'||!draft)return;
-  draft.name=d.name.trim();draft.setup={...clone(d),complete:true,completedAt:new Date().toISOString(),playId:'play-'+state.id};draft.vow={title:d.initialVow.trim(),progress:0,rank:d.initialVowRank};draft.profile={concept:d.concept.trim(),bonds:d.bonds.map(x=>x.trim()).filter(Boolean),equipment:d.equipment.trim(),backgroundVow:{title:d.backgroundVow.trim(),rank:d.backgroundVowRank}};
-  if(typeof formalSave==='function')formalSave();const token=sessionStorage.getItem(TOKEN_SESSION_KEY)||localStorage.getItem(TOKEN_LOCAL_KEY)||'';
+  const bonds=d.bonds.map(x=>x.trim()).filter(Boolean);
+  draft.name=d.name.trim();
+  draft.setup={...clone(d),complete:true,needsSync:true,completedAt:new Date().toISOString(),playId:'play-'+state.id};
+  draft.vow={title:d.initialVow.trim(),progress:0,rank:d.initialVowRank,status:'active'};
+  draft.backgroundVow={title:d.backgroundVow.trim(),rank:d.backgroundVowRank,progress:0,status:'active'};
+  draft.bonds=bonds.map(name=>({name,ticks:1,background:true}));
+  draft.equipment=d.equipment.trim();
+  draft.profile={concept:d.concept.trim(),bonds,equipment:d.equipment.trim(),backgroundVow:{title:d.backgroundVow.trim(),rank:d.backgroundVowRank}};
+  draft.notes=[d.concept.trim()&&('人物像・性格・背景\n'+d.concept.trim()),d.equipment.trim()&&('持ち物・装備\n'+d.equipment.trim())].filter(Boolean).join('\n\n');
+  try{const notes=JSON.parse(localStorage.getItem(NOTES_KEY)||'{}')||{};notes[draft.id]=draft.notes;localStorage.setItem(NOTES_KEY,JSON.stringify(notes))}catch(e){}
+  if(typeof formalSave==='function')formalSave();
+  const token=sessionStorage.getItem(TOKEN_SESSION_KEY)||localStorage.getItem(TOKEN_LOCAL_KEY)||'';
   $('setupNext').disabled=true;$('setupNext').textContent='保存中…';
   if(token){try{await Promise.all([window.IronswornGithubSync?.syncCurrentCharacter(token),window.IronswornSetupSync?.sync(token)])}catch(e){console.warn('initial github sync failed',e)}}
   state=null;saveState();$('setupFlow').classList.remove('open');if(typeof renderGame==='function')renderGame();if(typeof show==='function')show('gameScreen');history.replaceState(null,'',location.pathname+'#game');
 }
-async function loadWorlds(){try{const r=await fetch('worlds/index.json?v=setup1',{cache:'no-store'});if(r.ok){const j=await r.json();worlds=Array.isArray(j.worlds)?j.worlds:[];if(state?.step===2)render()}}catch(e){worlds=[]}}
+async function loadWorlds(){try{const r=await fetch('worlds/index.json?v=setup2',{cache:'no-store'});if(r.ok){const j=await r.json();worlds=Array.isArray(j.worlds)?j.worlds:[];if(state?.step===2)render()}}catch(e){worlds=[]}}
 const homeNew=$('homeNew');if(homeNew)homeNew.onclick=openFlow;
 loadWorlds();if(state&&state.id&&typeof draft!=='undefined'&&draft&&draft.id===state.id)resumeFlow();
 })();
