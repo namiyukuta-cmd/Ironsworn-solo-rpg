@@ -1,0 +1,24 @@
+{
+  "format": "ironsworn-world-index-v1",
+  "updatedAt": "2026-08-20T11:16:00+09:00",
+  "worlds": [
+    {
+      "id": "world-001",
+      "name": "白金の世界",
+      "status": "active",
+      "path": "worlds/world-001/world.json",
+      "statePath": "worlds/world-001/state.json",
+      "characterIds": ["shirogane"],
+      "playIds": ["play-shirogane"]
+    },
+    {
+      "id": "world-002",
+      "name": "ヒマリの世界",
+      "status": "setup",
+      "path": "worlds/world-002/world.json",
+      "statePath": "worlds/world-002/state.json",
+      "characterIds": ["char-1787151491684"],
+      "playIds": ["play-himari"]
+    }
+  ]
+}
