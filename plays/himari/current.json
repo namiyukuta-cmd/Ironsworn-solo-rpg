@@ -1,0 +1,15 @@
+{
+  "format": "ironsworn-play-state-v1",
+  "playId": "play-himari",
+  "characterId": "char-1787151491684",
+  "worldId": "world-002",
+  "status": "not_started",
+  "scene": 0,
+  "turn": 0,
+  "location": null,
+  "objective": null,
+  "pending": null,
+  "currentVowId": null,
+  "openThreads": [],
+  "updatedAt": "2026-08-20T11:16:00+09:00"
+}
