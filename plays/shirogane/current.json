@@ -1,0 +1,29 @@
+{
+  "format": "ironsworn-play-state-v1",
+  "playId": "play-shirogane",
+  "characterId": "shirogane",
+  "worldId": "world-001",
+  "status": "in_progress",
+  "scene": 1,
+  "turn": 33,
+  "location": "アデルの連絡拠点がある町・門前",
+  "objective": "アデルを連絡拠点まで安全に護衛する",
+  "pending": "門の商人風の男から『名前は？』と直接聞かれている。白金の返答待ち。",
+  "currentVowId": "V004",
+  "openThreads": [
+    "town_gate_observer",
+    "adel_decoy_mission",
+    "princess_assassination_plot",
+    "wagon_attackers",
+    "pursuer_identity_and_survival",
+    "guard_testimony",
+    "city_faction_politics"
+  ],
+  "sources": [
+    "game-data/FULL_MIRROR.md",
+    "game-data/HISTORY.md",
+    "game-data/GM_RULES.md",
+    "saves/current.json"
+  ],
+  "updatedAt": "2026-08-20T11:16:00+09:00"
+}
