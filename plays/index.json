@@ -1,0 +1,24 @@
+{
+  "format": "ironsworn-play-index-v1",
+  "updatedAt": "2026-08-20T11:16:00+09:00",
+  "plays": [
+    {
+      "id": "play-shirogane",
+      "name": "白金のプレイ",
+      "characterId": "shirogane",
+      "worldId": "world-001",
+      "status": "in_progress",
+      "currentPath": "plays/shirogane/current.json",
+      "historyPath": "game-data/HISTORY.md"
+    },
+    {
+      "id": "play-himari",
+      "name": "ヒマリのプレイ",
+      "characterId": "char-1787151491684",
+      "worldId": "world-002",
+      "status": "not_started",
+      "currentPath": "plays/himari/current.json",
+      "historyPath": "plays/himari/history.md"
+    }
+  ]
+}
