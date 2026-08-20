@@ -5,11 +5,11 @@
   "worldId": "world-002",
   "status": "in_progress",
   "scene": 1,
-  "turn": 1,
+  "turn": 2,
   "date": "1435-10-10",
   "location": "パリ・レ・アル周辺／酒場兼宿屋の酒場",
   "objective": "占いでその日の稼ぎを得る",
-  "pending": "ヒマリの呼びかけに気づいた最初の客とのやり取り",
+  "pending": "占石が示した内容を、ヒマリが最初の客へどう伝えるか",
   "currentVowId": null,
   "premise": {
     "livelihood": "占いをして細々と生計を立てる",
@@ -18,7 +18,18 @@
     "historyContact": "戦争、条約、王侯の動向など史実はニュースや噂、治安、物価、徴募などを通じて間接的に影響する。"
   },
   "openThreads": [
-    "最初の占い客"
+    "最初の占い客：商人の手代風の男",
+    "男が探す主人の娘：自分の意思で姿を消し、サン＝ドニ門へ向かう北側の界隈にいる兆し"
   ],
-  "updatedAt": "2026-08-20T17:25:00+09:00"
+  "lastMove": {
+    "move": "占石／読み解き",
+    "actionDie": 4,
+    "stat": "Wits",
+    "statValue": 2,
+    "actionScore": 6,
+    "challengeDice": [2, 5],
+    "result": "strong_hit",
+    "revealed": "男が探しているのは彼の主人の娘。連れ去られたのではなく自分の意思で姿を消しており、サン＝ドニ門へ向かう北側の界隈にいる兆し。"
+  },
+  "updatedAt": "2026-08-20T17:30:00+09:00"
 }
