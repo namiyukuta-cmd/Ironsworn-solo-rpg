@@ -1,0 +1,17 @@
+{
+  "format": "ironsworn-world-v1",
+  "id": "world-002",
+  "name": "ヒマリの世界",
+  "status": "setup",
+  "description": null,
+  "canon": [],
+  "regions": [],
+  "settlements": [],
+  "factions": [],
+  "cultures": [],
+  "religions": [],
+  "worldRules": [],
+  "linkedCharacters": ["char-1787151491684"],
+  "linkedPlays": ["play-himari"],
+  "updatedAt": "2026-08-20T11:16:00+09:00"
+}
