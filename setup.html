@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#fffaf8">
+<title>Ironsworn - ゲーム開始準備</title>
+<link rel="stylesheet" href="setup.css?v=1">
+</head>
+<body>
+<main class="setup-shell">
+  <header class="setup-head">
+    <button id="exitBtn" class="ghost" type="button">ホーム</button>
+    <div class="setup-title"><b>ゲーム開始準備</b><span id="stepText">1 / 8</span></div>
+    <button id="backBtn" class="ghost" type="button">戻る</button>
+  </header>
+  <div class="progress"><i id="progressBar"></i></div>
+  <section id="setupCard" class="setup-card"></section>
+  <div id="setupError" class="setup-error"></div>
+  <footer class="setup-foot">
+    <button id="nextBtn" class="next" type="button">次へ</button>
+  </footer>
+</main>
+<script src="setup.js?v=1"></script>
+</body>
+</html>
