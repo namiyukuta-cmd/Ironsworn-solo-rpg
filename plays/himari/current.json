@@ -5,11 +5,11 @@
   "worldId": "world-002",
   "status": "in_progress",
   "scene": 1,
-  "turn": 3,
+  "turn": 4,
   "date": "1435-10-10",
   "location": "パリ・レ・アル周辺／酒場兼宿屋の酒場",
   "objective": "占いでその日の稼ぎを得る",
-  "pending": "最初の客が差し出した銀貨を受け、追加で占うかどうか",
+  "pending": "最初の客が占い結果を受けてどう動くか",
   "currentVowId": null,
   "premise": {
     "livelihood": "占いをして細々と生計を立てる",
@@ -31,5 +31,11 @@
     "result": "strong_hit",
     "revealed": "男が探しているのは彼の主人の娘。連れ去られたのではなく自分の意思で姿を消しており、サン＝ドニ門へ向かう北側の界隈にいる兆し。"
   },
-  "updatedAt": "2026-08-20T17:36:00+09:00"
+  "earnings": [
+    {
+      "source": "最初の占い客",
+      "payment": "銀貨1枚"
+    }
+  ],
+  "updatedAt": "2026-08-20T17:44:00+09:00"
 }
