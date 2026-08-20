@@ -1,0 +1,15 @@
+{
+  "format": "ironsworn-character-tattoos-v1",
+  "characterId": "shirogane",
+  "characterName": "白金",
+  "tattoos": [
+    {"id":"TAT001","name":"道標","part":"額の中央","effect":"方角・地勢・獣道の感覚を研ぎ澄ます。荒野で迷いにくくなる。","moves":"Undertake a Journey / Face Danger","cost":"使用部位が赤く腫れ上がる。無理に重ねて使うとHealthやSpiritに悪影響。","recovery":"使用後約1日","note":"13歳・成人時に取得。部族文字の呪名であり「道標」は共通語での呼び名。"},
+    {"id":"TAT002","name":"鷹目","part":"右のこめかみから目尻の外側","effect":"遠くや異変を見抜く。待ち伏せ、足跡、わずかな動きを察知しやすい。","moves":"Gather Information / Face Danger","cost":"使用部位が赤く腫れ上がる。無理に重ねて使うとHealthやSpiritに悪影響。","recovery":"使用後約1日","note":"14歳で取得。部族文字の呪名であり「鷹目」は共通語での呼び名。"},
+    {"id":"TAT003","name":"守骨","part":"左の頬骨の下","effect":"打撃や転倒、衝撃に対して一瞬だけ身を硬く守る。","moves":"Endure Harm / Face Danger","cost":"使用部位が赤く腫れ上がる。無理に重ねて使うとHealthやSpiritに悪影響。","recovery":"使用後約1日","note":"15歳で取得。部族文字の呪名であり「守骨」は共通語での呼び名。"},
+    {"id":"TAT004","name":"影歩","part":"顎下から首筋","effect":"気配を薄める。身を隠す、追跡から外れる、静かに近づくのに向く。","moves":"Secure an Advantage / Face Danger","cost":"使用部位が赤く腫れ上がる。無理に重ねて使うとHealthやSpiritに悪影響。","recovery":"使用後約1日","note":"16歳で取得。部族文字の呪名であり「影歩」は共通語での呼び名。"},
+    {"id":"TAT005","name":"狩牙","part":"右肩の前側","effect":"狩りと止めの一撃に向く。獲物を追い、仕留め、解体する流れを助ける。","moves":"Resupply / Strike","cost":"使用部位が赤く腫れ上がる。無理に重ねて使うとHealthやSpiritに悪影響。","recovery":"使用後約1日","note":"17歳で取得。部族文字の呪名であり「狩牙」は共通語での呼び名。"},
+    {"id":"TAT006","name":"止血","part":"左前腕の内側","effect":"出血や傷の悪化を一時的に抑える。治療の初動用。","moves":"Heal / Endure Harm","cost":"使用部位が赤く腫れ上がる。無理に重ねて使うとHealthやSpiritに悪影響。","recovery":"使用後約1日","note":"18歳で取得。部族文字の呪名であり「止血」は共通語での呼び名。"},
+    {"id":"TAT007","name":"熾火","part":"鎖骨のあいだから胸元","effect":"火種、熱、灯り、寒さへの抵抗。小さな火を保つ、冷えに耐える。","moves":"Make Camp / Secure an Advantage","cost":"使用部位が赤く腫れ上がる。無理に重ねて使うとHealthやSpiritに悪影響。","recovery":"使用後約1日","note":"19歳で取得。部族文字の呪名であり「熾火」は共通語での呼び名。"},
+    {"id":"TAT008","name":"息潜","part":"右脇腹","effect":"息を殺し、気配と呼吸を制御する。潜伏、待機、痛みへの耐えに向く。","moves":"Face Danger / Secure an Advantage","cost":"使用部位が赤く腫れ上がる。無理に重ねて使うとHealthやSpiritに悪影響。","recovery":"使用後約1日","note":"20歳で取得。部族文字の呪名であり「息潜」は共通語での呼び名。"}
+  ]
+}
