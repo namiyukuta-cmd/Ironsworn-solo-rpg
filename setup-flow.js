@@ -25,7 +25,9 @@ function cancelFlow(){
 function fields(){return state.data}
 function syncDraft(){if(!state?.id||typeof draft==='undefined'||!draft)return;draft.setup=clone(state.data);if(typeof writeDraft==='function')writeDraft()}
 function makeInput(label,key,placeholder='',type='text'){
-  const v=fields()[key]??'';return '<label class="setup-label">'+label+'<'+(type==='textarea'?'textarea':'input')+' data-field="'+key+'" '+(type==='textarea'?'rows="4"':'type="text"')+' placeholder="'+placeholder+'">'+(type==='textarea'?escapeHtml(v):'')+(type==='textarea'?'</textarea>':'')+(type==='textarea'?'':' value="'+escapeAttr(v)+'">')+'</label>';
+  const v=fields()[key]??'';
+  if(type==='textarea')return '<label class="setup-label">'+label+'<textarea data-field="'+key+'" rows="4" placeholder="'+escapeAttr(placeholder)+'">'+escapeHtml(v)+'</textarea></label>';
+  return '<label class="setup-label">'+label+'<input data-field="'+key+'" type="text" placeholder="'+escapeAttr(placeholder)+'" value="'+escapeAttr(v)+'"></label>';
 }
 function escapeHtml(s){return String(s??'').replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]))}
 function escapeAttr(s){return escapeHtml(s).replace(/"/g,'&quot;')}
