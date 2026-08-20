@@ -2,7 +2,7 @@
   "format": "ironsworn-character-index-v1",
   "latestCharacterId": "char-1787151491684",
   "latestPath": "saves/characters/char-1787151491684.json",
-  "updatedAt": "2026-08-20T08:05:08.745Z",
+  "updatedAt": "2026-08-20T08:16:08.794Z",
   "characters": [
     {
       "id": "shirogane",
@@ -14,7 +14,7 @@
       "id": "char-1787151491684",
       "name": "ヒマリ",
       "path": "saves/characters/char-1787151491684.json",
-      "updatedAt": "2026-08-20T08:05:08.745Z"
+      "updatedAt": "2026-08-20T08:16:08.794Z"
     }
   ]
 }
