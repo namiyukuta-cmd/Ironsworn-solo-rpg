@@ -2,19 +2,19 @@
   "format": "ironsworn-character-index-v1",
   "latestCharacterId": "char-1787151491684",
   "latestPath": "saves/characters/char-1787151491684.json",
-  "updatedAt": "2026-08-20T11:16:00+09:00",
+  "updatedAt": "2026-08-20T07:37:27.493Z",
   "characters": [
-    {
-      "id": "char-1787151491684",
-      "name": "ヒマリ",
-      "path": "saves/characters/char-1787151491684.json",
-      "updatedAt": "2026-08-20T08:42:00+09:00"
-    },
     {
       "id": "shirogane",
       "name": "白金",
       "path": "saves/characters/shirogane.json",
       "updatedAt": "2026-08-20T11:16:00+09:00"
+    },
+    {
+      "id": "char-1787151491684",
+      "name": "ヒマリ",
+      "path": "saves/characters/char-1787151491684.json",
+      "updatedAt": "2026-08-20T07:37:27.493Z"
     }
   ]
 }
