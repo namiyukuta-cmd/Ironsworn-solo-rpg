@@ -1,0 +1,10 @@
+{
+  "format": "ironsworn-world-state-v1",
+  "worldId": "world-001",
+  "status": "active",
+  "currentFacts": [],
+  "worldChanges": [],
+  "openWorldThreads": [],
+  "note": "世界そのものに残る変化を記録する。キャラクターの行動履歴そのものは plays/play-shirogane 側で管理する。",
+  "updatedAt": "2026-08-20T11:16:00+09:00"
+}
