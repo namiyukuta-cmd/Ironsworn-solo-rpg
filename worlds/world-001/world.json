@@ -1,0 +1,21 @@
+{
+  "format": "ironsworn-world-v1",
+  "id": "world-001",
+  "name": "白金の世界",
+  "status": "active",
+  "description": null,
+  "canon": [],
+  "regions": [],
+  "settlements": [],
+  "factions": [],
+  "cultures": [],
+  "religions": [],
+  "worldRules": [],
+  "linkedCharacters": ["shirogane"],
+  "linkedPlays": ["play-shirogane"],
+  "legacySources": [
+    "game-data/FULL_MIRROR.md",
+    "game-data/GM_RULES.md"
+  ],
+  "updatedAt": "2026-08-20T11:16:00+09:00"
+}
