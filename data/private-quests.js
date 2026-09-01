@@ -1,10 +1,98 @@
-window.IRONSWORD_PRIVATE_QUEST_DATA={version:1,quests:[
-{id:'iq_001',title:'消えた荷運び人',rank:'Dangerous',tags:['contract','tracking'],giver:'街道沿いの集落',summary:'戻らない荷運び人と冬越し物資を探す。',description:'三日前に出た荷運び人が戻っていない。荷には薬と鉄材が積まれている。生死を確かめ、可能なら荷も回収してほしい。',stages:[{id:'trail',objective:'街道で荷車の痕跡を探す。'},{id:'follow',objective:'荷運び人の足取りを追う。'},{id:'threat',objective:'行く手を阻む脅威を越える。'},{id:'return',objective:'生存者か荷を確保し、依頼人のもとへ戻る。'}]},
-{id:'iq_002',title:'夜ごと消える家畜',rank:'Dangerous',tags:['hunt','tracking'],giver:'山あいの牧場主',summary:'夜ごと家畜を奪うものの正体を突き止める。',description:'柵は壊されていないのに、夜になると家畜だけが消える。足跡も途中で途切れている。',stages:[{id:'scene',objective:'襲撃現場と痕跡を調べる。'},{id:'track',objective:'正体不明の脅威を追跡する。'},{id:'face',objective:'脅威の正体を突き止める。'},{id:'resolve',objective:'村への危険を止め、結果を報告する。'}]},
-{id:'iq_003',title:'閉ざされた旧坑道',rank:'Formidable',tags:['explore','combat'],giver:'坑夫頭',summary:'崩れた坑道の奥に残された者を探す。',description:'古い坑道で崩落が起きた。奥に人が残っている可能性があるが、最近は内部から奇妙な音も聞こえる。',stages:[{id:'entry',objective:'安全に入れる経路を見つける。'},{id:'deep',objective:'坑道の奥へ進み、生存者の痕跡を探す。'},{id:'rescue',objective:'取り残された者を発見する。'},{id:'escape',objective:'崩落や脅威を越えて脱出する。'}]},
-{id:'iq_004',title:'奪われた鉄材',rank:'Dangerous',tags:['contract','combat'],giver:'鍛冶職人',summary:'街道で奪われた鉄材を取り戻す。',description:'鍛冶場に届くはずの鉄材が消えた。そりだけが見つかり、荷はきれいになくなっている。',stages:[{id:'inspect',objective:'そりが見つかった場所を調べる。'},{id:'pursue',objective:'鉄材を運び去った者を追う。'},{id:'motive',objective:'相手の目的と状況を知る。'},{id:'recover',objective:'鉄材を回収し、依頼人に届ける。'}]},
-{id:'iq_005',title:'峠を越える護衛',rank:'Dangerous',tags:['contract','travel','combat'],giver:'旅商人',summary:'危険な峠を越えて旅商人を送り届ける。',description:'峠では最近、旅人が消えるという噂がある。商人は報酬を出すので向こう側の集落まで護衛してほしいと言う。',stages:[{id:'prepare',objective:'峠越えの準備を整える。'},{id:'travel',objective:'商人を守りながら峠を進む。'},{id:'danger',objective:'待ち受ける危険を切り抜ける。'},{id:'arrive',objective:'商人を目的地へ送り届ける。'}]},
-{id:'iq_006',title:'森に残された狩人',rank:'Troublesome',tags:['tracking','hunt'],giver:'狩人の家族',summary:'戻らない狩人を探しに森へ入る。',description:'狩りに出た者が予定を過ぎても戻らない。家族は怪我か獣に襲われたのではないかと心配している。',stages:[{id:'last',objective:'狩人が最後に目撃された場所を確かめる。'},{id:'trail',objective:'森の中で痕跡を追う。'},{id:'find',objective:'狩人を発見する。'},{id:'home',objective:'狩人または知らせを家族へ届ける。'}]},
-{id:'iq_007',title:'古井戸からの声',rank:'Dangerous',tags:['mystery','explore'],giver:'村長',summary:'夜ごと古井戸から聞こえる声を調べる。',description:'誰も近づかない古井戸から、夜になると人の声のようなものが聞こえる。村長は原因だけでも確かめてほしいと言う。',stages:[{id:'ask',objective:'村人から古井戸について聞き込みをする。'},{id:'inspect',objective:'古井戸と周辺を調べる。'},{id:'descend',objective:'必要なら井戸の内部へ進む。'},{id:'truth',objective:'声の正体を突き止め、村長へ報告する。'}]},
-{id:'iq_008',title:'薬草を持ち帰れ',rank:'Troublesome',tags:['gather','travel'],giver:'薬師',summary:'治療に必要な薬草を危険な森から採取する。',description:'集落で熱病が広がり始めた。薬師は森の奥に生える銀葉草が必要だと言う。',stages:[{id:'learn',objective:'薬師から銀葉草の見分け方を聞く。'},{id:'reach',objective:'銀葉草が生える場所まで進む。'},{id:'gather',objective:'必要な量の銀葉草を採取する。'},{id:'return',objective:'薬草を薬師へ届ける。'}]}
+window.IRONSWORD_PRIVATE_QUEST_DATA={version:2,quests:[
+{
+ id:'iq_001',
+ title:'消えた荷運び人',
+ rank:'Dangerous',
+ hook:'三日前に街道へ出た荷運び人が戻らず、冬越し用の薬と鉄材も行方不明になった。',
+ people:['街道沿いの集落の住人','行方不明の荷運び人'],
+ objective:'荷運び人の行方を確かめ、可能なら冬越し物資も確保する。',
+ stakes:'荷運び人の命と、集落の冬越しに必要な薬・鉄材。',
+ unknowns:['荷運び人は生きているか？','荷運び人と荷に何が起きたのか？','街道には誰か、または何かの脅威がいるのか？'],
+ openingSituation:'荷車が通ったはずの街道に立つ。古い轍は雪と風に崩されかけており、どこまで追えるかはまだ分からない。',
+ tags:['contract','tracking']
+},
+{
+ id:'iq_002',
+ title:'夜ごと消える家畜',
+ rank:'Dangerous',
+ hook:'柵は壊されていないのに、夜になると家畜だけが消える。足跡も途中で途切れている。',
+ people:['山あいの牧場主','被害を受けている牧場の人々'],
+ objective:'家畜が消える原因を確かめ、被害を止める。',
+ stakes:'残っている家畜と、牧場で暮らす人々の生活。',
+ unknowns:['家畜を消しているのは何か？','なぜ柵を壊さずに家畜だけが消えるのか？','足跡はなぜ途中で途切れるのか？'],
+ openingSituation:'夜明けの牧場。柵に壊れた跡はないが、家畜がまた一頭消えている。地面の足跡は途中で途切れている。',
+ tags:['hunt','tracking']
+},
+{
+ id:'iq_003',
+ title:'閉ざされた旧坑道',
+ rank:'Formidable',
+ hook:'古い坑道で崩落が起きた。奥に人が残っている可能性があり、最近は内部から奇妙な音も聞こえる。',
+ people:['坑夫頭','坑道の奥に残された可能性のある者'],
+ objective:'坑道の奥に人が残っているか確かめる。',
+ stakes:'坑道内にいるかもしれない人々の命と、坑道へ入る者の安全。',
+ unknowns:['奥に生存者はいるか？','奇妙な音の正体は何か？','安全に奥へ進める道は残っているか？'],
+ openingSituation:'崩落した旧坑道の入口。崩れた岩の向こうから、風とは違う音がかすかに聞こえる。',
+ tags:['explore','combat']
+},
+{
+ id:'iq_004',
+ title:'奪われた鉄材',
+ rank:'Dangerous',
+ hook:'鍛冶場に届くはずの鉄材が消えた。街道では空になったそりだけが見つかった。',
+ people:['鍛冶職人','鉄材を運んでいた者'],
+ objective:'消えた鉄材の行方を確かめ、可能なら取り戻す。',
+ stakes:'鍛冶場の仕事と、鉄を必要とする集落の暮らし。',
+ unknowns:['誰が、または何が鉄材を持ち去ったのか？','なぜ鉄材だけがなくなったのか？','鉄材は今どこにあるのか？'],
+ openingSituation:'街道脇に空のそりが残されている。荷を固定していた跡はあるが、鉄材そのものは見当たらない。',
+ tags:['contract','combat']
+},
+{
+ id:'iq_005',
+ title:'峠を越える護衛',
+ rank:'Dangerous',
+ hook:'旅人が消えるという噂のある峠を越えたい旅商人が、向こう側の集落までの護衛を求めている。',
+ people:['旅商人'],
+ objective:'旅商人を峠の向こう側の集落まで送り届ける。',
+ stakes:'旅商人の命と、峠越えの成否。',
+ unknowns:['消えた旅人たちに何が起きたのか？','峠にはどんな危険があるのか？','安全に越えられる道は残っているか？'],
+ openingSituation:'峠の麓。旅商人は出発の準備を終えているが、山の上は雲に隠れ、先の道は見通せない。',
+ tags:['contract','travel','combat']
+},
+{
+ id:'iq_006',
+ title:'森に残された狩人',
+ rank:'Troublesome',
+ hook:'狩りに出た者が予定を過ぎても戻らない。家族が捜索を頼んできた。',
+ people:['狩人の家族','行方不明の狩人'],
+ objective:'狩人の行方を確かめる。',
+ stakes:'狩人の命。放置すれば寒さや獣によって生存の可能性が下がる。',
+ unknowns:['狩人は生きているか？','狩人が戻らない理由は何か？','森には狩人を脅かす何かがいるのか？'],
+ openingSituation:'狩人が最後に目撃された森の入口。雪の上には人の足跡と、判別できない大きな跡がある。',
+ tags:['tracking','hunt']
+},
+{
+ id:'iq_007',
+ title:'古井戸からの声',
+ rank:'Dangerous',
+ hook:'誰も近づかない古井戸から、夜になると人の声のようなものが聞こえる。',
+ people:['村長','古井戸を恐れている村人たち'],
+ objective:'古井戸から聞こえる声の原因を確かめる。',
+ stakes:'村人の安全と、古井戸をめぐる不安。',
+ unknowns:['声の正体は何か？','井戸の中には何があるのか？','声は村人に危険をもたらすものなのか？'],
+ openingSituation:'日が落ちた古井戸の前。周囲に人影はないが、井戸の底から声のような音が一度だけ聞こえた。',
+ tags:['mystery','explore']
+},
+{
+ id:'iq_008',
+ title:'薬草を持ち帰れ',
+ rank:'Troublesome',
+ hook:'集落で熱病が広がり始め、薬師は治療に必要な銀葉草を森から採ってきてほしいと言う。',
+ people:['薬師','熱病に苦しむ集落の人々'],
+ objective:'治療に必要な銀葉草を見つけ、集落へ持ち帰る。',
+ stakes:'熱病に苦しむ人々の命と、治療に残された時間。',
+ unknowns:['銀葉草はまだ必要な量だけ残っているか？','銀葉草が生える場所まで安全に辿り着けるか？','森では何が採取を妨げるのか？'],
+ openingSituation:'薬師が銀葉草の特徴と、最後に採れた場所を説明している。森へ向かうなら、今すぐ出発できる。',
+ tags:['gather','travel']
+}
 ]};
