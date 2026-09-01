@@ -5,49 +5,93 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
 <meta name="theme-color" content="#fffaf8">
 <title>Private Game | Ironsworn Solo RPG</title>
-<link rel="stylesheet" href="private-main.css?v=1">
+<link rel="stylesheet" href="private-main.css?v=2">
 </head>
 <body>
-<main class="app">
-  <header class="topbar">
-    <div class="brand"><b id="charName">Ironsworn</b><span>PRIVATE GAME</span></div>
-    <div class="top-actions"><button id="homeBtn" type="button">HOME</button><button id="saveBtn" type="button" class="primary">SAVE</button></div>
+<main class="game-shell">
+  <header class="hud">
+    <button id="homeBtn" class="hud-btn top-btn" type="button">TOP</button>
+
+    <div class="resources">
+      <div class="resource" data-resource="health">
+        <small>HP</small>
+        <div class="resource-control"><button type="button" data-track="health" data-d="-1">−</button><b id="healthValue">5/5</b><button type="button" data-track="health" data-d="1">＋</button></div>
+      </div>
+      <div class="resource" data-resource="spirit">
+        <small>SPIRIT</small>
+        <div class="resource-control"><button type="button" data-track="spirit" data-d="-1">−</button><b id="spiritValue">5/5</b><button type="button" data-track="spirit" data-d="1">＋</button></div>
+      </div>
+      <div class="resource" data-resource="supply">
+        <small>SUPPLY</small>
+        <div class="resource-control"><button type="button" data-track="supply" data-d="-1">−</button><b id="supplyValue">5/5</b><button type="button" data-track="supply" data-d="1">＋</button></div>
+      </div>
+    </div>
+
+    <div class="hud-right">
+      <button id="roadBtn" class="hud-btn" type="button">ROAD</button>
+      <button id="saveBtn" class="hud-btn save" type="button">SAVE</button>
+    </div>
+
+    <div class="status-head"><span>ステータス</span><button id="rogBtn" type="button">RoG</button></div>
+    <section id="stats" class="stats"></section>
   </header>
 
-  <section id="stats" class="stats"></section>
-  <section id="tracks" class="tracks"></section>
+  <section class="play-area">
+    <aside class="side-track momentum-side">
+      <button type="button" data-track="momentum" data-d="1">＋</button>
+      <span class="vertical-label">MOMENTUM</span>
+      <b id="momentumValue">2</b>
+      <div id="momentumMeter" class="vertical-meter"></div>
+      <button type="button" data-track="momentum" data-d="-1">−</button>
+    </aside>
 
-  <section class="vow box">
-    <div class="section-head"><div><small>CURRENT VOW</small><h2 id="vowTitle">未設定</h2></div><div class="vow-num"><b id="vowProgress">0</b><span>/10</span></div></div>
-    <div class="vow-track" id="vowTrack"></div>
-    <div class="vow-actions"><button type="button" data-vow="-1">−</button><button type="button" data-vow="1">＋</button></div>
+    <section class="quest-stage">
+      <div class="stage-head">
+        <div><small id="stageKicker">AI QUEST</small><h1 id="stageTitle">クエスト</h1></div>
+        <span id="charName">主人公</span>
+      </div>
+
+      <div id="panelQuest" class="stage-panel on" data-panel="quest">
+        <div class="quest-paper">
+          <h2 id="questTitle">現在のクエスト</h2>
+          <p id="questText"></p>
+          <div class="quest-meta"><span>現在の誓い</span><b id="vowTitleInline">未設定</b></div>
+        </div>
+      </div>
+
+      <div id="panelAbout" class="stage-panel" data-panel="about"><div id="aboutContent" class="paper"></div></div>
+      <div id="panelEquipment" class="stage-panel" data-panel="equipment"><div id="equipmentContent" class="paper"></div></div>
+      <div id="panelInventory" class="stage-panel" data-panel="inventory"><div id="inventoryContent" class="paper"></div></div>
+      <div id="panelSkills" class="stage-panel" data-panel="skills"><div id="skillList" class="paper"></div></div>
+      <div id="panelRoad" class="stage-panel" data-panel="road"><div id="roadContent" class="paper"></div></div>
+      <div id="panelLog" class="stage-panel" data-panel="log">
+        <div class="paper log-paper">
+          <label>記録<textarea id="logText" rows="4" placeholder="今起きたこと、判定、会話など"></textarea></label>
+          <button id="addLogBtn" type="button">記録する</button>
+          <div id="logList"></div>
+        </div>
+      </div>
+    </section>
+
+    <aside class="side-track vow-side">
+      <button type="button" data-vow="1">＋</button>
+      <span class="vertical-label">VOW</span>
+      <b id="vowProgress">0/10</b>
+      <div id="vowMeter" class="vertical-meter"></div>
+      <button type="button" data-vow="-1">−</button>
+    </aside>
   </section>
 
-  <section class="main-panel box">
-    <nav class="tabs">
-      <button class="on" type="button" data-tab="adventure">冒険</button>
-      <button type="button" data-tab="assets">アセット</button>
-      <button type="button" data-tab="log">記録</button>
-    </nav>
+  <nav class="bottom-nav">
+    <button class="on" type="button" data-tab="quest">クエスト</button>
+    <button type="button" data-tab="about">自分について</button>
+    <button type="button" data-tab="equipment">装備</button>
+    <button type="button" data-tab="inventory">所持品</button>
+    <button type="button" data-tab="skills">スキル</button>
+  </nav>
 
-    <div class="panel on" data-panel="adventure">
-      <div class="info-card"><small>開始場面</small><p id="openingScene"></p></div>
-      <div class="info-card"><small>発端事件</small><p id="incident"></p></div>
-      <label class="log-input">今起きたこと<textarea id="logText" rows="4" placeholder="場面、判定結果、出来事など"></textarea></label>
-      <button id="addLogBtn" class="wide primary" type="button">記録する</button>
-    </div>
-
-    <div class="panel" data-panel="assets">
-      <div id="assetList" class="asset-list"></div>
-    </div>
-
-    <div class="panel" data-panel="log">
-      <div id="logList" class="log-list"></div>
-    </div>
-  </section>
-
-  <div id="status" class="status"></div>
+  <div id="status" class="save-status"></div>
 </main>
-<script src="private-main.js?v=1"></script>
+<script src="private-main.js?v=2"></script>
 </body>
 </html>
