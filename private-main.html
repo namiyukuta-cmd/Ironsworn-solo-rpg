@@ -7,7 +7,7 @@
 <title>Private Game | Ironsworn Solo RPG</title>
 <link rel="stylesheet" href="private-main.css?v=7">
 <link rel="stylesheet" href="private-quest.css?v=1">
-<link rel="stylesheet" href="private-quest-play.css?v=1">
+<link rel="stylesheet" href="private-quest-play.css?v=2">
 </head>
 <body>
 <main class="game-shell">
@@ -26,7 +26,7 @@
     <aside class="side-track momentum-side"><button type="button" data-track="momentum" data-d="1">＋</button><span class="vertical-label">MOMENTUM</span><b id="momentumValue">2</b><div id="momentumMeter" class="vertical-meter"></div><button type="button" data-track="momentum" data-d="-1">−</button></aside>
     <section class="quest-stage">
       <div class="stage-head"><div><small id="stageKicker">AI QUEST</small><h1 id="stageTitle">クエスト</h1></div><span id="charName">主人公</span></div>
-      <div id="panelQuest" class="stage-panel on" data-panel="quest"><div class="quest-paper"><h2 id="questTitle">クエスト</h2><p id="questText"></p><div class="quest-meta"><span id="questMetaLabel">CURRENT OBJECTIVE</span><b id="questObjective">—</b></div><div class="quest-actions"><button id="questAcceptBtn" class="hud-btn" type="button">このクエストを受ける</button><button id="generateQuestBtn" class="hud-btn" type="button">別のクエストを作る</button></div></div></div>
+      <div id="panelQuest" class="stage-panel on" data-panel="quest"><div class="quest-paper"><h2 id="questTitle">クエスト</h2><div id="questText"></div><div class="quest-meta"><span id="questMetaLabel">CURRENT OBJECTIVE</span><b id="questObjective">—</b></div><div class="quest-actions"><button id="questAcceptBtn" class="hud-btn" type="button">このクエストを受ける</button><button id="generateQuestBtn" class="hud-btn" type="button">別のクエストを作る</button></div></div></div>
       <div id="panelAbout" class="stage-panel" data-panel="about"><div id="aboutContent" class="paper"></div></div>
       <div id="panelEquipment" class="stage-panel" data-panel="equipment"><div id="equipmentContent" class="paper"></div></div>
       <div id="panelInventory" class="stage-panel" data-panel="inventory"><div id="inventoryContent" class="paper"></div></div>
@@ -44,5 +44,6 @@
 <script src="private-log-label.js?v=1"></script>
 <script src="private-resource-select.js?v=1"></script>
 <script src="private-quest-play.js?v=1"></script>
+<script src="private-quest-reroll.js?v=1"></script>
 </body>
 </html>
