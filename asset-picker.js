@@ -74,7 +74,7 @@ function confirmSelection(){
   if(replaceIndex===null&&xpCost>0){if(currentXp<xpCost){alert('XPが足りません。');return}ch.tracks.xp=currentXp-xpCost}
   const obj={assetId:pending.id,name:pending.name,type:pending.type,summary:pending.summary||'',abilities:(pending.abilities||[]).map((x,i)=>[x.label,i===pendingAbility,x.description||'']),source:pending.userCustom?'user-custom':'asset-library',userCustom:!!pending.userCustom};
   if(replaceIndex!==null)ch.assets[replaceIndex]=obj;else ch.assets.push(obj);
-  saveDraft();closeModal();location.href='index.html#game';
+  saveDraft();closeModal();location.href=new URLSearchParams(location.search).get('setup')==='1'?'new.html':'main.html';
 }
 function loadCustoms(){try{return JSON.parse(localStorage.getItem(CUSTOM_KEY)||'[]')||[]}catch(e){return[]}}
 function openCustom(){[el.customName,el.customSummary,el.customA1,el.customD1,el.customA2,el.customD2,el.customA3,el.customD3].forEach(x=>x.value='');el.customType.value='カスタム';el.customError.textContent='';el.customModal.classList.add('open');el.customModal.setAttribute('aria-hidden','false')}
@@ -88,7 +88,7 @@ function createCustom(){
   const a={id:'user-custom-'+Date.now(),name,type:el.customType.value,summary:el.customSummary.value.trim()||'自作のカスタムアセット。',abilities,chooseStartingAbility:abilities.length>1,requirement:null,userCustom:true};
   const cs=loadCustoms();cs.push(a);localStorage.setItem(CUSTOM_KEY,JSON.stringify(cs));data.push(a);closeCustom();renderList();begin(a);
 }
-el.backBtn.onclick=()=>location.href='index.html#game';
+el.backBtn.onclick=()=>location.href=new URLSearchParams(location.search).get('setup')==='1'?'new.html':'main.html';
 el.search.oninput=e=>{query=e.target.value;renderList()};
 el.cancelBtn.onclick=closeModal;el.confirmBtn.onclick=confirmSelection;el.modal.onclick=e=>{if(e.target===el.modal)closeModal()};
 el.customNewBtn.onclick=openCustom;el.customCancelBtn.onclick=closeCustom;el.customCreateBtn.onclick=createCustom;el.customModal.onclick=e=>{if(e.target===el.customModal)closeCustom()};
