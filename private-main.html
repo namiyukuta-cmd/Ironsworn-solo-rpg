@@ -18,9 +18,7 @@
         <div class="resource-control">
           <button class="resource-step" type="button" data-track="health" data-d="-1" tabindex="-1" aria-hidden="true">−</button>
           <b id="healthValue" class="resource-legacy-value">5/5</b>
-          <select id="healthSelect" class="resource-current" aria-label="HP現在値">
-            <option value="5">5</option><option value="4">4</option><option value="3">3</option><option value="2">2</option><option value="1">1</option><option value="0">0</option>
-          </select>
+          <select id="healthSelect" class="resource-current" aria-label="HP現在値"><option value="5">5</option><option value="4">4</option><option value="3">3</option><option value="2">2</option><option value="1">1</option><option value="0">0</option></select>
           <span class="resource-max">/5</span>
           <button class="resource-step" type="button" data-track="health" data-d="1" tabindex="-1" aria-hidden="true">＋</button>
         </div>
@@ -30,9 +28,7 @@
         <div class="resource-control">
           <button class="resource-step" type="button" data-track="spirit" data-d="-1" tabindex="-1" aria-hidden="true">−</button>
           <b id="spiritValue" class="resource-legacy-value">5/5</b>
-          <select id="spiritSelect" class="resource-current" aria-label="SPIRIT現在値">
-            <option value="5">5</option><option value="4">4</option><option value="3">3</option><option value="2">2</option><option value="1">1</option><option value="0">0</option>
-          </select>
+          <select id="spiritSelect" class="resource-current" aria-label="SPIRIT現在値"><option value="5">5</option><option value="4">4</option><option value="3">3</option><option value="2">2</option><option value="1">1</option><option value="0">0</option></select>
           <span class="resource-max">/5</span>
           <button class="resource-step" type="button" data-track="spirit" data-d="1" tabindex="-1" aria-hidden="true">＋</button>
         </div>
@@ -42,9 +38,7 @@
         <div class="resource-control">
           <button class="resource-step" type="button" data-track="supply" data-d="-1" tabindex="-1" aria-hidden="true">−</button>
           <b id="supplyValue" class="resource-legacy-value">5/5</b>
-          <select id="supplySelect" class="resource-current" aria-label="SUPPLY現在値">
-            <option value="5">5</option><option value="4">4</option><option value="3">3</option><option value="2">2</option><option value="1">1</option><option value="0">0</option>
-          </select>
+          <select id="supplySelect" class="resource-current" aria-label="SUPPLY現在値"><option value="5">5</option><option value="4">4</option><option value="3">3</option><option value="2">2</option><option value="1">1</option><option value="0">0</option></select>
           <span class="resource-max">/5</span>
           <button class="resource-step" type="button" data-track="supply" data-d="1" tabindex="-1" aria-hidden="true">＋</button>
         </div>
@@ -54,25 +48,11 @@
     <div class="status-head"><span>ステータス</span><button id="rogBtn" type="button">LOG</button></div>
     <section id="stats" class="stats"></section>
   </header>
-
   <section class="play-area">
-    <aside class="side-track momentum-side">
-      <button type="button" data-track="momentum" data-d="1">＋</button><span class="vertical-label">MOMENTUM</span><b id="momentumValue">2</b><div id="momentumMeter" class="vertical-meter"></div><button type="button" data-track="momentum" data-d="-1">−</button>
-    </aside>
-
+    <aside class="side-track momentum-side"><button type="button" data-track="momentum" data-d="1">＋</button><span class="vertical-label">MOMENTUM</span><b id="momentumValue">2</b><div id="momentumMeter" class="vertical-meter"></div><button type="button" data-track="momentum" data-d="-1">−</button></aside>
     <section class="quest-stage">
       <div class="stage-head"><div><small id="stageKicker">AI QUEST</small><h1 id="stageTitle">クエスト</h1></div><span id="charName">主人公</span></div>
-      <div id="panelQuest" class="stage-panel on" data-panel="quest">
-        <div class="quest-paper">
-          <h2 id="questTitle">クエスト</h2>
-          <p id="questText"></p>
-          <div class="quest-meta"><span id="questMetaLabel">CURRENT OBJECTIVE</span><b id="questObjective">—</b></div>
-          <div class="quest-actions">
-            <button id="questAcceptBtn" class="hud-btn" type="button">このクエストを受ける</button>
-            <button id="generateQuestBtn" class="hud-btn" type="button">別のクエストを作る</button>
-          </div>
-        </div>
-      </div>
+      <div id="panelQuest" class="stage-panel on" data-panel="quest"><div class="quest-paper"><h2 id="questTitle">クエスト</h2><p id="questText"></p><div class="quest-meta"><span id="questMetaLabel">CURRENT OBJECTIVE</span><b id="questObjective">—</b></div><div class="quest-actions"><button id="questAcceptBtn" class="hud-btn" type="button">このクエストを受ける</button><button id="generateQuestBtn" class="hud-btn" type="button">別のクエストを作る</button></div></div></div>
       <div id="panelAbout" class="stage-panel" data-panel="about"><div id="aboutContent" class="paper"></div></div>
       <div id="panelEquipment" class="stage-panel" data-panel="equipment"><div id="equipmentContent" class="paper"></div></div>
       <div id="panelInventory" class="stage-panel" data-panel="inventory"><div id="inventoryContent" class="paper"></div></div>
@@ -80,19 +60,13 @@
       <div id="panelRoad" class="stage-panel" data-panel="road"><div id="roadContent" class="paper"></div></div>
       <div id="panelLog" class="stage-panel" data-panel="log"><div class="paper log-paper"><label>記録<textarea id="logText" rows="4" placeholder="今起きたこと、判定、会話など"></textarea></label><button id="addLogBtn" type="button">記録する</button><div id="logList"></div></div></div>
     </section>
-
-    <aside class="side-track vow-side">
-      <button type="button" data-vow="1">＋</button><span class="vertical-label">VOW</span><b id="vowProgress">0/10</b><div id="vowMeter" class="vertical-meter"></div><button type="button" data-vow="-1">−</button>
-    </aside>
+    <aside class="side-track vow-side"><button type="button" data-vow="1">＋</button><span class="vertical-label">VOW</span><b id="vowProgress">0/10</b><div id="vowMeter" class="vertical-meter"></div><button type="button" data-vow="-1">−</button></aside>
   </section>
-
-  <nav class="bottom-nav">
-    <button class="on" type="button" data-tab="quest">クエスト</button><button type="button" data-tab="about">自分について</button><button type="button" data-tab="equipment">装備</button><button type="button" data-tab="inventory">所持品</button><button type="button" data-tab="skills">スキル</button>
-  </nav>
+  <nav class="bottom-nav"><button class="on" type="button" data-tab="quest">クエスト</button><button type="button" data-tab="about">自分について</button><button type="button" data-tab="equipment">装備</button><button type="button" data-tab="inventory">所持品</button><button type="button" data-tab="skills">スキル</button></nav>
   <div id="status" class="save-status"></div>
 </main>
 <script src="data/private-quests.js?v=1"></script>
-<script src="private-main.js?v=5"></script>
+<script src="private-main.js?v=6"></script>
 <script src="private-resource-select.js?v=1"></script>
 </body>
 </html>
