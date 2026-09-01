@@ -1,5 +1,73 @@
 @import url('https://fonts.googleapis.com/css2?family=Yomogi&family=Zen+Maru+Gothic:wght@400;500;700&display=swap');
-:root{--bg:#fffaf8;--paper:#fff;--pink:#f4c3cf;--pink2:#ffe8ee;--yellow:#fff5a6;--orange:#f6a15c;--purple:#c98dea;--brown:#6f5046;--brown2:#aa867b;--line:#d9beb5;--text:#543d36}
-*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(--text);font-family:"Zen Maru Gothic",-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif;font-size:16px}button,textarea{font:inherit;color:inherit}.game-shell{width:min(760px,100%);height:100dvh;margin:auto;padding:calc(6px + env(safe-area-inset-top)) 6px calc(6px + env(safe-area-inset-bottom));display:grid;grid-template-rows:auto minmax(0,1fr) auto auto;gap:6px;overflow:hidden}.hud{display:grid;grid-template-columns:74px minmax(0,1fr) 58px;grid-template-areas:"top res right" "status status status" "stats stats stats";gap:5px;align-items:stretch}.hud-btn{border:1.5px solid var(--brown);border-radius:11px;background:#fff;min-height:38px;padding:5px 6px;font-weight:700;font-family:"Yomogi",sans-serif}.top-btn{grid-area:top;background:var(--purple);font-size:18px}.resources{grid-area:res;display:grid;grid-template-columns:repeat(3,1fr);gap:4px}.resource{border:1.5px solid var(--brown);border-radius:10px;background:#fff;padding:3px;min-width:0}.resource small{display:block;text-align:center;font-size:8px;color:var(--brown2);line-height:1.1}.resource-control{display:grid;grid-template-columns:18px 1fr 18px;align-items:center;gap:1px}.resource-control button{border:0;background:transparent;padding:0;font-weight:700;font-size:13px;height:22px}.resource-control b{text-align:center;font-size:13px;white-space:nowrap}.hud-right{grid-area:right;display:grid;grid-template-rows:1fr 1fr;gap:4px}.hud-right .hud-btn{background:var(--purple);font-size:11px;min-height:0}.hud-right .save{background:#d7a2f2}.status-head{grid-area:status;display:flex;align-items:center;justify-content:space-between;border-left:5px solid var(--orange);padding-left:7px;min-height:27px;font-size:11px;font-weight:700;letter-spacing:.05em}.status-head button{border:1px solid var(--brown);border-radius:7px;background:var(--purple);padding:3px 12px;min-height:27px;font-weight:700}.stats{grid-area:stats;display:grid;grid-template-columns:repeat(5,1fr);gap:3px}.stat{border:1.5px solid var(--orange);border-radius:7px;background:#fff;text-align:center;padding:3px 1px;min-width:0}.stat small{display:block;font-size:8px;color:var(--brown2)}.stat b{font-size:15px}.play-area{min-height:0;display:grid;grid-template-columns:34px minmax(0,1fr) 34px;gap:5px}.side-track{min-height:0;border:1.5px solid var(--orange);border-radius:10px;background:#fff;display:grid;grid-template-rows:30px auto auto minmax(0,1fr) 30px;align-items:center;justify-items:center;padding:4px 2px;overflow:hidden}.side-track button{width:26px;height:26px;border:1px solid var(--brown);border-radius:7px;background:#fff;padding:0;font-weight:700}.vertical-label{writing-mode:vertical-rl;text-orientation:mixed;font-family:"Yomogi",sans-serif;font-size:10px;letter-spacing:.08em;margin:3px 0}.side-track b{font-size:11px;text-align:center}.vertical-meter{width:10px;height:100%;min-height:40px;display:flex;flex-direction:column-reverse;gap:2px;padding:2px 0}.vertical-meter i{display:block;flex:1;min-height:3px;border:1px solid var(--line);border-radius:2px;background:#fff}.momentum-side .vertical-meter i.on{background:var(--orange)}.vow-side .vertical-meter i.on{background:var(--purple)}.quest-stage{min-height:0;border:2px solid #d8c875;border-radius:13px;background:var(--yellow);padding:7px;display:grid;grid-template-rows:auto minmax(0,1fr);overflow:hidden}.stage-head{display:flex;justify-content:space-between;align-items:end;gap:7px;padding:0 2px 6px;border-bottom:1px solid rgba(111,80,70,.35)}.stage-head small{display:block;font-size:9px;letter-spacing:.08em;color:#9b7f4d}.stage-head h1{font-family:"Yomogi",sans-serif;font-size:20px;line-height:1;margin:1px 0 0}.stage-head>span{max-width:42%;font-size:12px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.stage-panel{display:none;min-height:0;overflow:auto;padding:7px 1px 1px}.stage-panel.on{display:block}.quest-paper,.paper{background:rgba(255,255,255,.55);border:1px solid rgba(111,80,70,.28);border-radius:11px;padding:11px;min-height:100%;line-height:1.6}.quest-paper h2,.paper h2{margin:0 0 8px;font-size:17px}.quest-paper>p{margin:0;white-space:pre-wrap;font-size:17px;line-height:1.8}.quest-meta{margin-top:14px;padding-top:9px;border-top:1px dashed rgba(111,80,70,.35)}.quest-meta span{display:block;font-size:10px;color:var(--brown2)}.quest-meta b{display:block;margin-top:3px}.info-row{padding:8px 0;border-bottom:1px dashed rgba(111,80,70,.25)}.info-row:last-child{border-bottom:0}.info-row small{display:block;color:var(--brown2);font-size:10px}.info-row p{margin:3px 0 0;white-space:pre-wrap}.asset-card,.inventory-card,.log-entry{border:1px solid rgba(111,80,70,.25);background:rgba(255,255,255,.65);border-radius:9px;padding:8px;margin-bottom:7px}.asset-card strong,.inventory-card strong{display:block}.asset-card span,.log-entry time{display:block;color:var(--brown2);font-size:10px;margin-top:2px}.ability{margin-top:6px;font-size:13px}.log-paper label{display:block;font-weight:700}.log-paper textarea{width:100%;min-height:84px;margin-top:5px;border:1px solid var(--line);border-radius:9px;padding:8px;background:#fff;resize:none}.log-paper>button{width:100%;min-height:40px;border:1px solid var(--brown);border-radius:9px;background:var(--pink);font-weight:700;margin:6px 0 9px}.bottom-nav{display:grid;grid-template-columns:repeat(5,1fr);gap:4px}.bottom-nav button{min-width:0;min-height:48px;border:1.5px solid var(--brown);border-radius:11px;background:var(--pink2);padding:5px 2px;font-size:10px;font-weight:700;line-height:1.15}.bottom-nav button.on{background:var(--pink)}.save-status{min-height:16px;font-size:11px;font-weight:700;text-align:center;color:#a24761;line-height:16px}.empty{text-align:center;color:var(--brown2);padding:20px 5px}
-@media(min-width:520px){.game-shell{padding-left:10px;padding-right:10px}.hud{grid-template-columns:90px minmax(0,1fr) 70px}.play-area{grid-template-columns:42px minmax(0,1fr) 42px}.bottom-nav button{font-size:13px}.quest-paper>p{font-size:18px}}
-@media(max-height:700px){.game-shell{gap:4px}.hud{gap:3px}.status-head{min-height:22px}.hud-btn{min-height:34px}.bottom-nav button{min-height:42px}.stage-head h1{font-size:18px}.quest-paper,.paper{padding:8px}}
+:root{--bg:#fffaf8;--paper:#fff;--pink:#f4c3cf;--pink2:#ffe7ed;--pink3:#eaa4b7;--brown:#7d574a;--brown2:#ad887c;--line:#d8bbb1;--text:#5a4038;--sysw:58px;--sysh:42px}
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(--text);font-family:"Zen Maru Gothic",-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif;font-size:16px}
+button,textarea{font:inherit;color:inherit}button{cursor:pointer}
+.game-shell{width:min(760px,100%);height:100dvh;margin:auto;padding:calc(6px + env(safe-area-inset-top)) 6px calc(6px + env(safe-area-inset-bottom));display:grid;grid-template-rows:auto minmax(0,1fr) auto auto;gap:6px;overflow:hidden}
+
+.hud{display:grid;grid-template-columns:var(--sysw) minmax(0,1fr) var(--sysw);grid-template-areas:"top res right" "status status status" "stats stats stats";gap:5px;align-items:start}
+.hud-btn{border:1.5px solid var(--brown);border-radius:10px;background:#fff;padding:5px 7px;font-weight:700}
+.top-btn,.hud-right .hud-btn,.status-head button{width:var(--sysw);height:var(--sysh);min-width:var(--sysw);min-height:var(--sysh);padding:0;border:1.5px solid var(--brown);border-radius:10px;background:var(--pink2);font:700 13px/1 "Yomogi","Zen Maru Gothic",sans-serif}
+.top-btn{grid-area:top;align-self:start}
+.hud-right{grid-area:right;display:grid;grid-template-rows:var(--sysh) var(--sysh);gap:4px;justify-items:end}
+.hud-right .save{background:var(--pink)}
+
+.resources{grid-area:res;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;min-width:0}
+.resource{min-width:0;height:88px;border:1.5px solid var(--brown);border-radius:12px;background:#fffdfd;padding:7px 4px 5px;display:grid;grid-template-rows:auto 1fr;align-items:center}
+.resource small{display:block;text-align:center;font-size:13px;line-height:1.1;color:var(--brown2)}
+.resource-control{display:grid;grid-template-columns:24px minmax(0,1fr) 24px;align-items:center;gap:1px}
+.resource-control button{border:0;background:transparent;padding:0;height:32px;font-size:18px;font-weight:500;line-height:1}
+.resource-value{text-align:center;white-space:nowrap;font-weight:700;line-height:1}
+.resource-value>span:first-child{font-size:17px}
+.resource-max{font-size:13px;font-weight:500;color:var(--brown2);margin-left:1px}
+
+.status-head{grid-area:status;display:grid;grid-template-columns:1fr var(--sysw);align-items:center;gap:6px;min-height:var(--sysh);padding-left:8px;border-left:4px solid var(--pink3);font-size:13px;font-weight:700;letter-spacing:.04em}
+.status-head button{justify-self:end;background:var(--pink2)}
+.stats{grid-area:stats;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:3px}
+.stat{min-width:0;border:1px solid var(--line);border-radius:8px;background:#fffdfd;text-align:center;padding:4px 1px}
+.stat small{display:block;font:500 9px/1 "Yomogi","Zen Maru Gothic",sans-serif;color:var(--brown2)}
+.stat b{display:block;font-size:17px;line-height:1.15;margin-top:2px}
+
+.play-area{min-height:0;display:grid;grid-template-columns:34px minmax(0,1fr) 34px;gap:5px}
+.side-track{min-height:0;border:1px solid var(--line);border-radius:10px;background:#fffdfd;display:grid;grid-template-rows:30px auto auto minmax(0,1fr) 30px;align-items:center;justify-items:center;padding:4px 2px;overflow:hidden}
+.side-track button{width:26px;height:26px;border:1px solid var(--brown2);border-radius:7px;background:#fff;padding:0;font-size:18px;line-height:1}
+.vertical-label{writing-mode:vertical-rl;text-orientation:mixed;font:500 10px/1 "Yomogi","Zen Maru Gothic",sans-serif;letter-spacing:.08em;color:var(--brown2);margin:3px 0}
+.side-track b{font-size:11px;text-align:center}
+.vertical-meter{width:10px;height:100%;min-height:40px;display:flex;flex-direction:column-reverse;gap:2px;padding:2px 0}
+.vertical-meter i{display:block;flex:1;min-height:3px;border:1px solid var(--line);border-radius:2px;background:#fff}
+.momentum-side .vertical-meter i.on,.vow-side .vertical-meter i.on{background:var(--pink);border-color:var(--pink3)}
+
+.quest-stage{min-height:0;border:1.5px solid var(--brown);border-radius:13px;background:#fff7fa;padding:7px;display:grid;grid-template-rows:auto minmax(0,1fr);overflow:hidden}
+.stage-head{display:flex;justify-content:space-between;align-items:end;gap:7px;padding:0 2px 6px;border-bottom:1px solid var(--line)}
+.stage-head small{display:block;font-size:9px;letter-spacing:.08em;color:var(--brown2)}
+.stage-head h1{font:700 20px/1 "Yomogi","Zen Maru Gothic",sans-serif;margin:1px 0 0;color:var(--brown)}
+.stage-head>span{max-width:42%;font-size:12px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.stage-panel{display:none;min-height:0;overflow:auto;padding:7px 1px 1px}
+.stage-panel.on{display:block}
+.quest-paper,.paper{background:rgba(255,255,255,.82);border:1px solid var(--line);border-radius:11px;padding:11px;min-height:100%;line-height:1.6}
+.quest-paper h2,.paper h2{margin:0 0 8px;font-size:17px}
+.quest-paper>p{margin:0;white-space:pre-wrap;font-size:17px;line-height:1.8}
+.quest-meta{margin-top:14px;padding-top:9px;border-top:1px dashed var(--line)}
+.quest-meta span{display:block;font-size:10px;color:var(--brown2)}
+.quest-meta b{display:block;margin-top:3px}
+.info-row{padding:8px 0;border-bottom:1px dashed var(--line)}
+.info-row:last-child{border-bottom:0}
+.info-row small{display:block;color:var(--brown2);font-size:10px}
+.info-row p{margin:3px 0 0;white-space:pre-wrap}
+.asset-card,.inventory-card,.log-entry{border:1px solid var(--line);background:#fff;border-radius:9px;padding:8px;margin-bottom:7px}
+.asset-card strong,.inventory-card strong{display:block}
+.asset-card span,.log-entry time{display:block;color:var(--brown2);font-size:10px;margin-top:2px}
+.ability{margin-top:6px;font-size:13px}
+.log-paper label{display:block;font-weight:700}
+.log-paper textarea{width:100%;min-height:84px;margin-top:5px;border:1px solid var(--line);border-radius:9px;padding:8px;background:#fff;resize:none}
+.log-paper>button{width:100%;min-height:40px;border:1px solid var(--brown);border-radius:9px;background:var(--pink);font-weight:700;margin:6px 0 9px}
+
+.bottom-nav{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:4px}
+.bottom-nav button{min-width:0;min-height:48px;border:1.5px solid var(--brown);border-radius:11px;background:var(--pink2);padding:5px 2px;font-size:10px;font-weight:700;line-height:1.15}
+.bottom-nav button.on{background:var(--pink)}
+.save-status{min-height:16px;font-size:11px;font-weight:700;text-align:center;color:#a24761;line-height:16px}
+.empty{text-align:center;color:var(--brown2);padding:20px 5px}
+
+@media(min-width:520px){.game-shell{padding-left:10px;padding-right:10px}.play-area{grid-template-columns:42px minmax(0,1fr) 42px}.bottom-nav button{font-size:13px}.quest-paper>p{font-size:18px}}
+@media(max-width:390px){:root{--sysw:54px;--sysh:40px}.game-shell{padding-left:5px;padding-right:5px}.resource{height:84px;padding-left:2px;padding-right:2px}.resource small{font-size:13px}.resource-control{grid-template-columns:21px minmax(0,1fr) 21px}.resource-control button{font-size:17px}.resource-value>span:first-child{font-size:17px}.resource-max{font-size:13px}.status-head{font-size:13px}.play-area{grid-template-columns:32px minmax(0,1fr) 32px;gap:4px}}
+@media(max-height:700px){.game-shell{gap:4px}.hud{gap:3px}.resource{height:78px}.bottom-nav button{min-height:42px}.stage-head h1{font-size:18px}.quest-paper,.paper{padding:8px}}
