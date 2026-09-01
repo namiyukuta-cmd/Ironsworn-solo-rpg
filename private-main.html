@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
 <meta name="theme-color" content="#fffaf8">
 <title>Private Game | Ironsworn Solo RPG</title>
-<link rel="stylesheet" href="private-main.css?v=6">
+<link rel="stylesheet" href="private-main.css?v=7">
 <link rel="stylesheet" href="private-quest.css?v=1">
 </head>
 <body>
@@ -13,39 +13,12 @@
   <header class="hud">
     <button id="homeBtn" class="hud-btn top-btn" type="button">TOP</button>
     <div class="resources">
-      <div class="resource">
-        <small>HP</small>
-        <div class="resource-control">
-          <button class="resource-step" type="button" data-track="health" data-d="-1" tabindex="-1" aria-hidden="true">−</button>
-          <b id="healthValue" class="resource-legacy-value">5/5</b>
-          <select id="healthSelect" class="resource-current" aria-label="HP現在値"><option value="5">5</option><option value="4">4</option><option value="3">3</option><option value="2">2</option><option value="1">1</option><option value="0">0</option></select>
-          <span class="resource-max">/5</span>
-          <button class="resource-step" type="button" data-track="health" data-d="1" tabindex="-1" aria-hidden="true">＋</button>
-        </div>
-      </div>
-      <div class="resource">
-        <small>SPIRIT</small>
-        <div class="resource-control">
-          <button class="resource-step" type="button" data-track="spirit" data-d="-1" tabindex="-1" aria-hidden="true">−</button>
-          <b id="spiritValue" class="resource-legacy-value">5/5</b>
-          <select id="spiritSelect" class="resource-current" aria-label="SPIRIT現在値"><option value="5">5</option><option value="4">4</option><option value="3">3</option><option value="2">2</option><option value="1">1</option><option value="0">0</option></select>
-          <span class="resource-max">/5</span>
-          <button class="resource-step" type="button" data-track="spirit" data-d="1" tabindex="-1" aria-hidden="true">＋</button>
-        </div>
-      </div>
-      <div class="resource">
-        <small>SUPPLY</small>
-        <div class="resource-control">
-          <button class="resource-step" type="button" data-track="supply" data-d="-1" tabindex="-1" aria-hidden="true">−</button>
-          <b id="supplyValue" class="resource-legacy-value">5/5</b>
-          <select id="supplySelect" class="resource-current" aria-label="SUPPLY現在値"><option value="5">5</option><option value="4">4</option><option value="3">3</option><option value="2">2</option><option value="1">1</option><option value="0">0</option></select>
-          <span class="resource-max">/5</span>
-          <button class="resource-step" type="button" data-track="supply" data-d="1" tabindex="-1" aria-hidden="true">＋</button>
-        </div>
-      </div>
+      <div class="resource"><small>HP</small><div class="resource-control"><button class="resource-step" type="button" data-track="health" data-d="-1" tabindex="-1" aria-hidden="true">−</button><b id="healthValue" class="resource-legacy-value">5/5</b><select id="healthSelect" class="resource-current" aria-label="HP現在値"><option value="5">5</option><option value="4">4</option><option value="3">3</option><option value="2">2</option><option value="1">1</option><option value="0">0</option></select><span class="resource-max">/5</span><button class="resource-step" type="button" data-track="health" data-d="1" tabindex="-1" aria-hidden="true">＋</button></div></div>
+      <div class="resource"><small>SPIRIT</small><div class="resource-control"><button class="resource-step" type="button" data-track="spirit" data-d="-1" tabindex="-1" aria-hidden="true">−</button><b id="spiritValue" class="resource-legacy-value">5/5</b><select id="spiritSelect" class="resource-current" aria-label="SPIRIT現在値"><option value="5">5</option><option value="4">4</option><option value="3">3</option><option value="2">2</option><option value="1">1</option><option value="0">0</option></select><span class="resource-max">/5</span><button class="resource-step" type="button" data-track="spirit" data-d="1" tabindex="-1" aria-hidden="true">＋</button></div></div>
+      <div class="resource"><small>SUPPLY</small><div class="resource-control"><button class="resource-step" type="button" data-track="supply" data-d="-1" tabindex="-1" aria-hidden="true">−</button><b id="supplyValue" class="resource-legacy-value">5/5</b><select id="supplySelect" class="resource-current" aria-label="SUPPLY現在値"><option value="5">5</option><option value="4">4</option><option value="3">3</option><option value="2">2</option><option value="1">1</option><option value="0">0</option></select><span class="resource-max">/5</span><button class="resource-step" type="button" data-track="supply" data-d="1" tabindex="-1" aria-hidden="true">＋</button></div></div>
     </div>
-    <div class="hud-right"><button id="roadBtn" class="hud-btn" type="button">ROAD</button><button id="saveBtn" class="hud-btn save" type="button">SAVE</button></div>
-    <div class="status-head"><span>ステータス</span><button id="rogBtn" type="button">LOG</button></div>
+    <div class="hud-right"><button id="roadBtn" class="hud-btn" type="button">ROAD</button><button id="saveBtn" class="hud-btn save" type="button">SAVE</button><button id="rogBtn" class="hud-btn" type="button">LOG</button></div>
+    <div class="status-head"><span>ステータス</span></div>
     <section id="stats" class="stats"></section>
   </header>
   <section class="play-area">
