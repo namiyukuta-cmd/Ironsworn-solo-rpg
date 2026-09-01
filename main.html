@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+  <meta name="theme-color" content="#fffaf8">
+  <title>冒険 | Ironsworn Solo RPG</title>
+  <link rel="stylesheet" href="styles.css?v=layout2">
+  <link rel="stylesheet" href="main-layout.css?v=layout2">
+  <link rel="stylesheet" href="asset-index-details.css?v=indexdetails1">
+  <link rel="stylesheet" href="ai-share.css?v=ai1">
+  <link rel="stylesheet" href="free-notes.css?v=notes1">
+</head>
+<body data-page="main">
+<section id="gameScreen" class="screen hidden">
+  <div class="app main-app">
+    <header class="game-header box">
+      <div class="brand"><h1 id="charName">主人公</h1><span>IRONSWORN SOLO</span></div>
+      <div class="top-tools">
+        <button id="goHome" class="top-btn">トップ</button>
+        <button id="openSave" class="top-btn">セーブ</button>
+        <button id="openLoadPage" class="top-btn">ロード</button>
+        <button id="openLog" class="top-btn">ログ</button>
+      </div>
+    </header>
+    <section class="stats">
+      <div class="stat box"><span>EDGE</span><b id="statEdge">3</b></div><div class="stat box"><span>HEART</span><b id="statHeart">1</b></div><div class="stat box"><span>IRON</span><b id="statIron">2</b></div><div class="stat box"><span>SHADOW</span><b id="statShadow">1</b></div><div class="stat box"><span>WITS</span><b id="statWits">2</b></div>
+    </section>
+    <section class="resources">
+      <div class="res box"><div class="rhead"><span class="label">体力</span><div class="ctrl"><button class="tinybtn" data-k="health" data-d="-1">−</button><strong id="health">5</strong><button class="tinybtn" data-k="health" data-d="1">＋</button></div></div></div>
+      <div class="res box"><div class="rhead"><span class="label">気力</span><div class="ctrl"><button class="tinybtn" data-k="spirit" data-d="-1">−</button><strong id="spirit">5</strong><button class="tinybtn" data-k="spirit" data-d="1">＋</button></div></div></div>
+      <div class="res box"><div class="rhead"><span class="label">補給</span><div class="ctrl"><button class="tinybtn" data-k="supply" data-d="-1">−</button><strong id="supply">5</strong><button class="tinybtn" data-k="supply" data-d="1">＋</button></div></div></div>
+      <div class="mom box"><div class="mhead"><span class="label">モメンタム</span><div class="ctrl"><button class="tinybtn" data-k="momentum" data-d="-1">−</button><strong id="momentum">2</strong><button class="tinybtn" data-k="momentum" data-d="1">＋</button></div></div><div id="mtrack" class="mtrack"></div></div>
+    </section>
+    <section class="vow box"><div class="vow-title"><small>現在の誓い</small><strong id="vowTitle">未設定</strong></div><div id="vtrack" class="vtrack"></div><div class="vow-num"><span id="vp">0</span>/10</div></section>
+    <main class="main-window box">
+      <section class="tab-panel on" data-panel="self"><h2>自分のこと</h2><div id="selfContent"></div></section>
+      <section class="tab-panel" data-panel="equipment"><h2>装備</h2><textarea id="equipmentText" placeholder="武器、防具、大切な装備"></textarea><button id="saveEquipment">反映</button></section>
+      <section class="tab-panel" data-panel="inventory"><h2>所持品</h2><div id="inventoryList"></div><div class="add-row"><input id="inventoryName" placeholder="所持品名"><button id="addInventory">追加</button></div></section>
+      <section class="tab-panel" data-panel="quests"><h2>クエスト</h2><div id="questList"></div><button id="askQuestAi" class="wide-action">AIに次のクエストを作らせる</button></section>
+      <section class="tab-panel" data-panel="assets"><div class="ptitle"><h2>アセット</h2><div class="asset-head-tools"><span id="assetCount" class="asset-count"></span><button id="assetAddTop" class="asset-add-small">＋追加</button></div></div><div id="assets" class="assets"></div></section>
+    </main>
+    <nav class="bottom-tabs" aria-label="キャラクターメニュー">
+      <button class="on" data-tab="self">自分</button><button data-tab="equipment">装備</button><button data-tab="inventory">所持品</button><button data-tab="quests">クエスト</button><button data-tab="assets">アセット</button>
+    </nav>
+    <div class="xp-hidden"><span>XP</span><button class="sbtn" data-k="xp" data-d="-1">−</button><strong id="xp">0</strong><button class="sbtn" data-k="xp" data-d="1">＋</button></div>
+    <div id="tattoos" hidden></div><span id="tattooHint" hidden></span>
+  </div>
+</section>
+<div id="managerModal" class="modal-backdrop"><div class="save-modal"><div class="save-modal-head"><h2 id="managerTitle">詳細</h2><button id="closeManager" class="close-btn">×</button></div><p id="managerNote" class="save-note"></p><div id="characterList"></div><div id="slotArea"></div><button id="saveCurrent" hidden></button><button id="loadGithub" hidden></button><button id="exportSave" hidden></button><button id="importSave" hidden></button><input id="importFile" type="file" hidden><div id="saveStatus"></div></div></div>
+<div id="logModal" class="modal-backdrop"><div class="save-modal"><div class="save-modal-head"><h2>ログ</h2><button id="closeLog" class="close-btn">×</button></div><textarea id="logText" class="log-text" placeholder="今回起きたことを記録"></textarea><button id="addLog" class="wide-action">ログに追加</button><div id="logList"></div></div></div>
+<script src="app.js?v=layout2"></script>
+<script src="asset-index-details.js?v=indexdetails1"></script>
+<script src="main-layout.js?v=layout2"></script>
+<script src="private-save.js?v=layout2"></script>
+</body>
+</html>
