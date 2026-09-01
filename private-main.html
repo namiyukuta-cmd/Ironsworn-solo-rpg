@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
 <meta name="theme-color" content="#fffaf8">
 <title>Private Game | Ironsworn Solo RPG</title>
-<link rel="stylesheet" href="private-main.css?v=3">
+<link rel="stylesheet" href="private-main.css?v=4">
 <link rel="stylesheet" href="private-quest.css?v=1">
 </head>
 <body>
@@ -13,30 +13,9 @@
   <header class="hud">
     <button id="homeBtn" class="hud-btn top-btn" type="button">TOP</button>
     <div class="resources">
-      <div class="resource">
-        <small>HP</small>
-        <div class="resource-control">
-          <button type="button" data-track="health" data-d="-1">−</button>
-          <b class="resource-value"><span id="healthCurrent">5</span><span class="resource-max">/5</span></b>
-          <button type="button" data-track="health" data-d="1">＋</button>
-        </div>
-      </div>
-      <div class="resource">
-        <small>SPIRIT</small>
-        <div class="resource-control">
-          <button type="button" data-track="spirit" data-d="-1">−</button>
-          <b class="resource-value"><span id="spiritCurrent">5</span><span class="resource-max">/5</span></b>
-          <button type="button" data-track="spirit" data-d="1">＋</button>
-        </div>
-      </div>
-      <div class="resource">
-        <small>SUPPLY</small>
-        <div class="resource-control">
-          <button type="button" data-track="supply" data-d="-1">−</button>
-          <b class="resource-value"><span id="supplyCurrent">5</span><span class="resource-max">/5</span></b>
-          <button type="button" data-track="supply" data-d="1">＋</button>
-        </div>
-      </div>
+      <div class="resource"><small>HP</small><div class="resource-control"><button type="button" data-track="health" data-d="-1">−</button><b id="healthValue" class="resource-value">5/5</b><button type="button" data-track="health" data-d="1">＋</button></div></div>
+      <div class="resource"><small>SPIRIT</small><div class="resource-control"><button type="button" data-track="spirit" data-d="-1">−</button><b id="spiritValue" class="resource-value">5/5</b><button type="button" data-track="spirit" data-d="1">＋</button></div></div>
+      <div class="resource"><small>SUPPLY</small><div class="resource-control"><button type="button" data-track="supply" data-d="-1">−</button><b id="supplyValue" class="resource-value">5/5</b><button type="button" data-track="supply" data-d="1">＋</button></div></div>
     </div>
     <div class="hud-right"><button id="roadBtn" class="hud-btn" type="button">ROAD</button><button id="saveBtn" class="hud-btn save" type="button">SAVE</button></div>
     <div class="status-head"><span>ステータス</span><button id="rogBtn" type="button">RoG</button></div>
@@ -80,6 +59,6 @@
   <div id="status" class="save-status"></div>
 </main>
 <script src="data/private-quests.js?v=1"></script>
-<script src="private-main.js?v=5"></script>
+<script src="private-main.js?v=4"></script>
 </body>
 </html>
