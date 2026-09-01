@@ -2,6 +2,57 @@
 const DRAFT_KEY='ironsworn-private-new-draft-v1';
 const CUSTOM_KEY='ironsworn-private-custom-assets-v1';
 const DATA_FILES=['assets/custom.json','assets/companions.json','assets/paths-1.json','assets/paths-2.json','assets/combat.json','assets/rituals.json'];
+const root=document.getElementById('newAssetsApp');
+if(root)root.innerHTML=`
+<div class="page">
+  <div class="top">
+    <div class="head">
+      <h1>初期アセットを選ぶ</h1>
+      <div class="head-actions">
+        <button type="button" class="custom-new" id="customNewBtn">＋カスタム作成</button>
+        <button type="button" class="back" id="backBtn">戻る</button>
+      </div>
+    </div>
+    <div class="status"><span id="charLabel"></span><strong id="costLabel"></strong></div>
+    <input id="search" class="search" placeholder="名前・説明から検索">
+    <div id="filters" class="filters"></div>
+  </div>
+  <div id="list" class="asset-grid"></div>
+  <div class="license">Ironsworn © Shawn Tomkin. Asset concepts based on the Ironsworn Assets Master Set (CC BY-NC-SA 4.0). 日本語説明はこの個人用アプリ向けの要約です。</div>
+</div>
+<div id="modal" class="modal" aria-hidden="true">
+  <div class="modal-card">
+    <h2 id="modalTitle"></h2>
+    <p id="modalText"></p>
+    <div id="startAbilities" class="start-abilities"></div>
+    <div class="modal-actions">
+      <button type="button" id="cancelBtn">やめる</button>
+      <button type="button" id="confirmAssetBtn" class="ok">このアセットにする</button>
+    </div>
+  </div>
+</div>
+<div id="customModal" class="modal" aria-hidden="true">
+  <div class="modal-card custom-card">
+    <h2>カスタムアセットを作る</h2>
+    <label class="form-label">名前<input id="customName" class="form-input" maxlength="40" placeholder="例：山育ち"></label>
+    <label class="form-label">種類<select id="customType" class="form-input"><option>カスタム</option><option>パス</option><option>相棒</option><option>戦闘タレント</option><option>儀式</option></select></label>
+    <label class="form-label">どんなアセット？<textarea id="customSummary" class="form-input" rows="2" placeholder="短い説明"></textarea></label>
+    <div class="custom-ability-title">能力1</div>
+    <input id="customA1" class="form-input" maxlength="40" placeholder="能力名">
+    <textarea id="customD1" class="form-input" rows="2" placeholder="いつ使えて、何が起きる？"></textarea>
+    <div class="custom-ability-title">能力2</div>
+    <input id="customA2" class="form-input" maxlength="40" placeholder="能力名（任意）">
+    <textarea id="customD2" class="form-input" rows="2" placeholder="説明（任意）"></textarea>
+    <div class="custom-ability-title">能力3</div>
+    <input id="customA3" class="form-input" maxlength="40" placeholder="能力名（任意）">
+    <textarea id="customD3" class="form-input" rows="2" placeholder="説明（任意）"></textarea>
+    <div id="customError" class="custom-error"></div>
+    <div class="modal-actions">
+      <button type="button" id="customCancelBtn">やめる</button>
+      <button type="button" id="customCreateBtn" class="ok">作成して選ぶ</button>
+    </div>
+  </div>
+</div>`;
 const $=id=>document.getElementById(id);
 const el={backBtn:$('backBtn'),charLabel:$('charLabel'),costLabel:$('costLabel'),search:$('search'),filters:$('filters'),list:$('list'),modal:$('modal'),modalTitle:$('modalTitle'),modalText:$('modalText'),startAbilities:$('startAbilities'),cancelBtn:$('cancelBtn'),confirmBtn:$('confirmAssetBtn'),customNewBtn:$('customNewBtn'),customModal:$('customModal'),customName:$('customName'),customType:$('customType'),customSummary:$('customSummary'),customA1:$('customA1'),customD1:$('customD1'),customA2:$('customA2'),customD2:$('customD2'),customA3:$('customA3'),customD3:$('customD3'),customError:$('customError'),customCancelBtn:$('customCancelBtn'),customCreateBtn:$('customCreateBtn')};
 let state=null;try{state=JSON.parse(sessionStorage.getItem(DRAFT_KEY)||'null')}catch(e){}
