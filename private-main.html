@@ -11,88 +11,53 @@
 <main class="game-shell">
   <header class="hud">
     <button id="homeBtn" class="hud-btn top-btn" type="button">TOP</button>
-
     <div class="resources">
-      <div class="resource" data-resource="health">
-        <small>HP</small>
-        <div class="resource-control"><button type="button" data-track="health" data-d="-1">−</button><b id="healthValue">5/5</b><button type="button" data-track="health" data-d="1">＋</button></div>
-      </div>
-      <div class="resource" data-resource="spirit">
-        <small>SPIRIT</small>
-        <div class="resource-control"><button type="button" data-track="spirit" data-d="-1">−</button><b id="spiritValue">5/5</b><button type="button" data-track="spirit" data-d="1">＋</button></div>
-      </div>
-      <div class="resource" data-resource="supply">
-        <small>SUPPLY</small>
-        <div class="resource-control"><button type="button" data-track="supply" data-d="-1">−</button><b id="supplyValue">5/5</b><button type="button" data-track="supply" data-d="1">＋</button></div>
-      </div>
+      <div class="resource"><small>HP</small><div class="resource-control"><button type="button" data-track="health" data-d="-1">−</button><b id="healthValue">5/5</b><button type="button" data-track="health" data-d="1">＋</button></div></div>
+      <div class="resource"><small>SPIRIT</small><div class="resource-control"><button type="button" data-track="spirit" data-d="-1">−</button><b id="spiritValue">5/5</b><button type="button" data-track="spirit" data-d="1">＋</button></div></div>
+      <div class="resource"><small>SUPPLY</small><div class="resource-control"><button type="button" data-track="supply" data-d="-1">−</button><b id="supplyValue">5/5</b><button type="button" data-track="supply" data-d="1">＋</button></div></div>
     </div>
-
-    <div class="hud-right">
-      <button id="roadBtn" class="hud-btn" type="button">ROAD</button>
-      <button id="saveBtn" class="hud-btn save" type="button">SAVE</button>
-    </div>
-
+    <div class="hud-right"><button id="roadBtn" class="hud-btn" type="button">ROAD</button><button id="saveBtn" class="hud-btn save" type="button">SAVE</button></div>
     <div class="status-head"><span>ステータス</span><button id="rogBtn" type="button">RoG</button></div>
     <section id="stats" class="stats"></section>
   </header>
 
   <section class="play-area">
     <aside class="side-track momentum-side">
-      <button type="button" data-track="momentum" data-d="1">＋</button>
-      <span class="vertical-label">MOMENTUM</span>
-      <b id="momentumValue">2</b>
-      <div id="momentumMeter" class="vertical-meter"></div>
-      <button type="button" data-track="momentum" data-d="-1">−</button>
+      <button type="button" data-track="momentum" data-d="1">＋</button><span class="vertical-label">MOMENTUM</span><b id="momentumValue">2</b><div id="momentumMeter" class="vertical-meter"></div><button type="button" data-track="momentum" data-d="-1">−</button>
     </aside>
 
     <section class="quest-stage">
-      <div class="stage-head">
-        <div><small id="stageKicker">AI QUEST</small><h1 id="stageTitle">クエスト</h1></div>
-        <span id="charName">主人公</span>
-      </div>
-
+      <div class="stage-head"><div><small id="stageKicker">AI QUEST</small><h1 id="stageTitle">クエスト</h1></div><span id="charName">主人公</span></div>
       <div id="panelQuest" class="stage-panel on" data-panel="quest">
         <div class="quest-paper">
-          <h2 id="questTitle">現在のクエスト</h2>
+          <h2 id="questTitle">クエスト</h2>
           <p id="questText"></p>
-          <button id="generateQuestBtn" class="hud-btn" type="button">クエストを作る</button>
-          <div class="quest-meta"><span>現在の誓い</span><b id="vowTitleInline">未設定</b></div>
+          <div class="quest-meta"><span id="questMetaLabel">CURRENT OBJECTIVE</span><b id="questObjective">—</b></div>
+          <div class="quest-actions">
+            <button id="questAcceptBtn" class="hud-btn" type="button">このクエストを受ける</button>
+            <button id="generateQuestBtn" class="hud-btn" type="button">別のクエストを作る</button>
+          </div>
         </div>
       </div>
-
       <div id="panelAbout" class="stage-panel" data-panel="about"><div id="aboutContent" class="paper"></div></div>
       <div id="panelEquipment" class="stage-panel" data-panel="equipment"><div id="equipmentContent" class="paper"></div></div>
       <div id="panelInventory" class="stage-panel" data-panel="inventory"><div id="inventoryContent" class="paper"></div></div>
       <div id="panelSkills" class="stage-panel" data-panel="skills"><div id="skillList" class="paper"></div></div>
       <div id="panelRoad" class="stage-panel" data-panel="road"><div id="roadContent" class="paper"></div></div>
-      <div id="panelLog" class="stage-panel" data-panel="log">
-        <div class="paper log-paper">
-          <label>記録<textarea id="logText" rows="4" placeholder="今起きたこと、判定、会話など"></textarea></label>
-          <button id="addLogBtn" type="button">記録する</button>
-          <div id="logList"></div>
-        </div>
-      </div>
+      <div id="panelLog" class="stage-panel" data-panel="log"><div class="paper log-paper"><label>記録<textarea id="logText" rows="4" placeholder="今起きたこと、判定、会話など"></textarea></label><button id="addLogBtn" type="button">記録する</button><div id="logList"></div></div></div>
     </section>
 
     <aside class="side-track vow-side">
-      <button type="button" data-vow="1">＋</button>
-      <span class="vertical-label">VOW</span>
-      <b id="vowProgress">0/10</b>
-      <div id="vowMeter" class="vertical-meter"></div>
-      <button type="button" data-vow="-1">−</button>
+      <button type="button" data-vow="1">＋</button><span class="vertical-label">VOW</span><b id="vowProgress">0/10</b><div id="vowMeter" class="vertical-meter"></div><button type="button" data-vow="-1">−</button>
     </aside>
   </section>
 
   <nav class="bottom-nav">
-    <button class="on" type="button" data-tab="quest">クエスト</button>
-    <button type="button" data-tab="about">自分について</button>
-    <button type="button" data-tab="equipment">装備</button>
-    <button type="button" data-tab="inventory">所持品</button>
-    <button type="button" data-tab="skills">スキル</button>
+    <button class="on" type="button" data-tab="quest">クエスト</button><button type="button" data-tab="about">自分について</button><button type="button" data-tab="equipment">装備</button><button type="button" data-tab="inventory">所持品</button><button type="button" data-tab="skills">スキル</button>
   </nav>
-
   <div id="status" class="save-status"></div>
 </main>
-<script src="private-main.js?v=3"></script>
+<script src="data/private-quests.js?v=1"></script>
+<script src="private-main.js?v=4"></script>
 </body>
 </html>
