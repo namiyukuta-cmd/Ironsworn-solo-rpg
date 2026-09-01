@@ -3,16 +3,17 @@ const card=document.getElementById('newCard');
 const next=document.getElementById('nextBtn');
 if(!card||!next)return;
 const originalNext=next.onclick;
+const WORLD_HELP='ここは今わからなくて大丈夫です。決めたい項目だけ入力し、空欄のまま「次へ」で進めます。';
 function isWorldStep(){return document.getElementById('stepLabel')?.textContent.trim()==='3 / 8'}
 function softenWorldStep(){
   if(!isWorldStep())return;
   const help=card.querySelector('.help');
-  if(help)help.textContent='ここは今わからなくて大丈夫です。決めたい項目だけ入力し、空欄のまま「次へ」で進めます。';
+  if(help&&help.textContent!==WORLD_HELP)help.textContent=WORLD_HELP;
   card.querySelectorAll('.field>span').forEach(span=>{
     const t=span.textContent.trim();
     if(t==='世界名')span.textContent='世界名（分かれば）';
-    if(t==='世界の基本設定')span.textContent='世界の基本設定（分かれば）';
-    if(t==='物語の開始地点')span.textContent='物語の開始地点（分かれば）';
+    else if(t==='世界の基本設定')span.textContent='世界の基本設定（分かれば）';
+    else if(t==='物語の開始地点')span.textContent='物語の開始地点（分かれば）';
   });
 }
 next.onclick=async function(e){
@@ -25,6 +26,7 @@ next.onclick=async function(e){
   }
   return originalNext?.call(this,e);
 };
-new MutationObserver(softenWorldStep).observe(card,{childList:true,subtree:true});
+const observer=new MutationObserver(()=>softenWorldStep());
+observer.observe(card,{childList:true,subtree:true});
 softenWorldStep();
 })();
