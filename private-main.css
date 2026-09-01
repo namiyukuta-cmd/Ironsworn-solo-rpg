@@ -17,9 +17,8 @@ button,textarea{font:inherit;color:inherit}button{cursor:pointer}
 .resource small{display:block;text-align:center;font-size:13px;line-height:1.1;color:var(--brown2)}
 .resource-control{display:grid;grid-template-columns:24px minmax(0,1fr) 24px;align-items:center;gap:1px}
 .resource-control button{border:0;background:transparent;padding:0;height:32px;font-size:18px;font-weight:500;line-height:1}
-.resource-value{text-align:center;white-space:nowrap;font-weight:700;line-height:1}
-.resource-value>span:first-child{font-size:17px}
-.resource-max{font-size:13px;font-weight:500;color:var(--brown2);margin-left:1px}
+.resource-value{display:block;text-align:center;white-space:nowrap;font-size:13px;font-weight:500;line-height:1;color:var(--brown2)}
+.resource-value::first-letter{font-size:17px;font-weight:700;color:var(--text)}
 
 .status-head{grid-area:status;display:grid;grid-template-columns:1fr var(--sysw);align-items:center;gap:6px;min-height:var(--sysh);padding-left:8px;border-left:4px solid var(--pink3);font-size:13px;font-weight:700;letter-spacing:.04em}
 .status-head button{justify-self:end;background:var(--pink2)}
@@ -69,5 +68,5 @@ button,textarea{font:inherit;color:inherit}button{cursor:pointer}
 .empty{text-align:center;color:var(--brown2);padding:20px 5px}
 
 @media(min-width:520px){.game-shell{padding-left:10px;padding-right:10px}.play-area{grid-template-columns:42px minmax(0,1fr) 42px}.bottom-nav button{font-size:13px}.quest-paper>p{font-size:18px}}
-@media(max-width:390px){:root{--sysw:54px;--sysh:40px}.game-shell{padding-left:5px;padding-right:5px}.resource{height:84px;padding-left:2px;padding-right:2px}.resource small{font-size:13px}.resource-control{grid-template-columns:21px minmax(0,1fr) 21px}.resource-control button{font-size:17px}.resource-value>span:first-child{font-size:17px}.resource-max{font-size:13px}.status-head{font-size:13px}.play-area{grid-template-columns:32px minmax(0,1fr) 32px;gap:4px}}
+@media(max-width:390px){:root{--sysw:54px;--sysh:40px}.game-shell{padding-left:5px;padding-right:5px}.resource{height:84px;padding-left:2px;padding-right:2px}.resource small{font-size:13px}.resource-control{grid-template-columns:21px minmax(0,1fr) 21px}.resource-control button{font-size:17px}.resource-value{font-size:13px}.resource-value::first-letter{font-size:17px}.status-head{font-size:13px}.play-area{grid-template-columns:32px minmax(0,1fr) 32px;gap:4px}}
 @media(max-height:700px){.game-shell{gap:4px}.hud{gap:3px}.resource{height:78px}.bottom-nav button{min-height:42px}.stage-head h1{font-size:18px}.quest-paper,.paper{padding:8px}}
