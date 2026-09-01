@@ -28,6 +28,10 @@ function migrate(c){
   c.tracks=c.tracks||{health:5,spirit:5,supply:5,momentum:2,xp:0};
   c.vow=c.vow||{title:'未設定',progress:0};
   c.tattoos=c.tattoos||{};
+  c.equipment=c.equipment||'';
+  c.inventory=Array.isArray(c.inventory)?c.inventory:[];
+  c.quests=Array.isArray(c.quests)?c.quests:[];
+  c.log=Array.isArray(c.log)?c.log:[];
   return c;
 }
 
@@ -75,8 +79,8 @@ function formalSave(){
   return true;
 }
 function show(id){
-  ['homeScreen','newScreen','gameScreen'].forEach(x=>$(x).classList.add('hidden'));
-  $(id).classList.remove('hidden');
+  ['homeScreen','newScreen','gameScreen'].forEach(x=>$(x)?.classList.add('hidden'));
+  $(id)?.classList.remove('hidden');
 }
 function abilityParts(x){
   if(Array.isArray(x))return{label:x[0]||'能力',active:!!x[1],description:x[2]||''};
@@ -232,10 +236,10 @@ function openLoad(){
   });
 }
 
-$('homeLoad').onclick=()=>{discardDraft();openLoad()};
-$('homeNew').onclick=()=>{discardDraft();$('newName').value='';$('newError').textContent='';show('newScreen')};
-$('cancelNew').onclick=()=>{discardDraft();show('homeScreen')};
-$('createNew').onclick=()=>{
+$('homeLoad')&&($('homeLoad').onclick=()=>{discardDraft();openLoad()});
+$('homeNew')&&($('homeNew').onclick=()=>{discardDraft();if($('newName'))$('newName').value='';if($('newError'))$('newError').textContent='';show('newScreen')});
+$('cancelNew')&&($('cancelNew').onclick=()=>{discardDraft();location.href='index.html'});
+$('createNew')&&($('createNew').onclick=()=>{
   const name=$('newName').value.trim();
   const vals={edge:+$('newEdge').value,heart:+$('newHeart').value,iron:+$('newIron').value,shadow:+$('newShadow').value,wits:+$('newWits').value};
   const arr=Object.values(vals).sort((a,b)=>b-a).join(',');
@@ -244,30 +248,27 @@ $('createNew').onclick=()=>{
   const id='char-'+Date.now();
   startDraft(id,{id,name,stats:vals,tracks:{health:5,spirit:5,supply:5,momentum:2,xp:0},vow:{title:'未設定',progress:0},assets:[],tattoos:{},createdAt:new Date().toISOString(),updatedAt:new Date().toISOString()});
   renderGame();show('gameScreen');
-};
+});
 
-$('goHome').onclick=()=>{discardDraft();history.replaceState(null,'',location.pathname);show('homeScreen')};
-$('openSave').onclick=()=>{
+$('goHome')&&($('goHome').onclick=()=>{discardDraft();location.href='index.html'});
+$('openLoadPage')&&($('openLoadPage').onclick=()=>location.href='saves.html');
+$('openSave')&&($('openSave').onclick=()=>{
   if(formalSave()){
     const b=$('openSave'),old=b.textContent;
     b.textContent='保存済み';
     setTimeout(()=>b.textContent=old,900);
   }
-};
-$('closeManager').onclick=()=>$('managerModal').classList.remove('open');
-$('managerModal').onclick=e=>{if(e.target===$('managerModal'))$('managerModal').classList.remove('open')};
+});
+$('closeManager')&&($('closeManager').onclick=()=>$('managerModal').classList.remove('open'));
+$('managerModal')&&($('managerModal').onclick=e=>{if(e.target===$('managerModal'))$('managerModal').classList.remove('open')});
 
-$('saveCurrent').style.display='none';
-$('loadGithub').style.display='none';
-$('exportSave').style.display='none';
-$('importSave').style.display='none';
-$('importFile').style.display='none';
+['saveCurrent','loadGithub','exportSave','importSave','importFile'].forEach(id=>{if($(id))$(id).style.display='none'});
 
 const packed=readDraft();
-if(location.hash==='#game'){
+if(document.body.dataset.page==='main'||location.hash==='#game'){
   if(packed){activeId=packed.id;draft=migrate(packed.character)}
   else if(saves[activeId])startDraft(activeId,saves[activeId]);
-  if(draft){renderGame();show('gameScreen')}else show('homeScreen');
+  if(draft){renderGame();show('gameScreen')}else location.replace('saves.html');
 }else{
-  discardDraft();show('homeScreen');
+  if(document.body.dataset.page!=='new')discardDraft();show('homeScreen');
 }
