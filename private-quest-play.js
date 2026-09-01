@@ -45,6 +45,7 @@ function priceOne(){
  if(cost)addTrack(cost[0],cost[1]);return{n,text,cost};
 }
 function payPrice(){const p=priceOne();persist();return p}
+function twist(){const prompts=['新しい危険が見えてくる。','重要な手掛かりが別の問題につながる。','時間制限が厳しくなる。','誰かが重要な事実を隠している。','予想外の人物が関わっている。','安全だと思った道が使えない。'];return prompts[r(prompts.length)-1]}
 function kind(s){const id=s?.id||'';
  if(['last','scene','inspect','ask','learn','motive','truth','entry','prepare'].includes(id))return'investigate';
  if(['trail','follow','track','pursue','find','deep'].includes(id))return'track';
@@ -62,7 +63,7 @@ function offerView(){const q=c.questOffer;if(!q)return;const accept=$('questAcce
 function swear(q){const x=actionRoll('heart');
  if(x.result==='strong'){addTrack('momentum',2);accept(q);persist();renderActive();return}
  if(x.result==='weak'){addTrack('momentum',1);accept(q);persist();renderActive();return}
- const p=payPrice();setQuest('鉄の誓い',diceHtml(x)+`<div class="move-result miss"><b>MISS</b><p>誓いを始める前に重大な障害が立ちはだかった。</p><p class="price">Pay the Price ${p.n}: ${esc(p.text)}</p></div>`,'SWEAR AN IRON VOW','それでもこの誓いを引き受けますか？');
+ const obstacle=twist();setQuest('鉄の誓い',diceHtml(x)+`<div class="move-result miss"><b>MISS</b><p>誓いを始める前に重大な障害が立ちはだかった。</p><p>${esc(obstacle)}</p></div>`,'SWEAR AN IRON VOW','それでもこの誓いを引き受けますか？');
  setActionArea('<button id="vowPress" class="quest-play-btn primary">それでも進む（Momentum -2）</button><button id="vowDrop" class="quest-play-btn">今回は受けない</button>');
  $('vowPress').onclick=()=>{addTrack('momentum',-2);accept(q);persist();renderActive()};
  $('vowDrop').onclick=()=>{c.questOffer=null;persist();location.reload()};
@@ -91,7 +92,7 @@ function resolveAdvantage(q,s,x){if(x.result==='strong'){setQuest(q.title,diceHt
  const p=payPrice();renderActive(diceHtml(x)+`<div class="move-result miss"><b>MISS</b><p class="price">Pay the Price ${p.n}: ${esc(p.text)}</p></div>`)}
 function completeStage(q,s,note){const i=q.stageIndex||0;if(q.objectives?.[i])q.objectives[i].done=true;q.progress=Math.min(10,(Number(q.progress)||0)+(questStep[q.rank]||1));log(`Reach a Milestone：「${s.objective}」 ${note||''}`,'questProgress');if(i<(q.stages||[]).length-1)q.stageIndex=i+1;else q.readyToFulfill=true;persist();renderActive(`<div class="milestone"><b>REACH A MILESTONE</b><p>${esc(note||'重要な進展を得た。')}　進捗を記録しました。</p></div>`)}
 function resolveGather(q,s,x){if(x.result==='strong'){addTrack('momentum',2);persist();return completeStage(q,s,'役立つ具体的な手掛かりを得た。Momentum +2。')}
- if(x.result==='weak'){addTrack('momentum',1);const p=priceOne();persist();return completeStage(q,s,`手掛かりは得たが、新しい問題が見えた。Momentum +1。 ${p.text}`)}
+ if(x.result==='weak'){addTrack('momentum',1);const complication=twist();persist();return completeStage(q,s,`手掛かりは得たが、新しい問題が見えた。Momentum +1。 ${complication}`)}
  const p=payPrice();renderActive(diceHtml(x)+`<div class="move-result miss"><b>MISS</b><p>調査は不吉な真実を暴きました。</p><p class="price">Pay the Price ${p.n}: ${esc(p.text)}</p></div>`)}
 function resolveDanger(q,s,x){if(x.result==='strong'){addTrack('momentum',1);persist();return completeStage(q,s,'危険を切り抜けた。Momentum +1。')}
  if(x.result==='weak'){setQuest(q.title,diceHtml(x)+`<div class="move-result weak"><b>WEAK HIT</b><p>成功しましたが、代償が必要です。</p></div>`,'FACE DANGER','代償を選んでください。');setActionArea('<button class="quest-play-btn" data-cost="momentum">遅延・不利（Momentum -1）</button><button class="quest-play-btn" data-cost="health">疲労・負傷（Health -1）</button><button class="quest-play-btn" data-cost="spirit">恐怖・消耗（Spirit -1）</button><button class="quest-play-btn" data-cost="supply">資源を失う（Supply -1）</button>');document.querySelectorAll('[data-cost]').forEach(b=>b.onclick=()=>{addTrack(b.dataset.cost,-1);persist();completeStage(q,s,'代償を払いながら突破した。')});return}
@@ -101,11 +102,11 @@ function resolveJourney(q,s,x){const j=journeyState(q,s),step=questStep[j.rank]|
  if(x.result==='weak'){j.progress=Math.min(10,j.progress+step);addTrack('supply',-1);persist();renderActive(diceHtml(x)+`<div class="move-result weak"><b>WEAK HIT</b><p>ウェイポイントへ到達。旅の進捗を記録し、Supply -1。</p></div>`);return}
  const p=payPrice();renderActive(diceHtml(x)+`<div class="move-result miss"><b>MISS</b><p>道中で危険に阻まれました。</p><p class="price">Pay the Price ${p.n}: ${esc(p.text)}</p></div>`)}
 function reachDestination(q,s){const j=journeyState(q,s),x=progressRoll(j.progress);log(`Reach Your Destination: ${resultLabel(x.result)} (progress ${x.score}; challenge ${x.c1}/${x.c2})`,'move');if(x.result==='strong'){addTrack('momentum',1);persist();return completeStage(q,s,'目的地へ有利な状況で到着した。Momentum +1。')}
- if(x.result==='weak'){const p=priceOne();persist();return completeStage(q,s,`目的地へ着いたが、予想外の問題が待っていた。 ${p.text}`)}
+ if(x.result==='weak'){const complication=twist();persist();return completeStage(q,s,`目的地へ着いたが、予想外の問題が待っていた。 ${complication}`)}
  const idx=rankOrder.indexOf(j.rank);j.progress=1;if(idx>=0&&idx<rankOrder.length-1)j.rank=rankOrder[idx+1];persist();renderActive(`<div class="move-result miss">${diceHtml(x)}<b>MISS</b><p>道を大きく誤りました。旅の進捗を1へ戻し、ランクを${j.rank}へ上げます。</p></div>`)}
 function oracle(q,s){const n=r(100),prompts=['思いがけない痕跡が見つかる','誰かがこちらを見ている','天候が急変する','古い足跡が新しい手掛かりにつながる','助けを求める声が聞こえる','危険の正体は予想と違う','近道には代償がある','誰かが重要な事実を隠している','失われた物が別の場所で見つかる','時間が残されていない'];const text=prompts[Math.floor((n-1)/10)];log(`Ask the Oracle ${n}: ${text}`,'oracle');persist();renderActive(`<div class="oracle-result"><b>ASK THE ORACLE　${n}</b><p>${esc(text)}</p></div>`)}
 function fulfill(q){const x=progressRoll(q.progress);log(`Fulfill Your Vow: ${resultLabel(x.result)} (progress ${x.score}; challenge ${x.c1}/${x.c2})`,'move');if(x.result==='strong')return finishQuest(q,xpStrong[q.rank]||0,'誓いを果たした。');if(x.result==='weak')return finishQuest(q,xpWeak[q.rank]||0,'誓いは果たしたが、さらに対処すべき真実が明らかになった。');setQuest(q.title,`<div class="move-result miss">${diceHtml(x)}<b>MISS</b><p>誓いはまだ果たされていません。</p></div>`,'FULFILL YOUR VOW','どうしますか？');setActionArea('<button id="recommitBtn" class="quest-play-btn primary">誓い直す</button><button id="forsakeBtn" class="quest-play-btn">誓いを断念する</button>');$('recommitBtn').onclick=()=>{const idx=rankOrder.indexOf(q.rank);q.progress=1;if(idx>=0&&idx<rankOrder.length-1)q.rank=rankOrder[idx+1];q.readyToFulfill=false;q.stages.push({id:'recommit-'+Date.now(),objective:'誓いを阻む新たな重大な障害を乗り越える。'});q.objectives.push({id:q.stages.at(-1).id,text:q.stages.at(-1).objective,done:false});q.stageIndex=q.stages.length-1;persist();renderActive('誓い直した。新たな障害を越えなければならない。')};$('forsakeBtn').onclick=()=>{q.status='forsaken';q.completedAt=new Date().toISOString();log(`Forsake Your Vow：「${q.title}」`,'questForsaken');persist();location.reload()}}
 function finishQuest(q,xp,note){q.status='completed';q.completedAt=new Date().toISOString();addTrack('xp',xp);c.questBoard=c.questBoard||{};c.questBoard.completedNotice={title:q.title,rank:q.rank,at:q.completedAt};log(`${note} XP +${xp}`,'questCompleted');persist();setQuest('クエスト完了',`<div class="move-result strong"><b>${esc(note)}</b><p>XP +${xp}</p></div>`,'FULFILL YOUR VOW','次のクエストへ進めます。');setActionArea('<button id="nextQuestBtn" class="quest-play-btn primary">次のクエストを作る</button>');$('nextQuestBtn').onclick=()=>{c.questBoard.completedNotice=null;persist();location.reload()}}
-function boot(){save=read();if(!save?.character)return;c=save.character;c.tracks=c.tracks||{};c.quests=Array.isArray(c.quests)?c.quests:[];if(active())renderActive();else offerView();const accept=$('questAcceptBtn');if(accept)accept.addEventListener('click',()=>setTimeout(boot,0));}
+function boot(){save=read();if(!save?.character)return;c=save.character;c.tracks=c.tracks||{};c.quests=Array.isArray(c.quests)?c.quests:[];if(active())renderActive();else offerView();const reroll=$('generateQuestBtn');if(reroll&&!reroll.dataset.questPlayHook){reroll.dataset.questPlayHook='1';reroll.addEventListener('click',()=>setTimeout(boot,0));}}
 setTimeout(boot,0);
 })();
