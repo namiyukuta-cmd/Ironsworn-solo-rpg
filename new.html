@@ -2,17 +2,26 @@
 <html lang="ja">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#fffaf8">
-  <title>キャラクター作成 | Ironsworn Solo RPG</title>
-  <link rel="stylesheet" href="styles.css?v=layout2">
-  <link rel="stylesheet" href="setup-flow.css?v=layout2">
+  <title>NEW | Ironsworn Solo RPG</title>
+  <link rel="stylesheet" href="new-private.css?v=1">
 </head>
-<body data-page="new">
-  <section id="homeScreen" class="screen">
-    <div class="home-card"><div class="home-mark">鉄</div><h1>キャラクター作成</h1><div class="en">NEW SOLO ADVENTURE</div><a class="home-btn" href="index.html">トップへ戻る</a></div>
-  </section>
-  <script src="app.js?v=layout2"></script>
-  <script src="setup-flow.js?v=layout2"></script>
+<body>
+<main class="new-shell">
+  <header class="new-head">
+    <a href="index.html" class="back-link">Ironswornへ戻る</a>
+    <div class="new-title"><b>NEW</b><span>PRIVATE GAME DATA</span></div>
+    <span id="stepLabel" class="step-label"></span>
+  </header>
+  <div class="progress"><i id="progressBar"></i></div>
+  <section id="newCard" class="new-card"></section>
+  <div id="newError" class="new-error"></div>
+  <footer class="new-foot">
+    <button id="prevBtn" type="button" class="sub">戻る</button>
+    <button id="nextBtn" type="button" class="primary">次へ</button>
+  </footer>
+</main>
+<script src="new-private.js?v=1"></script>
 </body>
 </html>

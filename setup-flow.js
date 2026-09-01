@@ -101,10 +101,9 @@ async function finishFlow(){
   const token=sessionStorage.getItem(TOKEN_SESSION_KEY)||localStorage.getItem(TOKEN_LOCAL_KEY)||'';
   $('setupNext').disabled=true;$('setupNext').textContent='保存中…';
   if(token){try{await Promise.all([window.IronswornGithubSync?.syncCurrentCharacter(token),window.IronswornSetupSync?.sync(token)])}catch(e){console.warn('initial github sync failed',e)}}
-  state=null;saveState();location.href='main.html';
+  state=null;saveState();$('setupFlow').classList.remove('open');if(typeof renderGame==='function')renderGame();if(typeof show==='function')show('gameScreen');history.replaceState(null,'',location.pathname+'#game');
 }
 async function loadWorlds(){try{const r=await fetch('worlds/index.json?v=setup2',{cache:'no-store'});if(r.ok){const j=await r.json();worlds=Array.isArray(j.worlds)?j.worlds:[];if(state?.step===2)render()}}catch(e){worlds=[]}}
 const homeNew=$('homeNew');if(homeNew)homeNew.onclick=openFlow;
 loadWorlds();if(state&&state.id&&typeof draft!=='undefined'&&draft&&draft.id===state.id)resumeFlow();
-if(document.body.dataset.page==='new'&&!state)setTimeout(openFlow,0);
 })();
