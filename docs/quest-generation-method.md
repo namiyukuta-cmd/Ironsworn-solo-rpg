@@ -138,3 +138,15 @@ Move
 これ以上はクエスト生成時には決めない。
 
 同じ「人探し」であっても、MoveとOracleの結果によって毎回違う展開になることを前提とする。
+
+## 実装の分離ルール
+
+クエストを増やすたびにHTMLやゲーム処理を書き換えない。
+
+- `private-main.html`：画面のガワ、固定UI、空の表示先だけを持つ。クエスト名、本文、目的、選択肢、判定結果などの内容は書かない。
+- `private-quest-play.js`：全クエスト共通のクエストエンジン。クエスト選出、受注、Move、ダイス、Strong Hit / Weak Hit / Miss、Oracle、Pay the Price、Milestone、Fulfill Your Vow、画面描画を担当する。
+- `data/private-quests.js`：実際のクエストデータだけを持つ。ゲーム処理やDOM操作は書かない。
+
+通常のクエスト追加では `data/private-quests.js` にデータを1件追加するだけとする。
+
+新しいゲームメカニクスそのものを追加する場合を除き、クエスト追加のために `private-main.html` や `private-quest-play.js` を変更しない。
