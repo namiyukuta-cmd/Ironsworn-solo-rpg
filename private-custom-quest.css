@@ -1,0 +1,2 @@
+.custom-quest-launch{margin-top:6px;background:var(--pink2)}
+.custom-quest-form{display:grid;gap:10px}.custom-quest-form label{display:grid;gap:4px;font-size:13px;font-weight:700;color:var(--text)}.custom-quest-form input,.custom-quest-form textarea,.custom-quest-form select{width:100%;border:1px solid var(--line);border-radius:8px;background:#fff;padding:9px;font-size:16px;line-height:1.4}.custom-quest-form textarea{resize:vertical;min-height:74px}.custom-quest-form select{min-height:44px}
