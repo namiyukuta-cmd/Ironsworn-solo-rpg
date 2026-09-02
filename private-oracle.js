@@ -6,7 +6,7 @@
 
   const categories=[
     ['action','行動'],
-    ['scene','シーン'],
+    ['theme','主題'],
     ['region','地域'],
     ['location','ロケーション'],
     ['descriptor','場所の特徴'],
@@ -35,7 +35,7 @@
   }
   function rollCategory(key){
     if(key==='action')return rollSimple(window.IRONSWORN_ACTION_ORACLE_JA);
-    if(key==='scene')return rollSimple(window.IRONSWORN_SCENE_ORACLE_JA);
+    if(key==='theme')return rollSimple(window.IRONSWORN_THEME_ORACLE_JA);
     if(key==='region')return rollSimple(window.IRONSWORN_REGION_ORACLE_JA);
     if(key==='location')return rollSimple(window.IRONSWORN_LOCATION_ORACLE_JA);
     if(key==='descriptor')return rollSimple(window.IRONSWORN_LOCATION_DESCRIPTOR_ORACLE_JA);
@@ -68,7 +68,7 @@
         <strong id="oracleMultiResult">—</strong>
       </div>
       <button id="oracleMultiReroll" class="oracle-roll-btn" type="button">もう一度振る</button>
-      <p class="oracle-note">行動／シーン／地域／ロケーション／場所の特徴／名前の由来／集落名から選べます。</p>`;
+      <p class="oracle-note">行動／主題／地域／ロケーション／場所の特徴／名前の由来／集落名から選べます。</p>`;
     modal.classList.add('on');
     modal.setAttribute('aria-hidden','false');
     document.querySelectorAll('.oracle-category-btn').forEach(b=>b.addEventListener('click',()=>{current=b.dataset.oracleCategory;drawResult()}));
@@ -77,7 +77,6 @@
     drawResult()
   }
 
-  // 旧private-main.jsの「ロケーションだけ」のonclickより先に捕まえて、必ずこの7分類メニューを開く。
   document.addEventListener('click',e=>{
     const target=e.target instanceof Element?e.target.closest('#oracleBtn'):null;
     if(!target)return;
