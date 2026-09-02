@@ -42,7 +42,12 @@ function renderResources(){
  $('momentumValue').textContent=c.tracks.momentum;
  meter($('momentumMeter'),16,c.tracks.momentum+6)
 }
-function renderVow(){c.vow.progress=clamp(c.vow.progress,0,10);$('vowProgress').textContent=c.vow.progress+'/10';meter($('vowMeter'),10,c.vow.progress)}
+function renderVow(){
+ c.vow.progress=clamp(c.vow.progress,0,10);
+ const progress=$('vowProgress'),vowMeter=$('vowMeter');
+ if(progress)progress.textContent=c.vow.progress+'/10';
+ if(vowMeter)meter(vowMeter,10,c.vow.progress)
+}
 function renderAbout(){const setup=c.setup||{},world=setup.world||{},bonds=bondNames();$('aboutContent').innerHTML='<h2>'+esc(c.name||save.name||'主人公')+'</h2><div class="info-row"><small>人物像・背景</small><p>'+esc(textOr(c.profile||c.notes,'まだ決めていません。'))+'</p></div><div class="info-row"><small>世界</small><p>'+esc(textOr(world.name,'まだ決めていません。'))+'</p></div><div class="info-row"><small>開始地点</small><p>'+esc(textOr(world.startLocation,'まだ決めていません。'))+'</p></div><div class="info-row"><small>絆</small><p>'+esc(bonds.length?bonds.join(' / '):'まだありません。')+'</p></div>'}
 function renderEquipment(){$('equipmentContent').innerHTML='<h2>装備</h2><div class="info-row"><p>'+esc(textOr(c.equipment,'まだ登録されていません。'))+'</p></div>'}
 function renderInventory(){$('inventoryContent').innerHTML='<h2>所持品</h2>'+(c.inventory.length?c.inventory.map(x=>{const name=typeof x==='string'?x:(x.name||'所持品');const qty=typeof x==='object'&&x.qty!=null?' × '+x.qty:'';return'<div class="inventory-card"><strong>'+esc(name+qty)+'</strong></div>'}).join(''):'<div class="empty">所持品はまだありません。</div>')}
@@ -61,6 +66,42 @@ function openPanel(name){
  if(name==='quest')window.dispatchEvent(new CustomEvent('ironsworn:questopen'))
 }
 
+function openSideTool(title,html){
+ const modal=$('sideToolModal');
+ $('sideToolTitle').textContent=title;
+ $('sideToolBody').innerHTML=html;
+ modal.classList.add('on');
+ modal.setAttribute('aria-hidden','false')
+}
+function closeSideTool(){
+ const modal=$('sideToolModal');
+ modal.classList.remove('on');
+ modal.setAttribute('aria-hidden','true')
+}
+function openVowTool(){
+ refreshState();
+ c.vow.progress=clamp(c.vow.progress,0,10);
+ openSideTool('VOW','<div class="vow-tool-title">'+esc(textOr(c.vow.title,'現在の誓い'))+'</div><div class="vow-tool-progress"><button id="vowMinus" type="button">−</button><strong id="vowToolValue">'+c.vow.progress+'/10</strong><button id="vowPlus" type="button">＋</button></div>');
+ const change=d=>{refreshState();c.vow.progress=clamp((Number(c.vow.progress)||0)+d,0,10);persistLocal();renderVow();$('vowToolValue').textContent=c.vow.progress+'/10'};
+ $('vowMinus').onclick=()=>change(-1);
+ $('vowPlus').onclick=()=>change(1)
+}
+function rollLocationOracle(){
+ const table=Array.isArray(window.IRONSWORN_LOCATION_ORACLE_JA)?window.IRONSWORN_LOCATION_ORACLE_JA:[];
+ if(!table.length)return{roll:'—',location:'ロケーション表を読み込めませんでした'};
+ return table[Math.floor(Math.random()*table.length)]
+}
+function updateOracleResult(){
+ const result=rollLocationOracle(),roll=$('oracleRoll'),location=$('oracleLocation');
+ if(roll)roll.textContent=String(result.roll).padStart(2,'0');
+ if(location)location.textContent=result.location
+}
+function openOracleTool(){
+ openSideTool('オラクル','<div class="oracle-result"><small>d100 ロケーション</small><b id="oracleRoll">—</b><strong id="oracleLocation">—</strong></div><button id="oracleReroll" class="oracle-roll-btn" type="button">ロケーションを振る</button><p class="oracle-note">100個の日本語ロケーションから1つ選びます。</p>');
+ $('oracleReroll').onclick=updateOracleResult;
+ updateOracleResult()
+}
+
 document.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>openPanel(b.dataset.tab));
 document.querySelectorAll('[data-track]').forEach(b=>b.onclick=()=>{refreshState();const k=b.dataset.track,d=Number(b.dataset.d),ranges={health:[0,5],spirit:[0,5],supply:[0,5],momentum:[-6,10],xp:[0,99]},rr=ranges[k]||[0,99];c.tracks[k]=clamp((Number(c.tracks[k])||0)+d,rr[0],rr[1]);persistLocal();renderResources()});
 document.querySelectorAll('[data-vow]').forEach(b=>b.onclick=()=>{refreshState();c.vow.progress=clamp((Number(c.vow.progress)||0)+Number(b.dataset.vow),0,10);persistLocal();renderVow()});
@@ -68,6 +109,11 @@ $('roadBtn').onclick=()=>openPanel('road');
 $('rogBtn').onclick=()=>openPanel('log');
 $('addLogBtn').onclick=()=>{refreshState();const t=$('logText').value.trim();if(!t)return;c.log.push({type:'note',at:new Date().toISOString(),text:t});$('logText').value='';persistLocal();renderLog()};
 $('homeBtn').onclick=()=>location.href='index.html';
+if($('vowBtn'))$('vowBtn').onclick=openVowTool;
+if($('oracleBtn'))$('oracleBtn').onclick=openOracleTool;
+if($('sideToolClose'))$('sideToolClose').onclick=closeSideTool;
+if($('sideToolModal'))$('sideToolModal').onclick=e=>{if(e.target===$('sideToolModal'))closeSideTool()};
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSideTool()});
 
 function token(){return localStorage.getItem(TOKEN_KEY)||''}
 function utf8b64(text){const bytes=new TextEncoder().encode(text);let out='';for(let i=0;i<bytes.length;i+=32768)out+=String.fromCharCode(...bytes.subarray(i,i+32768));return btoa(out)}
