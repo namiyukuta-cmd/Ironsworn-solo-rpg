@@ -6,12 +6,12 @@ let editing=null;
 
 const PRESET_GROUPS=[
  {title:'世界',store:'worldTruths',fields:[
+  ['civilization','文明'],
   ['technology','技術'],
   ['supernatural','超常'],
   ['gods','神'],
   ['otherworld','異世界'],
-  ['nonhumans','人間以外'],
-  ['spaceCivilization','宇宙文明']
+  ['nonhumans','人間以外']
  ]},
  {title:'主人公の周囲',store:'surroundings',fields:[
   ['hometown','故郷'],
@@ -35,6 +35,8 @@ function normalize(save){
  c.bonds=Array.isArray(c.bonds)?c.bonds:[];
  c.aboutFields=Array.isArray(c.aboutFields)?c.aboutFields.filter(x=>x&&typeof x==='object'):[];
  c.worldTruths=c.worldTruths&&typeof c.worldTruths==='object'?c.worldTruths:{};
+ if(c.worldTruths.civilization==null&&c.worldTruths.spaceCivilization!=null)c.worldTruths.civilization=c.worldTruths.spaceCivilization;
+ delete c.worldTruths.spaceCivilization;
  c.surroundings=c.surroundings&&typeof c.surroundings==='object'?c.surroundings:{};
  return c
 }
