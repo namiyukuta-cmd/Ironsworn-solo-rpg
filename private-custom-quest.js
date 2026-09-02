@@ -1,11 +1,32 @@
 (()=>{'use strict';
 const KEY='ironsworn-private-loaded-save-v1';
 const TOKEN_KEY='ironsworn-private-save-token-v1';
+const OWNER='namiyukuta-cmd',REPO='private-game-data',BRANCH='main';
+const API='https://api.github.com/repos/'+OWNER+'/'+REPO;
 const $=id=>document.getElementById(id);
 let formOpen=false;
 
 function read(){try{return JSON.parse(sessionStorage.getItem(KEY)||'null')}catch(e){return null}}
 function write(save){sessionStorage.setItem(KEY,JSON.stringify(save));window.dispatchEvent(new CustomEvent('ironsworn:statechange'))}
+function token(){return localStorage.getItem(TOKEN_KEY)||''}
+function decode(content){const raw=(content||'').replace(/\n/g,'');const bytes=Uint8Array.from(atob(raw),c=>c.charCodeAt(0));return new TextDecoder().decode(bytes)}
+async function request(path){const headers={'Accept':'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28'};if(token())headers.Authorization='Bearer '+token();const r=await fetch(API+path,{headers,cache:'no-store'});let body=null;try{body=await r.json()}catch(e){}if(!r.ok)throw new Error((body&&body.message)||('GitHub API '+r.status));return body}
+async function syncRemoteSave(){
+ const local=read();
+ if(!token()||!local?.path)return false;
+ try{
+  const p=String(local.path).split('/').map(encodeURIComponent).join('/');
+  const file=await request('/contents/'+p+'?ref='+encodeURIComponent(BRANCH));
+  const remote=JSON.parse(decode(file.content));
+  if(!remote?.character)return false;
+  const rt=Date.parse(remote.savedAt||'')||0,lt=Date.parse(local.savedAt||'')||0;
+  if(rt<=lt)return false;
+  sessionStorage.setItem(KEY,JSON.stringify(remote));
+  window.dispatchEvent(new CustomEvent('ironsworn:statechange'));
+  window.dispatchEvent(new CustomEvent('ironsworn:questopen'));
+  return true;
+ }catch(e){return false}
+}
 function activeQuest(c){return Array.isArray(c?.quests)?c.quests.find(q=>q?.status==='active'):null}
 function actionsBox(){return $('questActions')||document.querySelector('.quest-actions')}
 
@@ -57,7 +78,7 @@ function saveDraft(){
 }
 
 const observer=new MutationObserver(()=>injectButton());
-function boot(){const box=actionsBox();if(box)observer.observe(box,{childList:true,subtree:true});setTimeout(injectButton,0)}
+async function boot(){const box=actionsBox();if(box)observer.observe(box,{childList:true,subtree:true});await syncRemoteSave();setTimeout(injectButton,0)}
 window.addEventListener('ironsworn:questopen',()=>setTimeout(injectButton,0));
 setTimeout(boot,0);
 })();
