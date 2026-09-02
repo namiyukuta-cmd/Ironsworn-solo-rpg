@@ -21,14 +21,17 @@
   }
   function rollSimple(table){
     const roll=random100(),item=byRoll(table,roll);
-    return{roll:pad(roll),result:item?.result||item?.location||'表を読み込めませんでした'}
+    return{roll:pad(roll),result:(item&&((item.result)||(item.location)))||'表を読み込めませんでした'}
   }
   function rollSettlement(){
     const table=window.IRONSWORN_SETTLEMENT_NAME_ORACLE_JA;
-    if(!table?.prefixes?.length||!table?.suffixes?.length)return{roll:'—',result:'集落名表を読み込めませんでした'};
+    if(!table||!Array.isArray(table.prefixes)||!table.prefixes.length||!Array.isArray(table.suffixes)||!table.suffixes.length){
+      return{roll:'—',result:'集落名表を読み込めませんでした'};
+    }
     const a=random100(),b=random100();
-    const prefix=table.prefixes[a-1],suffix=table.suffixes[b-1];
-    return{roll:pad(a)+' + '+pad(b),result:prefix+suffix}
+    const prefix=table.prefixes[a-1]||table.prefixes[(a-1)%table.prefixes.length];
+    const suffix=table.suffixes[b-1]||table.suffixes[(b-1)%table.suffixes.length];
+    return{roll:pad(a)+' + '+pad(b),result:String(prefix||'')+String(suffix||'')}
   }
   function rollCategory(key){
     if(key==='action')return rollSimple(window.IRONSWORN_ACTION_ORACLE_JA);
@@ -40,7 +43,7 @@
     if(key==='settlement')return rollSettlement();
     return{roll:'—',result:'—'}
   }
-  function labelFor(key){return(categories.find(x=>x[0]===key)||['','オラクル'])[1]}
+  function labelFor(key){const x=categories.find(x=>x[0]===key);return x?x[1]:'オラクル'}
 
   function drawResult(){
     const r=rollCategory(current);
@@ -52,10 +55,10 @@
   }
 
   function openOracle(){
-    const modal=$('sideToolModal');
-    if(!modal)return;
-    $('sideToolTitle').textContent='オラクル';
-    $('sideToolBody').innerHTML=`
+    const modal=$('sideToolModal'),title=$('sideToolTitle'),body=$('sideToolBody');
+    if(!modal||!title||!body)return;
+    title.textContent='オラクル';
+    body.innerHTML=`
       <div class="oracle-category-grid">
         ${categories.map(([key,label])=>`<button class="oracle-category-btn" type="button" data-oracle-category="${key}">${label}</button>`).join('')}
       </div>
@@ -65,14 +68,23 @@
         <strong id="oracleMultiResult">—</strong>
       </div>
       <button id="oracleMultiReroll" class="oracle-roll-btn" type="button">もう一度振る</button>
-      <p class="oracle-note">「シーン」はこのゲーム用に追加した100個のシーン表です。その他はIronswornのオラクルを日本語化・実装しています。</p>`;
+      <p class="oracle-note">行動／シーン／地域／ロケーション／場所の特徴／名前の由来／集落名から選べます。</p>`;
     modal.classList.add('on');
     modal.setAttribute('aria-hidden','false');
-    document.querySelectorAll('.oracle-category-btn').forEach(b=>b.onclick=()=>{current=b.dataset.oracleCategory;drawResult()});
-    $('oracleMultiReroll').onclick=drawResult;
+    document.querySelectorAll('.oracle-category-btn').forEach(b=>b.addEventListener('click',()=>{current=b.dataset.oracleCategory;drawResult()}));
+    const reroll=$('oracleMultiReroll');
+    if(reroll)reroll.addEventListener('click',drawResult);
     drawResult()
   }
 
-  const oracleBtn=$('oracleBtn');
-  if(oracleBtn)oracleBtn.onclick=openOracle;
+  // 旧private-main.jsの「ロケーションだけ」のonclickより先に捕まえて、必ずこの7分類メニューを開く。
+  document.addEventListener('click',e=>{
+    const target=e.target instanceof Element?e.target.closest('#oracleBtn'):null;
+    if(!target)return;
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    openOracle();
+  },true);
+
+  window.IRONSWORN_OPEN_ORACLE=openOracle;
 })();
