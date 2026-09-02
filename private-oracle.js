@@ -31,6 +31,9 @@
     const a=random100(),b=random100();
     const prefix=table.prefixes[a-1]||table.prefixes[(a-1)%table.prefixes.length];
     const suffix=table.suffixes[b-1]||table.suffixes[(b-1)%table.suffixes.length];
+    if(prefix&&typeof prefix==='object'&&suffix&&typeof suffix==='object'){
+      return{roll:pad(a)+' + '+pad(b),result:String(prefix.en||'')+String(suffix.en||'')+'（'+String(prefix.ja||'')+String(suffix.ja||'')+'）'};
+    }
     return{roll:pad(a)+' + '+pad(b),result:String(prefix||'')+String(suffix||'')}
   }
   function rollCategory(key){
@@ -68,7 +71,7 @@
         <strong id="oracleMultiResult">—</strong>
       </div>
       <button id="oracleMultiReroll" class="oracle-roll-btn" type="button">もう一度振る</button>
-      <p class="oracle-note">行動／主題／地域／ロケーション／場所の特徴／名前の由来／集落名から選べます。</p>`;
+      <p class="oracle-note">結果は English（日本語）で表示します。集落名は English（カタカナ読み）です。</p>`;
     modal.classList.add('on');
     modal.setAttribute('aria-hidden','false');
     document.querySelectorAll('.oracle-category-btn').forEach(b=>b.addEventListener('click',()=>{current=b.dataset.oracleCategory;drawResult()}));
