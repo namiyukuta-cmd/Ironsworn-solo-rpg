@@ -17,11 +17,7 @@ const PRESET_GROUPS=[
   ['hometown','故郷'],
   ['parents','両親'],
   ['nearbyTown','近くの街'],
-  ['north','北'],
-  ['south','南'],
-  ['west','西'],
-  ['east','東'],
-  ['rivalSettlement','村と対立'],
+  ['rivalSettlement','対立相手'],
   ['recentProblem','最近の問題']
  ]}
 ];
