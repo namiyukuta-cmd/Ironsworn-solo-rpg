@@ -27,14 +27,18 @@ button,textarea,select{font:inherit;color:inherit}button{cursor:pointer}
 .stat small{display:block;font:500 13px/1 "Yomogi","Zen Maru Gothic",sans-serif;color:var(--brown2)}
 .stat b{display:block;font-size:16px;line-height:1;margin-top:2px}
 
-.play-area{min-height:0;display:grid;grid-template-columns:34px minmax(0,1fr) 34px;gap:5px}
+.play-area{min-height:0;display:grid;grid-template-columns:34px minmax(0,1fr) 60px;gap:5px}
 .side-track{min-height:0;border:1px solid var(--line);border-radius:10px;background:#fffdfd;display:grid;grid-template-rows:30px auto auto minmax(0,1fr) 30px;align-items:center;justify-items:center;padding:4px 2px;overflow:hidden}
 .side-track button{width:26px;height:26px;border:1px solid var(--brown2);border-radius:7px;background:#fff;padding:0;font-size:18px;line-height:1}
 .vertical-label{writing-mode:vertical-rl;text-orientation:mixed;font:500 10px/1 "Yomogi","Zen Maru Gothic",sans-serif;letter-spacing:.08em;color:var(--brown2);margin:3px 0}
 .side-track b{font-size:11px;text-align:center}
 .vertical-meter{width:10px;height:100%;min-height:40px;display:flex;flex-direction:column-reverse;gap:2px;padding:2px 0}
 .vertical-meter i{display:block;flex:1;min-height:3px;border:1px solid var(--line);border-radius:2px;background:#fff}
-.momentum-side .vertical-meter i.on,.vow-side .vertical-meter i.on{background:var(--pink);border-color:var(--pink3)}
+.momentum-side .vertical-meter i.on{background:var(--pink);border-color:var(--pink3)}
+
+.side-actions{min-height:0;display:flex;flex-direction:column;align-items:center;gap:7px;padding-top:4px}
+.side-action-btn{width:56px;height:56px;min-width:56px;min-height:56px;border:1.5px solid var(--brown);border-radius:9px;background:var(--pink2);padding:3px;font:700 12px/1.1 "Yomogi","Zen Maru Gothic",sans-serif;display:flex;align-items:center;justify-content:center;text-align:center}
+.side-action-btn.oracle{background:var(--pink)}
 
 .quest-stage{min-height:0;border:1.5px solid var(--brown);border-radius:13px;background:#fff7fa;padding:7px;display:grid;grid-template-rows:auto minmax(0,1fr);overflow:hidden}
 .stage-head{display:flex;justify-content:space-between;align-items:end;gap:7px;padding:0 2px 6px;border-bottom:1px solid var(--line)}
@@ -67,6 +71,24 @@ button,textarea,select{font:inherit;color:inherit}button{cursor:pointer}
 .save-status{min-height:14px;font-size:11px;font-weight:700;text-align:center;color:#a24761;line-height:14px}
 .empty{text-align:center;color:var(--brown2);padding:20px 5px}
 
-@media(min-width:520px){.game-shell{padding-left:10px;padding-right:10px}.play-area{grid-template-columns:42px minmax(0,1fr) 42px}.bottom-nav button{font-size:13px}.quest-paper>p{font-size:18px}}
-@media(max-width:390px){:root{--sysw:58px;--sysh:32px}.game-shell{padding-left:5px;padding-right:5px}.resource{height:61px;padding-left:2px;padding-right:2px}.resource small{font-size:16px}.resource-current{font-size:23px}.resource-max{font-size:13px}.status-head{font-size:9px}.stat small{font-size:13px}.stat b{font-size:16px}.play-area{grid-template-columns:32px minmax(0,1fr) 32px;gap:4px}}
-@media(max-height:700px){.game-shell{gap:2px}.hud{row-gap:1px}.resource{height:58px}.bottom-nav button{min-height:40px}.stage-head h1{font-size:18px}.quest-paper,.paper{padding:8px}}
+.side-tool-backdrop{position:fixed;inset:0;z-index:1000;background:rgba(70,45,38,.2);display:none;align-items:center;justify-content:center;padding:18px}
+.side-tool-backdrop.on{display:flex}
+.side-tool-card{width:min(360px,100%);max-height:min(520px,80dvh);overflow:auto;border:1.5px solid var(--brown);border-radius:14px;background:var(--bg);box-shadow:0 10px 34px rgba(80,48,42,.18);padding:12px}
+.side-tool-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-bottom:9px;border-bottom:1px solid var(--line)}
+.side-tool-head h2{margin:0;font:700 21px/1 "Yomogi","Zen Maru Gothic",sans-serif}
+.side-tool-head button{width:34px;height:34px;border:1px solid var(--brown2);border-radius:8px;background:#fff;padding:0;font-size:21px;line-height:1}
+.side-tool-body{padding-top:11px}
+.vow-tool-title{font-size:16px;font-weight:700;margin-bottom:10px}
+.vow-tool-progress{display:flex;align-items:center;justify-content:center;gap:12px;margin:10px 0}
+.vow-tool-progress button{width:46px;height:46px;border:1.5px solid var(--brown);border-radius:9px;background:var(--pink2);font-size:22px;font-weight:700}
+.vow-tool-progress strong{min-width:76px;text-align:center;font-size:22px}
+.oracle-result{border:1px solid var(--line);border-radius:11px;background:#fff;padding:14px;text-align:center;margin-bottom:10px}
+.oracle-result small{display:block;color:var(--brown2);font-size:11px}
+.oracle-result b{display:block;font-size:26px;line-height:1.1;margin-top:2px}
+.oracle-result strong{display:block;font-size:20px;margin-top:9px}
+.oracle-roll-btn{width:100%;min-height:46px;border:1.5px solid var(--brown);border-radius:10px;background:var(--pink);font-weight:700}
+.oracle-note{margin:8px 0 0;color:var(--brown2);font-size:11px;text-align:center}
+
+@media(min-width:520px){.game-shell{padding-left:10px;padding-right:10px}.play-area{grid-template-columns:42px minmax(0,1fr) 64px}.bottom-nav button{font-size:13px}.quest-paper>p{font-size:18px}}
+@media(max-width:390px){:root{--sysw:58px;--sysh:32px}.game-shell{padding-left:5px;padding-right:5px}.resource{height:61px;padding-left:2px;padding-right:2px}.resource small{font-size:16px}.resource-current{font-size:23px}.resource-max{font-size:13px}.status-head{font-size:9px}.stat small{font-size:13px}.stat b{font-size:16px}.play-area{grid-template-columns:32px minmax(0,1fr) 58px;gap:4px}.side-action-btn{width:54px;height:54px;min-width:54px;min-height:54px;font-size:11px}}
+@media(max-height:700px){.game-shell{gap:2px}.hud{row-gap:1px}.resource{height:58px}.bottom-nav button{min-height:40px}.stage-head h1{font-size:18px}.quest-paper,.paper{padding:8px}.side-action-btn{width:50px;height:50px;min-width:50px;min-height:50px}}
