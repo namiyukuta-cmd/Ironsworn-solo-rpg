@@ -8,33 +8,68 @@
 
   function read(){try{return JSON.parse(sessionStorage.getItem(KEY)||'null')}catch(e){return null}}
   function write(state){sessionStorage.setItem(KEY,JSON.stringify(state));window.dispatchEvent(new CustomEvent('ironsworn:statechange'))}
+  function validTitle(v){return String(v?.title||'').trim()&&v.title!=='未設定'}
   function ensure(state){
     if(!state?.character)return null;
     const c=state.character;
     if(!Array.isArray(c.vows)){
       c.vows=[];
-      if(c.vow&&String(c.vow.title||'').trim()&&c.vow.title!=='未設定'){
-        c.vows.push({id:'legacy-'+Date.now(),title:String(c.vow.title),rank:c.vow.rank||'Extreme',progress:clamp(c.vow.progress)});
+      if(validTitle(c.vow)){
+        c.vows.push({id:'legacy-'+Date.now(),title:String(c.vow.title),rank:c.vow.rank||'Dangerous',progress:clamp(c.vow.progress),background:false});
       }
     }
     c.vows=c.vows.map((v,i)=>({
       id:v?.id||('vow-'+Date.now()+'-'+i),
       title:String(v?.title||'未設定'),
       rank:ranks.includes(v?.rank)?v.rank:'Dangerous',
-      progress:clamp(v?.progress)
+      progress:clamp(v?.progress),
+      background:!!v?.background
     }));
+
+    if(validTitle(c.backgroundVow)){
+      const bgTitle=String(c.backgroundVow.title).trim();
+      let bg=c.vows.find(v=>v.background||v.id==='background-vow');
+      if(!bg)bg=c.vows.find(v=>String(v.title).trim()===bgTitle);
+      if(bg){
+        bg.background=true;
+        if(!bg.title||bg.title==='未設定')bg.title=bgTitle;
+        if(!ranks.includes(bg.rank))bg.rank=ranks.includes(c.backgroundVow.rank)?c.backgroundVow.rank:'Extreme';
+      }else{
+        c.vows.push({
+          id:'background-vow',
+          title:bgTitle,
+          rank:ranks.includes(c.backgroundVow.rank)?c.backgroundVow.rank:'Extreme',
+          progress:clamp(c.backgroundVow.progress),
+          background:true
+        });
+      }
+    }
+
+    syncBackground(c);
     syncLegacy(c);
+    sessionStorage.setItem(KEY,JSON.stringify(state));
     return c;
   }
+  function syncBackground(c){
+    const bg=Array.isArray(c.vows)?c.vows.find(v=>v.background):null;
+    if(!bg)return;
+    c.backgroundVow={
+      ...(c.backgroundVow||{}),
+      title:bg.title,
+      rank:bg.rank,
+      progress:bg.progress,
+      status:c.backgroundVow?.status||'active'
+    };
+  }
   function syncLegacy(c){
-    const first=Array.isArray(c.vows)&&c.vows.length?c.vows[0]:null;
+    const first=Array.isArray(c.vows)?c.vows.find(v=>!v.background):null;
     c.vow=first?{title:first.title,rank:first.rank,progress:first.progress}:{title:'未設定',rank:'Dangerous',progress:0};
   }
   function rankJa(rank){return({Troublesome:'面倒',Dangerous:'危険',Formidable:'手強い',Extreme:'極限',Epic:'壮大'})[rank]||rank}
 
   function card(v){
     return `<article class="vow-manager-card" data-vow-id="${esc(v.id)}">
-      <div class="vow-manager-head"><div><strong>${esc(v.title)}</strong><small>${esc(v.rank)}（${rankJa(v.rank)}）</small></div><button class="vow-delete" type="button" data-vow-delete="${esc(v.id)}">削除</button></div>
+      <div class="vow-manager-head"><div><strong>${esc(v.title)}</strong><small>${v.background?'背景の誓い / ':''}${esc(v.rank)}（${rankJa(v.rank)}）</small></div>${v.background?'':'<button class="vow-delete" type="button" data-vow-delete="'+esc(v.id)+'">削除</button>'}</div>
       <div class="vow-tool-progress"><button type="button" data-vow-step="-1" data-vow-id="${esc(v.id)}">−</button><strong>${v.progress}/10</strong><button type="button" data-vow-step="1" data-vow-id="${esc(v.id)}">＋</button></div>
     </article>`;
   }
@@ -56,21 +91,21 @@
       const title=String($('newVowTitle')?.value||'').trim();
       if(!title){$('newVowTitle')?.focus();return}
       const s=read(),ch=ensure(s); if(!ch)return;
-      ch.vows.push({id:'vow-'+Date.now(),title,rank:$('newVowRank')?.value||'Dangerous',progress:0});
-      syncLegacy(ch);write(s);render();
+      ch.vows.push({id:'vow-'+Date.now(),title,rank:$('newVowRank')?.value||'Dangerous',progress:0,background:false});
+      syncBackground(ch);syncLegacy(ch);write(s);render();
     };
 
     body.querySelectorAll('[data-vow-step]').forEach(btn=>btn.onclick=()=>{
       const s=read(),ch=ensure(s); if(!ch)return;
       const v=ch.vows.find(x=>x.id===btn.dataset.vowId); if(!v)return;
       v.progress=clamp(v.progress+Number(btn.dataset.vowStep||0));
-      syncLegacy(ch);write(s);render();
+      syncBackground(ch);syncLegacy(ch);write(s);render();
     });
 
     body.querySelectorAll('[data-vow-delete]').forEach(btn=>btn.onclick=()=>{
       const s=read(),ch=ensure(s); if(!ch)return;
       ch.vows=ch.vows.filter(x=>x.id!==btn.dataset.vowDelete);
-      syncLegacy(ch);write(s);render();
+      syncBackground(ch);syncLegacy(ch);write(s);render();
     });
   }
 
