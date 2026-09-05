@@ -1,55 +1,61 @@
-@import url('https://fonts.googleapis.com/css2?family=Yomogi&family=Zen+Maru+Gothic:wght@400;500;700&display=swap');
-:root{--bg:#fffaf8;--paper:#fff;--pink:#f4c3cf;--pink2:#ffe7ed;--pink3:#eaa4b7;--brown:#7d574a;--brown2:#ad887c;--line:#d8bbb1;--text:#5a4038;--sysw:60px;--sysh:34px}
+:root{--bg:#fffaf8;--paper:#fff;--pink:#f4c3cf;--pink2:#ffe7ed;--pink3:#eaa4b7;--brown:#684b42;--brown2:#92746a;--line:#d8c8c2;--text:#3f302b}
 *{box-sizing:border-box}
-html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(--text);font-family:"Zen Maru Gothic",-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif;font-size:16px}
-button,textarea,select{font:inherit;color:inherit}button{cursor:pointer}
-.game-shell{width:min(760px,100%);height:100dvh;margin:auto;padding:calc(2px + env(safe-area-inset-top)) 6px calc(4px + env(safe-area-inset-bottom));display:grid;grid-template-rows:auto minmax(0,1fr) auto auto;gap:3px;overflow:hidden}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif;font-size:16px;-webkit-text-size-adjust:100%}
+button,textarea,select{font:inherit;color:inherit}button{cursor:pointer;-webkit-tap-highlight-color:transparent}
+.game-shell{width:min(760px,100%);height:100dvh;margin:auto;padding:calc(4px + env(safe-area-inset-top)) 7px calc(4px + env(safe-area-inset-bottom));display:grid;grid-template-rows:auto minmax(0,1fr) auto auto;gap:5px;overflow:hidden}
 
-.hud{display:grid;grid-template-columns:var(--sysw) minmax(0,1fr) var(--sysw);grid-template-areas:"left res right" "status status status" "stats stats stats";column-gap:4px;row-gap:2px;align-items:start}
-.hud-btn{border:1.5px solid var(--brown);border-radius:5px;background:#fff;padding:3px 5px;font-weight:700}
-.hud-left .hud-btn,.hud-right .hud-btn{width:var(--sysw);height:var(--sysh);min-width:var(--sysw);min-height:var(--sysh);padding:0;border:1.5px solid var(--brown);border-radius:5px;background:var(--pink2);font:700 13px/1 "Yomogi","Zen Maru Gothic",sans-serif}
-.hud-left{grid-area:left;display:grid;grid-template-rows:repeat(2,var(--sysh));gap:3px;justify-items:start}
-.hud-right{grid-area:right;display:grid;grid-template-rows:repeat(2,var(--sysh));gap:3px;justify-items:end}
-.hud-right .save{background:var(--pink)}
-
-.resources{grid-area:res;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:3px;min-width:0}
-.resource{min-width:0;height:64px;border:1.5px solid var(--brown);border-radius:10px;background:#fffdfd;padding:4px 2px 3px;display:grid;grid-template-rows:auto 1fr;align-items:center}
-.resource small{display:block;text-align:center;font-size:16px;font-weight:700;line-height:1;color:var(--text)}
-.resource-control{display:flex;align-items:baseline;justify-content:center;gap:0;min-width:0}
+/* 上部1：LEVEL / HP・SPIRIT / MENU */
+.hud{position:relative;min-width:0}
+.top-row{position:relative;display:grid;grid-template-columns:60px minmax(0,1fr) 72px;align-items:center;gap:7px;min-height:54px}
+.level-block{height:48px;display:flex;flex-direction:column;align-items:center;justify-content:center;border-right:1px solid var(--line)}
+.level-block small{font-size:10px;font-weight:800;letter-spacing:.08em;line-height:1;color:var(--brown2)}
+.level-block b{font-size:23px;line-height:1.05;margin-top:3px;font-variant-numeric:tabular-nums}
+.resources{min-width:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.resource{min-width:0;display:grid;grid-template-rows:auto auto;gap:4px;padding:3px 0}
+.resource small{font-size:11px;font-weight:800;letter-spacing:.04em;line-height:1;color:var(--text)}
+.resource-inline{min-width:0;display:flex;align-items:center;gap:7px}
+.resource-bar{position:relative;display:block;flex:1;min-width:28px;height:5px;border-radius:999px;background:#eadfdb;overflow:hidden}
+.resource-bar i{position:absolute;inset:0 auto 0 0;width:100%;border-radius:inherit;background:var(--brown);transition:width .15s ease}
 .resource-step,.resource-legacy-value{display:none!important}
-.resource-current{appearance:none;-webkit-appearance:none;border:0;background:transparent;width:38px;min-width:38px;margin:0;padding:0;text-align:center;text-align-last:center;font-size:23px;font-weight:700;line-height:1;color:var(--text);outline:none}
+.resource-current{appearance:none;-webkit-appearance:none;border:0;background:transparent;width:31px;min-width:31px;height:28px;margin:0;padding:0;text-align:center;text-align-last:center;font-size:20px;font-weight:800;line-height:1;font-variant-numeric:tabular-nums;outline:none}
 .resource-current:focus{outline:none}
-.resource-max{font-size:13px;font-weight:700;line-height:1;color:var(--text)}
+.menu-btn{height:44px;border:1.5px solid var(--brown);border-radius:22px;background:#fff;padding:0 9px;font-size:13px;font-weight:850;letter-spacing:.03em;box-shadow:0 2px 5px rgba(70,45,38,.06)}
+.main-menu{position:absolute;z-index:80;top:50px;right:0;width:150px;display:none;overflow:hidden;border:1.5px solid var(--brown);border-radius:12px;background:#fff;box-shadow:0 8px 24px rgba(70,45,38,.14)}
+.main-menu.on{display:block}
+.main-menu button{display:block;width:100%;height:45px;border:0;border-bottom:1px solid #eee3df;background:#fff;padding:0 16px;text-align:left;font-size:14px;font-weight:750}
+.main-menu button:last-child{border-bottom:0}
+.main-menu button:active{background:var(--pink2)}
 
-.status-head{grid-area:status;display:flex;align-items:center;min-height:12px;height:12px;padding-left:4px;border-left:3px solid var(--pink3);font-size:9px;font-weight:700;line-height:1;letter-spacing:.04em}
-.stats{grid-area:stats;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:3px;margin-top:0}
-.stat{min-width:0;height:34px;border:1px solid var(--line);border-radius:7px;background:#fffdfd;text-align:center;padding:1px 1px 2px}
-.stat small{display:block;font:500 13px/1 "Yomogi","Zen Maru Gothic",sans-serif;color:var(--brown2)}
-.stat b{display:block;font-size:16px;line-height:1;margin-top:2px}
+/* 上部2：MOMENTUM */
+.momentum-row{display:grid;grid-template-columns:auto 28px minmax(0,1fr) 30px 28px;align-items:center;gap:6px;min-height:36px;margin-top:3px;padding:4px 2px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.momentum-label{font-size:10px;font-weight:850;letter-spacing:.06em;color:var(--brown2)}
+.momentum-step{width:28px;height:28px;border:1px solid var(--line);border-radius:8px;background:#fff;padding:0;font-size:18px;font-weight:700;line-height:1}
+.momentum-bar{position:relative;height:6px;border-radius:999px;background:#eadfdb;overflow:hidden}
+.momentum-bar i{position:absolute;inset:0 auto 0 0;width:50%;border-radius:inherit;background:var(--pink3);transition:width .15s ease}
+#momentumValue{font-size:18px;text-align:center;font-variant-numeric:tabular-nums}
 
-.play-area{min-height:0;display:grid;grid-template-columns:34px minmax(0,1fr) 60px;gap:5px}
-.side-track{min-height:0;border:1px solid var(--line);border-radius:10px;background:#fffdfd;display:grid;grid-template-rows:30px auto auto minmax(0,1fr) 30px;align-items:center;justify-items:center;padding:4px 2px;overflow:hidden}
-.side-track button{width:26px;height:26px;border:1px solid var(--brown2);border-radius:7px;background:#fff;padding:0;font-size:18px;line-height:1}
-.vertical-label{writing-mode:vertical-rl;text-orientation:mixed;font:500 10px/1 "Yomogi","Zen Maru Gothic",sans-serif;letter-spacing:.08em;color:var(--brown2);margin:3px 0}
-.side-track b{font-size:11px;text-align:center}
-.vertical-meter{width:10px;height:100%;min-height:40px;display:flex;flex-direction:column-reverse;gap:2px;padding:2px 0}
-.vertical-meter i{display:block;flex:1;min-height:3px;border:1px solid var(--line);border-radius:2px;background:#fff}
-.momentum-side .vertical-meter i.on{background:var(--pink);border-color:var(--pink3)}
+/* 上部3：パラメータ */
+.stats{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));margin-top:3px;border-bottom:1px solid var(--line)}
+.stat{min-width:0;height:42px;text-align:center;padding:5px 1px 4px;border-right:1px solid var(--line)}
+.stat:last-child{border-right:0}
+.stat small{display:block;font-size:9px;font-weight:800;line-height:1;color:var(--brown2);letter-spacing:.03em;white-space:nowrap}
+.stat b{display:block;margin-top:4px;font-size:18px;font-weight:800;line-height:1;font-variant-numeric:tabular-nums}
 
-.side-actions{min-height:0;display:flex;flex-direction:column;align-items:center;gap:7px;padding-top:4px}
-.side-action-btn{width:56px;height:56px;min-width:56px;min-height:56px;border:1.5px solid var(--brown);border-radius:9px;background:var(--pink2);padding:3px;font:700 12px/1.1 "Yomogi","Zen Maru Gothic",sans-serif;display:flex;align-items:center;justify-content:center;text-align:center}
+/* 中央 */
+.play-area{min-height:0;display:grid;grid-template-columns:minmax(0,1fr) 58px;gap:6px}
+.side-actions{min-height:0;display:flex;flex-direction:column;align-items:center;gap:8px;padding-top:5px}
+.side-action-btn{width:54px;height:54px;min-width:54px;min-height:54px;border:1.5px solid var(--brown);border-radius:12px;background:var(--pink2);padding:4px;font-size:12px;font-weight:800;line-height:1.15;display:flex;align-items:center;justify-content:center;text-align:center}
 .side-action-btn.oracle{background:var(--pink)}
-
-.quest-stage{min-height:0;border:1.5px solid var(--brown);border-radius:13px;background:#fff7fa;padding:7px;display:grid;grid-template-rows:auto minmax(0,1fr);overflow:hidden}
-.stage-head{display:flex;justify-content:space-between;align-items:end;gap:7px;padding:0 2px 6px;border-bottom:1px solid var(--line)}
-.stage-head small{display:block;font-size:9px;letter-spacing:.08em;color:var(--brown2)}
-.stage-head h1{font:700 20px/1 "Yomogi","Zen Maru Gothic",sans-serif;margin:1px 0 0;color:var(--brown)}
-.stage-head>span{max-width:42%;font-size:12px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.stage-panel{display:none;min-height:0;overflow:auto;padding:7px 1px 1px}
+.quest-stage{min-height:0;border:1px solid var(--line);border-radius:13px;background:#fffdfc;padding:7px;display:grid;grid-template-rows:auto minmax(0,1fr);overflow:hidden}
+.stage-head{display:flex;justify-content:space-between;align-items:end;gap:7px;padding:0 3px 6px;border-bottom:1px solid var(--line)}
+.stage-head small{display:block;font-size:9px;font-weight:700;letter-spacing:.06em;color:var(--brown2)}
+.stage-head h1{margin:2px 0 0;font-size:19px;font-weight:800;line-height:1.15;color:var(--text)}
+.stage-head>span{max-width:42%;font-size:11px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--brown2)}
+.stage-panel{display:none;min-height:0;overflow:auto;padding:7px 1px 1px;-webkit-overflow-scrolling:touch}
 .stage-panel.on{display:block}
-.quest-paper,.paper{background:rgba(255,255,255,.82);border:1px solid var(--line);border-radius:11px;padding:11px;min-height:100%;line-height:1.6}
-.quest-paper h2,.paper h2{margin:0 0 8px;font-size:17px}
-.quest-paper>p{margin:0;white-space:pre-wrap;font-size:17px;line-height:1.8}
+.quest-paper,.paper{background:#fff;border:1px solid var(--line);border-radius:11px;padding:11px;min-height:100%;line-height:1.65}
+.quest-paper h2,.paper h2{margin:0 0 8px;font-size:17px;font-weight:800}
+.quest-paper>p{margin:0;white-space:pre-wrap;font-size:16px;line-height:1.75}
 .quest-meta{margin-top:14px;padding-top:9px;border-top:1px dashed var(--line)}
 .quest-meta span{display:block;font-size:10px;color:var(--brown2)}
 .quest-meta b{display:block;margin-top:3px}
@@ -63,10 +69,10 @@ button,textarea,select{font:inherit;color:inherit}button{cursor:pointer}
 .ability{margin-top:6px;font-size:13px}
 .log-paper label{display:block;font-weight:700}
 .log-paper textarea{width:100%;min-height:84px;margin-top:5px;border:1px solid var(--line);border-radius:9px;padding:8px;background:#fff;resize:none}
-.log-paper>button{width:100%;min-height:40px;border:1px solid var(--brown);border-radius:9px;background:var(--pink);font-weight:700;margin:6px 0 9px}
+.log-paper>button{width:100%;min-height:40px;border:1px solid var(--brown);border-radius:9px;background:var(--pink);font-weight:800;margin:6px 0 9px}
 
 .bottom-nav{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:4px}
-.bottom-nav button{min-width:0;min-height:44px;border:1.5px solid var(--brown);border-radius:10px;background:var(--pink2);padding:4px 2px;font-size:10px;font-weight:700;line-height:1.15}
+.bottom-nav button{min-width:0;min-height:44px;border:1px solid var(--brown);border-radius:10px;background:#fff;padding:4px 2px;font-size:10px;font-weight:800;line-height:1.15}
 .bottom-nav button.on{background:var(--pink)}
 .save-status{min-height:14px;font-size:11px;font-weight:700;text-align:center;color:#a24761;line-height:14px}
 .empty{text-align:center;color:var(--brown2);padding:20px 5px}
@@ -75,20 +81,20 @@ button,textarea,select{font:inherit;color:inherit}button{cursor:pointer}
 .side-tool-backdrop.on{display:flex}
 .side-tool-card{width:min(360px,100%);max-height:min(520px,80dvh);overflow:auto;border:1.5px solid var(--brown);border-radius:14px;background:var(--bg);box-shadow:0 10px 34px rgba(80,48,42,.18);padding:12px}
 .side-tool-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-bottom:9px;border-bottom:1px solid var(--line)}
-.side-tool-head h2{margin:0;font:700 21px/1 "Yomogi","Zen Maru Gothic",sans-serif}
+.side-tool-head h2{margin:0;font-size:21px;font-weight:800;line-height:1.1}
 .side-tool-head button{width:34px;height:34px;border:1px solid var(--brown2);border-radius:8px;background:#fff;padding:0;font-size:21px;line-height:1}
 .side-tool-body{padding-top:11px}
-.vow-tool-title{font-size:16px;font-weight:700;margin-bottom:10px}
+.vow-tool-title{font-size:16px;font-weight:800;margin-bottom:10px}
 .vow-tool-progress{display:flex;align-items:center;justify-content:center;gap:12px;margin:10px 0}
-.vow-tool-progress button{width:46px;height:46px;border:1.5px solid var(--brown);border-radius:9px;background:var(--pink2);font-size:22px;font-weight:700}
+.vow-tool-progress button{width:46px;height:46px;border:1.5px solid var(--brown);border-radius:9px;background:var(--pink2);font-size:22px;font-weight:800}
 .vow-tool-progress strong{min-width:76px;text-align:center;font-size:22px}
 .oracle-result{border:1px solid var(--line);border-radius:11px;background:#fff;padding:14px;text-align:center;margin-bottom:10px}
 .oracle-result small{display:block;color:var(--brown2);font-size:11px}
 .oracle-result b{display:block;font-size:26px;line-height:1.1;margin-top:2px}
 .oracle-result strong{display:block;font-size:20px;margin-top:9px}
-.oracle-roll-btn{width:100%;min-height:46px;border:1.5px solid var(--brown);border-radius:10px;background:var(--pink);font-weight:700}
+.oracle-roll-btn{width:100%;min-height:46px;border:1.5px solid var(--brown);border-radius:10px;background:var(--pink);font-weight:800}
 .oracle-note{margin:8px 0 0;color:var(--brown2);font-size:11px;text-align:center}
 
-@media(min-width:520px){.game-shell{padding-left:10px;padding-right:10px}.play-area{grid-template-columns:42px minmax(0,1fr) 64px}.bottom-nav button{font-size:13px}.quest-paper>p{font-size:18px}}
-@media(max-width:390px){:root{--sysw:58px;--sysh:32px}.game-shell{padding-left:5px;padding-right:5px}.resource{height:61px;padding-left:2px;padding-right:2px}.resource small{font-size:16px}.resource-current{font-size:23px}.resource-max{font-size:13px}.status-head{font-size:9px}.stat small{font-size:13px}.stat b{font-size:16px}.play-area{grid-template-columns:32px minmax(0,1fr) 58px;gap:4px}.side-action-btn{width:54px;height:54px;min-width:54px;min-height:54px;font-size:11px}}
-@media(max-height:700px){.game-shell{gap:2px}.hud{row-gap:1px}.resource{height:58px}.bottom-nav button{min-height:40px}.stage-head h1{font-size:18px}.quest-paper,.paper{padding:8px}.side-action-btn{width:50px;height:50px;min-width:50px;min-height:50px}}
+@media(min-width:520px){.game-shell{padding-left:10px;padding-right:10px}.top-row{grid-template-columns:72px minmax(0,1fr) 82px}.play-area{grid-template-columns:minmax(0,1fr) 64px}.bottom-nav button{font-size:13px}.quest-paper>p{font-size:18px}}
+@media(max-width:390px){.game-shell{padding-left:5px;padding-right:5px}.top-row{grid-template-columns:56px minmax(0,1fr) 68px;gap:5px}.resources{gap:7px}.resource-inline{gap:5px}.resource-current{font-size:19px;width:29px;min-width:29px}.momentum-row{grid-template-columns:auto 27px minmax(0,1fr) 28px 27px;gap:5px}.momentum-step{width:27px;height:27px}.stat{height:40px}.play-area{grid-template-columns:minmax(0,1fr) 56px;gap:4px}.side-action-btn{width:52px;height:52px;min-width:52px;min-height:52px}}
+@media(max-height:700px){.game-shell{gap:3px}.top-row{min-height:48px}.level-block{height:43px}.menu-btn{height:40px}.momentum-row{min-height:32px;padding-top:2px;padding-bottom:2px}.stat{height:36px;padding-top:3px}.bottom-nav button{min-height:40px}.stage-head h1{font-size:17px}.quest-paper,.paper{padding:8px}.side-action-btn{width:48px;height:48px;min-width:48px;min-height:48px}}
