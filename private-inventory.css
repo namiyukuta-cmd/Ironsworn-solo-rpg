@@ -1,0 +1,16 @@
+.inventory-title-row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:8px}
+.inventory-title-row h2{margin:0}
+.inventory-add-btn{min-height:34px;border:1px solid var(--brown);border-radius:9px;background:var(--pink2);padding:0 10px;font-weight:800}
+.inventory-edit-card{padding:9px}
+.inventory-card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
+.inventory-card-head strong{min-width:0;flex:1}
+.inventory-card-actions{display:flex;gap:5px;flex:0 0 auto}
+.inventory-card-actions button{min-height:30px;border:1px solid var(--line);border-radius:8px;background:#fff;padding:0 8px;font-size:11px;font-weight:700}
+.inventory-edit-card p{margin:7px 0 0;white-space:pre-wrap;font-size:13px;line-height:1.55}
+.inventory-editor{margin:7px 0 10px;padding:10px;border:1px solid var(--line);border-radius:10px;background:var(--pink2)}
+.inventory-editor label{display:block;margin-bottom:8px;font-size:12px;font-weight:700}
+.inventory-editor input,.inventory-editor textarea{display:block;width:100%;margin-top:4px;border:1px solid var(--line);border-radius:8px;background:#fff;padding:8px;font:inherit;color:inherit}
+.inventory-editor textarea{resize:none}
+.inventory-editor-actions{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.inventory-editor-actions button{min-height:38px;border:1px solid var(--brown);border-radius:8px;background:#fff;font-weight:800}
+.inventory-editor-actions button.primary{background:var(--pink)}
