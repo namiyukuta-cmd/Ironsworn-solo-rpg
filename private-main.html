@@ -8,7 +8,7 @@
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
 <title>Private Game | Ironsworn Solo RPG</title>
-<link rel="stylesheet" href="private-main.css?v=10">
+<link rel="stylesheet" href="private-main.css?v=11">
 <link rel="stylesheet" href="private-about.css?v=3">
 <link rel="stylesheet" href="private-map.css?v=1">
 <link rel="stylesheet" href="private-quest.css?v=1">
@@ -20,18 +20,57 @@
 <body>
 <main class="game-shell">
   <header class="hud">
-    <div class="hud-left"><button id="homeBtn" class="hud-btn top-btn" type="button">TOP</button><button id="rogBtn" class="hud-btn" type="button">LOG</button></div>
-    <div class="resources">
-      <div class="resource"><small>HP</small><div class="resource-control"><button class="resource-step" type="button" data-track="health" data-d="-1" tabindex="-1" aria-hidden="true">−</button><b id="healthValue" class="resource-legacy-value"></b><select id="healthSelect" class="resource-current" aria-label="HP現在値"><option value="5">5</option><option value="4">4</option><option value="3">3</option><option value="2">2</option><option value="1">1</option><option value="0">0</option></select><span class="resource-max">/5</span><button class="resource-step" type="button" data-track="health" data-d="1" tabindex="-1" aria-hidden="true">＋</button></div></div>
-      <div class="resource"><small>SPIRIT</small><div class="resource-control"><button class="resource-step" type="button" data-track="spirit" data-d="-1" tabindex="-1" aria-hidden="true">−</button><b id="spiritValue" class="resource-legacy-value"></b><select id="spiritSelect" class="resource-current" aria-label="SPIRIT現在値"><option value="5">5</option><option value="4">4</option><option value="3">3</option><option value="2">2</option><option value="1">1</option><option value="0">0</option></select><span class="resource-max">/5</span><button class="resource-step" type="button" data-track="spirit" data-d="1" tabindex="-1" aria-hidden="true">＋</button></div></div>
-      <div class="resource"><small>SUPPLY</small><div class="resource-control"><button class="resource-step" type="button" data-track="supply" data-d="-1" tabindex="-1" aria-hidden="true">−</button><b id="supplyValue" class="resource-legacy-value"></b><select id="supplySelect" class="resource-current" aria-label="SUPPLY現在値"><option value="5">5</option><option value="4">4</option><option value="3">3</option><option value="2">2</option><option value="1">1</option><option value="0">0</option></select><span class="resource-max">/5</span><button class="resource-step" type="button" data-track="supply" data-d="1" tabindex="-1" aria-hidden="true">＋</button></div></div>
+    <div class="top-row">
+      <div class="level-block" aria-label="レベル">
+        <small>LEVEL</small>
+        <b id="levelValue">1</b>
+      </div>
+
+      <div class="resources" aria-label="HPとSPIRIT">
+        <div class="resource">
+          <small>HP</small>
+          <div class="resource-inline">
+            <span class="resource-bar" aria-hidden="true"><i id="healthBar"></i></span>
+            <button class="resource-step" type="button" data-track="health" data-d="-1" tabindex="-1" aria-hidden="true">−</button>
+            <b id="healthValue" class="resource-legacy-value"></b>
+            <select id="healthSelect" class="resource-current" aria-label="HP現在値"><option value="5">5</option><option value="4">4</option><option value="3">3</option><option value="2">2</option><option value="1">1</option><option value="0">0</option></select>
+            <button class="resource-step" type="button" data-track="health" data-d="1" tabindex="-1" aria-hidden="true">＋</button>
+          </div>
+        </div>
+        <div class="resource">
+          <small>SPIRIT</small>
+          <div class="resource-inline">
+            <span class="resource-bar" aria-hidden="true"><i id="spiritBar"></i></span>
+            <button class="resource-step" type="button" data-track="spirit" data-d="-1" tabindex="-1" aria-hidden="true">−</button>
+            <b id="spiritValue" class="resource-legacy-value"></b>
+            <select id="spiritSelect" class="resource-current" aria-label="SPIRIT現在値"><option value="5">5</option><option value="4">4</option><option value="3">3</option><option value="2">2</option><option value="1">1</option><option value="0">0</option></select>
+            <button class="resource-step" type="button" data-track="spirit" data-d="1" tabindex="-1" aria-hidden="true">＋</button>
+          </div>
+        </div>
+      </div>
+
+      <button id="menuBtn" class="menu-btn" type="button" aria-expanded="false" aria-controls="mainMenu">MENU</button>
+      <div id="mainMenu" class="main-menu" aria-hidden="true">
+        <button id="menuHomeBtn" type="button">TOP</button>
+        <button id="menuLogBtn" type="button">LOG</button>
+        <button id="menuRoadBtn" type="button">ROAD</button>
+        <button id="menuSaveBtn" type="button">SAVE</button>
+        <button id="menuLoadBtn" type="button">LOAD</button>
+      </div>
     </div>
-    <div class="hud-right"><button id="roadBtn" class="hud-btn" type="button">ROAD</button><button id="saveBtn" class="hud-btn save" type="button">SAVE</button></div>
-    <div class="status-head"><span>ステータス</span></div>
-    <section id="stats" class="stats"></section>
+
+    <div class="momentum-row">
+      <span class="momentum-label">MOMENTUM</span>
+      <button class="momentum-step" type="button" data-track="momentum" data-d="-1" aria-label="モメンタムを1減らす">−</button>
+      <span class="momentum-bar" aria-hidden="true"><i id="momentumBar"></i></span>
+      <b id="momentumValue">2</b>
+      <button class="momentum-step" type="button" data-track="momentum" data-d="1" aria-label="モメンタムを1増やす">＋</button>
+    </div>
+
+    <section id="stats" class="stats" aria-label="パラメータ"></section>
   </header>
+
   <section class="play-area">
-    <aside class="side-track momentum-side"><button type="button" data-track="momentum" data-d="1">＋</button><span class="vertical-label">MOMENTUM</span><b id="momentumValue"></b><div id="momentumMeter" class="vertical-meter"></div><button type="button" data-track="momentum" data-d="-1">−</button></aside>
     <section class="quest-stage">
       <div class="stage-head"><div><small id="stageKicker"></small><h1 id="stageTitle"></h1></div><span id="charName"></span></div>
       <div id="panelQuest" class="stage-panel on" data-panel="quest"><div class="quest-paper"><h2 id="questTitle"></h2><div id="questText"></div><div class="quest-meta"><span id="questMetaLabel"></span><b id="questObjective"></b></div><div id="questActions" class="quest-actions"></div></div></div>
@@ -42,11 +81,13 @@
       <div id="panelRoad" class="stage-panel" data-panel="road"><div id="roadContent" class="paper"></div></div>
       <div id="panelLog" class="stage-panel" data-panel="log"><div class="paper log-paper"><label>記録<textarea id="logText" rows="4" placeholder="今起きたこと、判定、会話など"></textarea></label><button id="addLogBtn" type="button">記録する</button><div id="logList"></div></div></div>
     </section>
+
     <aside class="side-actions" aria-label="VOWとオラクル">
       <button id="vowBtn" class="side-action-btn" type="button">VOW</button>
       <button id="oracleBtn" class="side-action-btn oracle" type="button">オラクル</button>
     </aside>
   </section>
+
   <nav class="bottom-nav"><button class="on" type="button" data-tab="quest">クエスト</button><button type="button" data-tab="about">自分について</button><button type="button" data-tab="equipment">装備</button><button type="button" data-tab="inventory">所持品</button><button type="button" data-tab="skills">スキル</button></nav>
   <div id="status" class="save-status"></div>
 </main>
@@ -62,12 +103,12 @@
 <script src="data/oracle-locations-ja.js?v=2"></script>
 <script src="data/oracle-tables-ja.js?v=3"></script>
 <script src="data/oracle-theme-ja.js?v=2"></script>
-<script src="private-main.js?v=9"></script>
+<script src="private-main.js?v=10"></script>
 <script src="private-vow.js?v=3"></script>
 <script src="private-oracle.js?v=5"></script>
 <script src="private-about.js?v=6"></script>
 <script src="private-map.js?v=1"></script>
-<script src="private-resource-select.js?v=1"></script>
+<script src="private-resource-select.js?v=2"></script>
 <script src="private-quest-play.js?v=4"></script>
 <script src="private-custom-quest.js?v=3"></script>
 </body>
