@@ -1,0 +1,27 @@
+.main-menu{
+  left:0;
+  right:0;
+  width:auto;
+  top:50px;
+}
+.main-menu.on{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+}
+.main-menu button{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:auto;
+  height:44px;
+  border:0;
+  border-right:1px solid #eee3df;
+  border-bottom:0;
+  padding:0 4px;
+  text-align:center;
+  font-size:12px;
+  font-weight:800;
+}
+.main-menu button:last-child{
+  border-right:0;
+}
