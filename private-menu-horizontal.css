@@ -1,8 +1,17 @@
 .main-menu{
+  position:absolute;
+  z-index:80;
+  top:50%;
+  transform:translateY(-50%);
   left:0;
-  right:0;
+  right:79px;
   width:auto;
-  top:50px;
+  height:44px;
+  overflow:hidden;
+  border:1.5px solid var(--brown);
+  border-radius:22px;
+  background:#fff;
+  box-shadow:0 2px 5px rgba(70,45,38,.06);
 }
 .main-menu.on{
   display:grid;
@@ -12,16 +21,30 @@
   display:flex;
   align-items:center;
   justify-content:center;
+  min-width:0;
   width:auto;
-  height:44px;
+  height:100%;
   border:0;
   border-right:1px solid #eee3df;
   border-bottom:0;
-  padding:0 4px;
+  padding:0 2px;
   text-align:center;
-  font-size:12px;
+  font-size:11px;
   font-weight:800;
+  line-height:1;
+  background:#fff;
 }
 .main-menu button:last-child{
   border-right:0;
+}
+.main-menu button:active{
+  background:var(--pink2);
+}
+.menu-btn{
+  position:relative;
+  z-index:81;
+}
+@media(max-width:390px){
+  .main-menu{right:73px}
+  .main-menu button{font-size:10px}
 }
